@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
+using System.Runtime.InteropServices;
+using System.IO;
+using IniOperate;
 
 namespace CanTool
 {
@@ -31,6 +34,9 @@ namespace CanTool
 
             try
             {
+                OperateIniFile.WriteIniData("PORT", "NAME", ComComobox.Text, ".\\cantool.ini");
+                OperateIniFile.WriteIniData("BaudRate", "NAME", BaudRatecomobox.Text, ".\\cantool.ini");
+
                 serialPort1.PortName = ComComobox.Text;                                                                       //选择串口
                 serialPort1.BaudRate = Convert.ToInt32(BaudRatecomobox.Text);                                                  //Baud Rate
                 serialPort1.Parity = (System.IO.Ports.Parity)Enum.Parse(typeof(System.IO.Ports.Parity), parity);           //Parity
@@ -98,14 +104,17 @@ namespace CanTool
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            FileStream cantool = new FileStream("cantool.ini",
+            FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            cantool.Close();
+
             coms = System.IO.Ports.SerialPort.GetPortNames();
             ComComobox.Items.AddRange(coms);
             ComComobox.SelectedIndex = 0;
-            //ComComobox.Text = "COM1";
+            ComComobox.Text = OperateIniFile.ReadIniData("PORT", "NAME", "COM1", ".\\cantool.ini"); //从ini文件中读取上一次保存的串口
 
             BaudRatecomobox.SelectedIndex = 5; //波特率默认值9600
-            //BaudRatecomobox.Text=
-            //BaudRatecomobox.Text =;//在ini文件中保存用户上一次的选择，后期加入
+            BaudRatecomobox.Text=OperateIniFile.ReadIniData("BaudRate", "NAME", "9600", ".\\cantool.ini");
 
             //加入奇偶校验选择
             foreach (string str in Enum.GetNames(typeof(System.IO.Ports.Parity)))
@@ -136,6 +145,70 @@ namespace CanTool
 
 
         }
+
+
+    }
+}
+
+namespace IniOperate
+{
+    public class OperateIniFile
+    {
+        #region API函数声明
+
+        [DllImport("kernel32")]//返回0表示失败，非0为成功
+        private static extern long WritePrivateProfileString(string section, string key,
+            string val, string filePath);
+
+        [DllImport("kernel32")]//返回取得字符串缓冲区的长度
+        private static extern long GetPrivateProfileString(string section, string key,
+            string def, StringBuilder retVal, int size, string filePath);
+
+
+        #endregion
+
+        #region 读Ini文件
+
+        public static string ReadIniData(string Section, string Key, string NoText, string iniFilePath)
+        {
+            if (File.Exists(iniFilePath))
+            {
+                StringBuilder temp = new StringBuilder(1024);
+                GetPrivateProfileString(Section, Key, NoText, temp, 1024, iniFilePath);
+                return temp.ToString();
+            }
+            else
+            {
+                return String.Empty;
+            }
+        }
+
+        #endregion
+
+        #region 写Ini文件
+
+        public static bool WriteIniData(string Section, string Key, string Value, string iniFilePath)
+        {
+            if (File.Exists(iniFilePath))
+            {
+                long OpStation = WritePrivateProfileString(Section, Key, Value, iniFilePath);
+                if (OpStation == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        #endregion
+
 
 
     }
