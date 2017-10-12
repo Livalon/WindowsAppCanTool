@@ -27,11 +27,12 @@ namespace CanTool
         }
 
 
-        public string canReceiptAnalysis(string CanSignal)//解析接收的Can信号
+        public List<string> canReceiptAnalysis(string CanSignal)//解析接收的Can信号
         {
             int i, j;
             string anaresult = CanSignal;
             anaresult = CanSignal.Substring(0, 1);
+            List<string> CanDatas = new List<string>();
 
 
             //现在扩展帧，标准帧分别默认为3位和8位十进制数，后期按相应16进制进行解析
@@ -77,10 +78,16 @@ namespace CanTool
                         int x = Convert.ToInt32(caninfo, 2);
                         //Console.WriteLine("x的值"+x); //显示x的数值
                         double Phy = phyCalculate(x, Convert.ToDouble(arr1[4]), Convert.ToDouble(arr1[5])); //计算用户能看懂的物理值
-                        Console.WriteLine(arr1[0] + ":" + Phy); //显示该值  
+                        //Console.WriteLine(arr1[0] + ":" + Phy); //显示该值  
+                        CanDatas.Add(arr1[0] + ',' + Phy);
+                    }
+                    foreach (string CanData in CanDatas)
+                    {
+                        string[] Data = CanData.Split(',');
+                        Console.WriteLine(Data[0] + "----------" + Data[1]);
                     }
                     break;
-                    Console.WriteLine(s);
+                    //Console.WriteLine(s);
                 }
             }
             else if (string.Equals(anaresult, "T")) //扩展帧
@@ -95,7 +102,7 @@ namespace CanTool
 
 
 
-            return anaresult;
+            return CanDatas;
         }
 
         public double phyCalculate(int x, double A, double B) //计算Phy值

@@ -49,12 +49,14 @@
             this.CanMessageReceiveTextBox = new System.Windows.Forms.TextBox();
             this.CanMessageSendTextBox = new System.Windows.Forms.TextBox();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.Canform = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.Canform);
             this.groupBox1.Controls.Add(this.closeButton);
             this.groupBox1.Controls.Add(this.openButton);
             this.groupBox1.Controls.Add(this.label5);
@@ -248,6 +250,16 @@
             this.CanMessageSendTextBox.Size = new System.Drawing.Size(364, 94);
             this.CanMessageSendTextBox.TabIndex = 0;
             // 
+            // Canform
+            // 
+            this.Canform.Location = new System.Drawing.Point(65, 312);
+            this.Canform.Name = "Canform";
+            this.Canform.Size = new System.Drawing.Size(110, 23);
+            this.Canform.TabIndex = 12;
+            this.Canform.Text = "CanMessage";
+            this.Canform.UseVisualStyleBackColor = true;
+            this.Canform.Click += new System.EventHandler(this.Canform_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -289,6 +301,7 @@
         private System.Windows.Forms.TextBox CanMessageSendTextBox;
         private System.Windows.Forms.Button SendButton;
         private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.Button Canform;
     }
 }
 

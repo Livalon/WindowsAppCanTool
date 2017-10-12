@@ -102,6 +102,13 @@ namespace CanTool
             }
         }
 
+        private void Canform_Click(object sender, EventArgs e)
+        {
+            Form2 f2 = new Form2();
+            f2.Show();
+            //this.Hide(); //后期看是否需要隐藏之前的窗口
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             FileStream cantool = new FileStream("cantool.ini",
