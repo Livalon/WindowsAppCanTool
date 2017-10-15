@@ -69,6 +69,14 @@ namespace test
 				return this.GetTable<LED1>();
 			}
 		}
+		
+		public System.Data.Linq.Table<DashBoard1> DashBoard1
+		{
+			get
+			{
+				return this.GetTable<DashBoard1>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LED1")]
@@ -101,6 +109,51 @@ namespace test
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data", DbType="Text", UpdateCheck=UpdateCheck.Never)]
 		public string data
+		{
+			get
+			{
+				return this._data;
+			}
+			set
+			{
+				if ((this._data != value))
+				{
+					this._data = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DashBoard1")]
+	public partial class DashBoard1
+	{
+		
+		private System.Nullable<int> _id;
+		
+		private System.Nullable<double> _data;
+		
+		public DashBoard1()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int")]
+		public System.Nullable<int> id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data", DbType="Float")]
+		public System.Nullable<double> data
 		{
 			get
 			{

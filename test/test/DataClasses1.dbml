@@ -6,4 +6,10 @@
       <Column Name="data" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
     </Type>
   </Table>
+  <Table Name="dbo.DashBoard1" Member="DashBoard1">
+    <Type Name="DashBoard1">
+      <Column Name="id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="data" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

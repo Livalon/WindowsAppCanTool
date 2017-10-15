@@ -58,6 +58,12 @@
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
     <Compile Include="dbDataContext.cs" />
+    <Compile Include="Dash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dash.Designer.cs">
+      <DependentUpon>Dash.cs</DependentUpon>
+    </Compile>
     <Compile Include="Led.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,14 +72,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="testDataSet3.Designer.cs">
+    <Compile Include="testDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>testDataSet3.xsd</DependentUpon>
+      <DependentUpon>testDataSet.xsd</DependentUpon>
     </Compile>
     <None Include="DataClasses1.dbml.layout">
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </None>
+    <EmbeddedResource Include="Dash.resx">
+      <DependentUpon>Dash.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Led.resx">
       <DependentUpon>Led.cs</DependentUpon>
     </EmbeddedResource>
@@ -101,16 +110,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="testDataSet3.xsc">
-      <DependentUpon>testDataSet3.xsd</DependentUpon>
+    <None Include="testDataSet.xsc">
+      <DependentUpon>testDataSet.xsd</DependentUpon>
     </None>
-    <None Include="testDataSet3.xsd">
+    <None Include="testDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>testDataSet3.Designer.cs</LastGenOutput>
+      <LastGenOutput>testDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="testDataSet3.xss">
-      <DependentUpon>testDataSet3.xsd</DependentUpon>
+    <None Include="testDataSet.xss">
+      <DependentUpon>testDataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -8,5 +8,11 @@
         <elementListCompartment Id="a601545e-1751-4ab9-9756-82e1cb107009" absoluteBounds="0.89, 1.085, 1.9700000000000002, 0.60771687825520826" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="581e8a8c-7778-4275-bc82-7dda5ef3d3f7" absoluteBounds="4.625, 0.75, 2, 1.1677168782552083">
+      <DataClassMoniker Name="/DataClasses1DataContext/DashBoard1" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bd0e4a4c-b91d-4112-bc4a-d69081c8501f" absoluteBounds="4.64, 1.21, 1.9700000000000002, 0.60771687825520826" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

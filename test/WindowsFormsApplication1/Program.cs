@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using test;
 
-namespace test
+namespace WindowsFormsApplication1
 {
     static class Program
     {
@@ -17,7 +16,7 @@ namespace test
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Dash());
+            Application.Run(new Form1());
         }
     }
 }
