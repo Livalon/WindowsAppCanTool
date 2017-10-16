@@ -23,6 +23,9 @@ namespace CanTool
         private string[] coms;
         private int[] databits = { 7, 8 };
         private string parity, stopbits;
+        public string CanMessget;
+        string buffread = ""; //缓冲区字符
+        Form2 f2;
 
         //暂时不让用户选择奇偶校验以及停止位
 
@@ -44,7 +47,7 @@ namespace CanTool
                 serialPort1.DataBits = Convert.ToInt32(DataBitscomobox.Text);                                                  //Data bits                                                        //DataBits
                 serialPort1.Open();
                 serialPort1.DataReceived += new SerialDataReceivedEventHandler(CommDataReceived); //串口监听
-
+                serialPort1.ReceivedBytesThreshold = 1;//用来控制缓冲区的大小，接收足够的字符串后再接收处理，注意每次发送加的换行符占1字节而且算一次发送
             }
 
             catch (Exception ex)
@@ -59,7 +62,46 @@ namespace CanTool
         #region
         public void CommDataReceived(Object sender, SerialDataReceivedEventArgs e)
         {
-            CanMessageReceiveTextBox.Text = serialPort1.ReadExisting();
+            int n = serialPort1.BytesToRead;
+            byte[] buf = new byte[n];
+            serialPort1.Read(buf, 0, n);//该部分取出后串口缓冲区的数据就没了
+            buffread += System.Text.Encoding.Default.GetString(buf);
+            string[] strlist = buffread.Split("\\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+            string outp = "";
+            List<string> Caninfos = new List<string>();
+            if (buffread.Length != strlist[0].Length) //ifbuffread的长度等于strlist第0项目的长度，说明没有\r
+            {
+                if (strlist.Length > 1)
+                {
+                    for (int i = 0; i < strlist.Length - 1; i++)
+                    {
+                        //输出所有ID信息
+                        outp += strlist[i];
+                        Caninfos.Add(strlist[i]);
+                    }
+
+                    //把strlist数组最后一个值赋给bufferead
+                    if (string.Equals(buffread.Substring(buffread.Length - 2, 2), "\\r"))
+                    {
+                        outp += strlist[strlist.Length - 1];
+                        Caninfos.Add(strlist[strlist.Length - 1]);
+                    }
+                    CanMessageReceiveTextBox.Text = outp;
+                    buffread = strlist[strlist.Length - 1];
+                }
+                else
+                {
+                    outp = strlist[0];
+                    Caninfos.Add(strlist[0]);
+                    CanMessageReceiveTextBox.Text = outp;
+                }
+                buffread = "";
+                //f2.filterCanID(Caninfos, 3);
+                f2.flushMesslist(f2.filterCanID(Caninfos, 3));
+                //f2.flushMesslist(Caninfos);
+            }
+
         }
         #endregion
 
@@ -92,7 +134,7 @@ namespace CanTool
             {
                 if (serialPort1.IsOpen)
                 {
-                    serialPort1.WriteLine(CanMessageSendTextBox.Text + Environment.NewLine);
+                    serialPort1.WriteLine(CanMessageSendTextBox.Text);
                     CanMessageSendTextBox.Clear();
                 }
             }
@@ -104,7 +146,7 @@ namespace CanTool
 
         private void Canform_Click(object sender, EventArgs e)
         {
-            Form2 f2 = new Form2();
+            f2 = new Form2();
             f2.Show();
             //this.Hide(); //后期看是否需要隐藏之前的窗口
         }

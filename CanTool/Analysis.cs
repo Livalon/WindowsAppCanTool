@@ -9,6 +9,8 @@ namespace CanTool
 {
     class Analysis
     {
+        List<string> CanIDselect = new List<string>();
+
         public void canReceipt(string CantoolMessage) //接收CanTool装置的信息
         {
 
@@ -26,6 +28,24 @@ namespace CanTool
 
         }
 
+        public List<string> getCanIDFromDatabase()
+        {
+            List<string> CanIDs = new List<string>();
+            FileStream fs = new FileStream("data.txt", FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs);
+            string s;
+
+
+            while ((s = sr.ReadLine()) != null)
+            {
+                string[] arr = s.Split(' ');
+                if (arr.Length == 3)
+                {
+                    CanIDs.Add(arr[0] + arr[1]);
+                }
+            }
+            return CanIDs;
+        }
 
         public List<string> canReceiptAnalysis(string CanSignal)//解析接收的Can信号
         {
@@ -41,67 +61,68 @@ namespace CanTool
             if (string.Equals(anaresult, "t")) //标准帧
             {
                 anaresult = CanSignal.Substring(1, 3);
+                anaresult = (Int32.Parse(anaresult, System.Globalization.NumberStyles.HexNumber)).ToString(); //16转10进制
+
+
 
                 FileStream fs = new FileStream("data.txt", FileMode.Open, FileAccess.Read);
                 StreamReader sr = new StreamReader(fs);
                 string s;
-                while ((s = sr.ReadLine()) != "")
+                while ((s = sr.ReadLine()) != null)
                 {
                     string[] arr = s.Split(' ');
                     if (s.Length > 5 && string.Equals(arr[1], anaresult)) //查找ID数
                     {
                         Console.WriteLine(arr[1]);
+                        anaresult = CanSignal.Substring(4, 16);
+                        string binarycandata = tobinaryCanData(anaresult); //转化为二进制
+
+                        s = sr.ReadLine();
+                        Console.WriteLine(s);
+                        int Canline = Convert.ToInt32(s); //读入对应ID的Can信息行数
+                        s = sr.ReadLine(); //跳过空行
+
+                        int start, len;
+
+
+                        for (i = 0; i < Canline; i++)
+                        {
+                            s = sr.ReadLine(); //跳到有效行
+                            string[] arr1 = s.Split(' '); //将每一行每一部分的有效信息放入arr1数组
+                                                          //arr1[1] arr[2]分别表示起始编号 长度
+                            start = Convert.ToInt32(arr1[1]);
+                            len = Convert.ToInt32(arr1[2]);
+
+                            int substart = start / 8 * 8 - start % 8 + 7;         //解析can信号，start+8-start%8-1 即在二进制字符中的真实起始位置
+                                                                                  //int subend = substart + len-1;
+                                                                                  //Console.WriteLine("start:"+substart+"len:"+len); //显示在二进制的起始位和长度
+                            string caninfo = binarycandata.Substring(substart, len); //选取指定位置的can信息
+                                                                                     //Console.WriteLine("binarycandata:"+caninfo); //显示二进制can信息
+                            int x = Convert.ToInt32(caninfo, 2);
+                            //Console.WriteLine("x的值"+x); //显示x的数值
+                            double Phy = phyCalculate(x, Convert.ToDouble(arr1[4]), Convert.ToDouble(arr1[5])); //计算用户能看懂的物理值
+                                                                                                                //Console.WriteLine(arr1[0]+":"+Phy); //顺序显示CanMessage数值！！！
+
+                            CanDatas.Add(arr1[0] + ',' + Phy);
+
+
+                        }
+                        foreach (string CanData in CanDatas)
+                        {
+                            string[] Data = CanData.Split(',');
+                            Console.WriteLine(Data[0] + "----------" + Data[1]);
+                        }
+                        break;
+                        //Console.WriteLine(s);
                     }
 
-                    anaresult = CanSignal.Substring(4, 16);
-                    string binarycandata = tobinaryCanData(anaresult); //转化为二进制
 
-                    s = sr.ReadLine();
-                    Console.WriteLine(s);
-                    int Canline = Convert.ToInt32(s); //读入对应ID的Can信息行数
-                    s = sr.ReadLine(); //跳过空行
-
-                    int start, len;
-                    for (i = 0; i < Canline; i++)
-                    {
-                        s = sr.ReadLine(); //跳到有效行
-                        string[] arr1 = s.Split(' '); //将每一行每一部分的有效信息放入arr1数组
-                        //arr1[1] arr[2]分别表示起始编号 长度
-                        start = Convert.ToInt32(arr1[1]);
-                        len = Convert.ToInt32(arr1[2]);
-
-                        int substart = start / 8 * 8 - start % 8 + 7;         //解析can信号，start+8-start%8-1 即在二进制字符中的真实起始位置
-                        //int subend = substart + len-1;
-                        //Console.WriteLine("start:"+substart+"len:"+len); //显示在二进制的起始位和长度
-                        string caninfo = binarycandata.Substring(substart, len); //选取指定位置的can信息
-                        //Console.WriteLine("binarycandata:"+caninfo); //显示二进制can信息
-                        int x = Convert.ToInt32(caninfo, 2);
-                        //Console.WriteLine("x的值"+x); //显示x的数值
-                        double Phy = phyCalculate(x, Convert.ToDouble(arr1[4]), Convert.ToDouble(arr1[5])); //计算用户能看懂的物理值
-                        //Console.WriteLine(arr1[0] + ":" + Phy); //显示该值  
-                        CanDatas.Add(arr1[0] + ',' + Phy);
-                    }
-                    foreach (string CanData in CanDatas)
-                    {
-                        string[] Data = CanData.Split(',');
-                        Console.WriteLine(Data[0] + "----------" + Data[1]);
-                    }
-                    break;
-                    //Console.WriteLine(s);
                 }
             }
             else if (string.Equals(anaresult, "T")) //扩展帧
             {
-                anaresult = CanSignal.Substring(1, 3);
+                anaresult = CanSignal.Substring(1, 8);
             }
-
-
-
-
-
-
-
-
             return CanDatas;
         }
 
