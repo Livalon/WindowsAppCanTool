@@ -133,6 +133,13 @@ namespace CanTool
             return Phy;
         }
 
+        public int xCalculate(double phy, double A, double B) //从x转化为Phy
+        {
+            int x;
+            x = (int)((phy - B) / A);
+            return x;
+        }
+
         public string tobinaryCanData(string anaresult)//将CanData转化为二进制数（输入字符串，输出二进制形式字符串）
         {
             int i;
@@ -173,10 +180,89 @@ namespace CanTool
             return binarycandata;
         }
 
+        public string to16CanData(string anaresult) //8个8位二进制数转化为16进制
+        {
+            string CanData16 = "";
+            for(int i=0;i<8;i++)
+            {
+                string subana=anaresult.Substring(i * 8, 8);
+                byte Bytes = Convert.ToByte(subana, 2);
+                string t=Bytes.ToString("x2");//16进制数
+                CanData16 += t;
+            }
+            return CanData16;
+        }
+
         public string canSendAnalysis(string CanSignal)//把用户输入的内容转化为Can信息
         {
+
             string anaresult = null;
-            return anaresult;
+            string candata = CanSignal;
+
+            //将用户输入数值按顺序解析，生成CanData
+            //查找位置
+
+            int i, j;
+            anaresult = candata;
+            string[] candatablock = candata.Split(' ');
+            //Console.WriteLine("*****************");
+            string binaryCanID_Data = "0000000000000000000";//标准帧的CanID和Data
+
+            //ID放入binaryCanID_Data
+            string CanID16 = Convert.ToString(Convert.ToInt32(candatablock[0]), 16);//16进制的CanID
+            //Console.WriteLine(CanID16);
+            binaryCanID_Data = binaryCanID_Data.Remove(3 - CanID16.Length, CanID16.Length);
+            binaryCanID_Data = binaryCanID_Data.Insert(3 - CanID16.Length, CanID16);
+            //Console.WriteLine(binaryCanID_Data);
+            //现在扩展帧，标准帧分别默认为3位和8位十进制数，后期按相应16进制进行解析
+            //暂时不写扩展帧的解析
+
+
+            FileStream fs = new FileStream("data.txt", FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs);
+            string s;
+            while ((s = sr.ReadLine()) != null)
+            {
+                string[] arr = s.Split(' ');
+                if (s.Length > 5 && string.Equals(arr[1], candatablock[0])) //查找ID数
+                {
+
+                    s = sr.ReadLine();
+                    //Console.WriteLine(s);
+                    int Canline = Convert.ToInt32(s); //读入对应ID的Can信息行数
+                    s = sr.ReadLine(); //跳过空行
+
+                    string binarycandata = tobinaryCanData("0000000000000000"); //转化为二进制
+                    int start, len;
+                    for (i = 0; i < Canline; i++)
+                    {
+                        s = sr.ReadLine(); //跳到有效行
+                        //Console.WriteLine(s);
+                        string[] arr1 = s.Split(' '); //将每一行每一部分的有效信息放入arr1数组
+                                                      //arr1[1] arr[2]分别表示起始编号 长度
+                        double phy = Convert.ToInt32(candatablock[i + 1]);//根据第i行解析
+                        //Console.WriteLine(phy);
+                        int x = xCalculate(phy, Convert.ToDouble(arr1[4]), Convert.ToDouble(arr1[5]));//获取一行的x
+                        //Console.WriteLine(x);
+                        string binaryx_value = System.Convert.ToString(x, 2);
+
+                        start = Convert.ToInt32(arr1[1]);
+                        len = Convert.ToInt32(arr1[2]);
+                        int substart = start / 8 * 8 - start % 8 + 7;
+                        int sublen = len - binaryx_value.Length;
+
+                        binarycandata = binarycandata.Remove(substart + sublen, binaryx_value.Length); //
+                        binarycandata = binarycandata.Insert(substart + sublen, binaryx_value);
+                    }
+                    anaresult = to16CanData(binarycandata);
+                    binaryCanID_Data = binaryCanID_Data.Remove(3, 16);
+                    binaryCanID_Data = binaryCanID_Data.Insert(3, anaresult);
+                }
+
+            }
+
+            //Console.WriteLine(binaryCanID_Data);
+            return binaryCanID_Data;
         }
 
         public string canSend(string CanSignal)//向CanTool装置发送信息
