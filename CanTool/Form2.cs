@@ -92,8 +92,6 @@ namespace CanTool
             textBox1.Text = "***************";
         }
 
-
-
         private void seletCanIDbutton_Click(object sender, EventArgs e)
         {
             Analysis ayselect = new Analysis();
