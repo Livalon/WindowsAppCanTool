@@ -262,16 +262,24 @@ namespace CanTool
             }
 
             //Console.WriteLine(binaryCanID_Data);
+
+            //暂定为标准帧
+            binaryCanID_Data = "t" + binaryCanID_Data;
             return binaryCanID_Data;
         }
 
-        public string canSend(string CanSignal)//向CanTool装置发送信息
+        public string canSend(List<string> CanSignals)//向CanTool装置发送信息
         {
-            string anaresult = null;
+            //给出一个can信息格式：candata = "61 2 2 2";
+            //解析为Can信息格式发送
+            string anaresult = "";
+
+            foreach(string cansignal in CanSignals)
+            {
+                anaresult = canSendAnalysis(cansignal)+"\r";
+            }
             return anaresult;
         }
-
-
         public void test()
         {
             Console.WriteLine("*****");

@@ -29,6 +29,8 @@ namespace CanTool
 
         //暂时不让用户选择奇偶校验以及停止位
 
+        public delegate void SetVisiableHandler();
+
         private void openButton_Click(object sender, EventArgs e)
         {
             
@@ -144,9 +146,15 @@ namespace CanTool
             }
         }
 
+        private void SetVisiable()
+        {
+            //CanMessageReceiveTextBox.Text = "**********";
+            CanMessageReceiveTextBox.Text = f2.test();
+        }
+
         private void Canform_Click(object sender, EventArgs e)
         {
-            f2 = new Form2();
+            f2 = new Form2(new SetVisiableHandler(SetVisiable));
             f2.Show();
             //this.Hide(); //后期看是否需要隐藏之前的窗口
         }

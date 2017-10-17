@@ -12,10 +12,16 @@ namespace CanTool
 {
     public partial class Form2 : Form
     {
-        public Form2()
+
+        private Form1.SetVisiableHandler m_setVisible;
+
+        public Form2(Form1.SetVisiableHandler setvisible)
         {
             InitializeComponent();
+            this.m_setVisible = setvisible;
         }
+
+        
 
         private void ShowMessbutton_Click(object sender, EventArgs e)
         {
@@ -157,7 +163,20 @@ namespace CanTool
 
         private void selectbuttoninput_Click(object sender, EventArgs e)
         {
+            //点击按钮，调出控件
+            //读取数据库，用户输入相关值
+            //打包解析为can信号
+            //发送给comport，结束。该部分放入发送区
+            if (this.m_setVisible != null)
+            {
+                this.m_setVisible();
+            }
+            //CanMessageReceiveTextBox = "**********";
+        }
 
+        public string test()
+        {
+            return "^^^^^^^^^^^";
         }
     }
 }
