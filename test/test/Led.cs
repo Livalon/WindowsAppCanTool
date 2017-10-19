@@ -22,7 +22,6 @@ namespace test
         {
             InitializeComponent();
             var query = from t in db.LED1
-                            //where t.id == i
                         select t;
             foreach (LED1 item in query)
             {
