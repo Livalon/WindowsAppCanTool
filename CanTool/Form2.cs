@@ -148,6 +148,7 @@ namespace CanTool
             foreach (string canmess in CanMesses)
             {
                 string str = canmess.Substring(1, len);
+                //textBox1.Text = "123";
                 string anaresult = (Int32.Parse(str, System.Globalization.NumberStyles.HexNumber)).ToString();
                 if (CanIDsl.Contains(anaresult))
                 {
@@ -202,7 +203,7 @@ namespace CanTool
 
         private void CanMessInputbutton_Click(object sender, EventArgs e)
         {
-            int i;
+            int i,lennode=0;
             int count = this.treeList1.Nodes.Count;
             String ss = "";
             Analysis ay = new Analysis();
@@ -216,17 +217,22 @@ namespace CanTool
             List<string> CanIDselect = new List<string>();
             List<string> CanSignals =new List<string>();
             CanIDselect = CanIDselected();
+            string all = "";
             foreach (string CanID in CanIDselect)
             {
                 ss = CanID;
                 for(i=0;i<Convert.ToInt32(ay.getLongFromDatabase(CanID));i++)
                 {
-                    ss+=" "+treeList1.Nodes[i].GetValue(1);
+                    ss+=" "+treeList1.Nodes[i+lennode].GetValue(1);
                 }
+                lennode += i;
+                //ss += " ";
                 CanSignals.Add(ss);
+                all += ss;
             }
             //返回CanSignals;
             textBox1.Text=ay.canSend(CanSignals); //放入发送信息
+            //textBox1.Text=all;
 
             if (this.m_setVisible != null)
             {

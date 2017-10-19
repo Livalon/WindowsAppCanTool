@@ -121,7 +121,7 @@
             this.textBox1.Location = new System.Drawing.Point(755, 439);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(167, 52);
+            this.textBox1.Size = new System.Drawing.Size(230, 52);
             this.textBox1.TabIndex = 6;
             // 
             // treeList1

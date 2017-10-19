@@ -14,16 +14,16 @@ namespace CanTool
         public void canReceipt(string CantoolMessage) //接收CanTool装置的信息
         {
 
-            string s = Console.ReadLine();
+            /*string s = Console.ReadLine();
 
-            if (string.Equals(s, "\\r"))
+            if (string.Equals(s, "\r"))
             {
                 Console.WriteLine("open ok");
             }
             else if (string.Equals(s, "\\BEL"))
             {
                 Console.WriteLine("Failure");
-            }
+            }*/
 
 
         }

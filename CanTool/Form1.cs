@@ -68,7 +68,7 @@ namespace CanTool
             byte[] buf = new byte[n];
             serialPort1.Read(buf, 0, n);//该部分取出后串口缓冲区的数据就没了
             buffread += System.Text.Encoding.Default.GetString(buf);
-            string[] strlist = buffread.Split("\\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            string[] strlist = buffread.Split("\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
             string outp = "";
             List<string> Caninfos = new List<string>();
@@ -84,11 +84,12 @@ namespace CanTool
                     }
 
                     //把strlist数组最后一个值赋给bufferead
-                    if (string.Equals(buffread.Substring(buffread.Length - 2, 2), "\\r"))
+                    if (string.Equals(buffread.Substring(buffread.Length - 1, 1), "\r"))
                     {
                         outp += strlist[strlist.Length - 1];
                         Caninfos.Add(strlist[strlist.Length - 1]);
                     }
+                    Control.CheckForIllegalCrossThreadCalls = false;
                     CanMessageReceiveTextBox.Text = outp;
                     buffread = strlist[strlist.Length - 1];
                 }
@@ -96,6 +97,7 @@ namespace CanTool
                 {
                     outp = strlist[0];
                     Caninfos.Add(strlist[0]);
+                    Control.CheckForIllegalCrossThreadCalls = false;
                     CanMessageReceiveTextBox.Text = outp;
                 }
                 buffread = "";
@@ -136,7 +138,8 @@ namespace CanTool
             {
                 if (serialPort1.IsOpen)
                 {
-                    serialPort1.WriteLine(CanMessageSendTextBox.Text);
+                    //serialPort1.WriteLine(CanMessageSendTextBox.Text);
+                    serialPort1.WriteLine("t3581122334455667788\rt3201122334455667788\rt3601122334455667788\rt3211122334455667788\r");
                     CanMessageSendTextBox.Clear();
                 }
             }
