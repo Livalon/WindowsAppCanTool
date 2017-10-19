@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,8 +21,6 @@ namespace CanTool
             InitializeComponent();
             this.m_setVisible = setvisible;
         }
-
-        
 
         private void ShowMessbutton_Click(object sender, EventArgs e)
         {
@@ -75,7 +74,7 @@ namespace CanTool
             CanMesslistView.Items.Clear();
             Analysis ay = new Analysis();
             //string Canget = "t8561122334455667788\r";
-            foreach (string Canget in Cangets)
+            foreach (string Canget in Cangets) //此处疑似有重复
             {
                 ListViewItem listv = new ListViewItem();
                 listv.Text = Canget;
@@ -89,9 +88,8 @@ namespace CanTool
                     //Console.WriteLine(Data[0] + "----------" + Data[1]);
                     ListViewItem listv = new ListViewItem();
                     listv.Text = Data[0]; //第一列
-                    listv.SubItems.Add(Data[1]);
+                    listv.SubItems.Add(Data[1]); //没有报错提示
                     CanMesslistView.Items.Add(listv);
-
                 }
             }
 
@@ -172,11 +170,100 @@ namespace CanTool
                 this.m_setVisible();
             }
             //CanMessageReceiveTextBox = "**********";
+
+            //获取用户选择的ID号
+            Analysis ay = new Analysis();
+            List<string> CanIDselect = new List<string>();
+            ArrayList pList = new ArrayList();
+            CanIDselect = CanIDselected();
+            foreach (string CanID in CanIDselect)
+            {
+                List<string> CanInfos= ay.getCaninfoFromDatabase(CanID);
+
+                foreach(string Caninfo in CanInfos)
+                {
+                    ListTree p = new ListTree();
+                    p.ID = Caninfo;
+                    p.Data = "0";
+                    pList.Add(p);
+                }
+            }
+
+             //通过ID获取元件
+
+            treeList1.DataSource = pList;
+            treeList1.RefreshDataSource();
         }
 
         public string test()
         {
-            return "^^^^^^^^^^^";
+            return textBox1.Text;
         }
+
+        private void CanMessInputbutton_Click(object sender, EventArgs e)
+        {
+            int i;
+            int count = this.treeList1.Nodes.Count;
+            String ss = "";
+            Analysis ay = new Analysis();
+
+            for (i = 0; i < count; i++)
+            {
+                ss += treeList1.Nodes[i].GetValue(1)+ " ";
+                textBox1.Text = ss;
+            }
+
+            List<string> CanIDselect = new List<string>();
+            List<string> CanSignals =new List<string>();
+            CanIDselect = CanIDselected();
+            foreach (string CanID in CanIDselect)
+            {
+                ss = CanID;
+                for(i=0;i<Convert.ToInt32(ay.getLongFromDatabase(CanID));i++)
+                {
+                    ss+=" "+treeList1.Nodes[i].GetValue(1);
+                }
+                CanSignals.Add(ss);
+            }
+            //返回CanSignals;
+            textBox1.Text=ay.canSend(CanSignals); //放入发送信息
+
+            if (this.m_setVisible != null)
+            {
+                this.m_setVisible();
+            }
+        }
+    }
+
+    public class ListTree
+    {
+        private string m_ID;
+        private string m_Data = string.Empty;
+
+        public string ID
+        {
+            get
+            {
+                return m_ID;
+            }
+            set
+            {
+                m_ID = value;
+            }
+        }
+
+        public string Data
+        {
+            get
+            {
+                return m_Data;
+            }
+            set
+            {
+                m_Data = value;
+            }
+        }
+
+
     }
 }
