@@ -14,16 +14,16 @@ namespace CanTool
         public void canReceipt(string CantoolMessage) //接收CanTool装置的信息
         {
 
-            string s = Console.ReadLine();
+            /*string s = Console.ReadLine();
 
-            if (string.Equals(s, "\\r"))
+            if (string.Equals(s, "\r"))
             {
                 Console.WriteLine("open ok");
             }
             else if (string.Equals(s, "\\BEL"))
             {
                 Console.WriteLine("Failure");
-            }
+            }*/
 
 
         }
@@ -45,6 +45,32 @@ namespace CanTool
                 }
             }
             return CanIDs;
+        }
+
+        public List<string> getCaninfoFromDatabase(string CanID) //通过ID获取具体的信息格式
+        {
+            int i;
+            List<string> CanInfos = new List<string>();
+            FileStream fs = new FileStream("data.txt", FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs);
+            string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    string[] arr = s.Split(' ');
+                    if (s.Length > 5 && string.Equals(arr[1], CanID))
+                    {
+                        s = sr.ReadLine();
+                        int Canline = Convert.ToInt32(s);
+                        s = sr.ReadLine(); //跳过空行
+                        for (i = 0; i < Canline; i++)
+                        {
+                            s = sr.ReadLine(); //跳到有效行
+                            string[] arr1 = s.Split(' ');
+                            CanInfos.Add(arr1[0]);
+                        }
+                    }
+                }
+            return CanInfos;
         }
 
         public List<string> canReceiptAnalysis(string CanSignal)//解析接收的Can信号
@@ -193,7 +219,7 @@ namespace CanTool
             return CanData16;
         }
 
-        public string canSendAnalysis(string CanSignal)//把用户输入的内容转化为Can信息
+        public string canSendAnalysis(string CanSignal)//把用户输入的内容转化为Can信息 string格式为ID+数据 最后
         {
 
             string anaresult = null;
@@ -262,16 +288,43 @@ namespace CanTool
             }
 
             //Console.WriteLine(binaryCanID_Data);
+
+            //暂定为标准帧
+            binaryCanID_Data = "t" + binaryCanID_Data;
             return binaryCanID_Data;
         }
 
-        public string canSend(string CanSignal)//向CanTool装置发送信息
+        public string getLongFromDatabase(string CanID)
         {
-            string anaresult = null;
-            return anaresult;
+            string lenth;
+            FileStream fs = new FileStream("data.txt", FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs);
+            string s;
+            while ((s = sr.ReadLine()) != null)
+            {
+                string[] arr = s.Split(' ');
+                if (s.Length > 5 && string.Equals(arr[1], CanID))
+                {
+                    s = sr.ReadLine();
+                    break;
+                }
+            }
+            lenth = s;
+            return lenth;
         }
 
+        public string canSend(List<string> CanSignals)//向CanTool装置发送信息
+        {
+            //给出一个can信息格式：candata = "61 2 2 2";
+            //解析为Can信息格式发送
+            string anaresult = "";
 
+            foreach(string cansignal in CanSignals)
+            {
+                anaresult += canSendAnalysis(cansignal)+"\r";
+            }
+            return anaresult;
+        }
         public void test()
         {
             Console.WriteLine("*****");
