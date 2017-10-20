@@ -209,13 +209,11 @@ namespace formatConversion
                fs1.Close();
             }
 
-
-
-
-
         }
 
-        public void reconversionToXml(string fileName)
+
+
+        public void reconversionToXml(string xmlFilePath)
         {//将XML文件逆序列化成CAN信息和信号数据库格式
          //FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
          // StreamReader sr = new StreamReader(fs);
@@ -224,7 +222,78 @@ namespace formatConversion
          // {
 
             // }
-            FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+            ToXml tx = new ToXml();
+            object result = null;
+            if (File.Exists(xmlFilePath))
+            {
+                using (StreamReader reader = new StreamReader(xmlFilePath))
+                {
+                    XmlSerializer xs = new XmlSerializer(tx.GetType());
+                    result = xs.Deserialize(reader);
+                }
+            }
+
+            tx = result as ToXml;
+
+            if (!File.Exists("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample1.dbc"))
+            {
+                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample1.dbc";
+                FileStream fs = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample1.dbc", FileMode.Create, FileAccess.Write);//创建写入文件 
+                StreamWriter sw = new StreamWriter(fs);
+
+                foreach (CanMessageAndSignal cmas in tx.cmarr)
+                {
+                    CanMessage canm1 = new CanMessage();
+                    canm1 = cmas.canm;
+                    string s;
+                    s = canm1.CANmessageTAG + " " + canm1.mId + " " + canm1.messageName + canm1.mSeparator + " " + canm1.DLC + " " + canm1.mNodeName;
+                    sw.WriteLine(s);
+                    foreach(CanSignal cs in cmas.cansarr)
+                    {
+                        string s1;
+                        s1 =" " +  cs.CANsignalTAG + " " + cs.signalName + " " + cs.sSeparator + " " + cs.startToEnd + " " + cs.AB + " " + cs.CD + " " + cs.unit + "  " + cs.sNodeName;
+                        sw.WriteLine(s1);
+                    }
+                    sw.WriteLine();
+
+                }
+                //sw.WriteLine(this.textBox3.Text.Trim() + "+" + this.textBox4.Text);//开始写入值
+                sw.Close();
+                fs.Close();
+
+            }
+
+            else
+            {
+                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample1.dbc";
+                FileStream fs = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample1.dbc", FileMode.Create, FileAccess.Write);//创建写入文件 
+                StreamWriter sw = new StreamWriter(fs);
+
+                foreach (CanMessageAndSignal cmas in tx.cmarr)
+                {
+                    CanMessage canm1 = new CanMessage();
+                    canm1 = cmas.canm;
+                    string s;
+                    s = canm1.CANmessageTAG + " " + canm1.mId + " " + canm1.messageName + canm1.mSeparator + " " + canm1.DLC + " " + canm1.mNodeName;
+                    sw.WriteLine(s);
+                    foreach (CanSignal cs in cmas.cansarr)
+                    {
+                        string s1;
+                        s1 =" " + cs.CANsignalTAG + " " + cs.signalName + " " + cs.sSeparator + " " + cs.startToEnd + " " + cs.AB + " " + cs.CD + " " + cs.unit + "  " + cs.sNodeName;
+                        sw.WriteLine(s1);
+                    }
+                    sw.WriteLine();
+
+                }
+                //sw.WriteLine(this.textBox3.Text.Trim() + "+" + this.textBox4.Text);//开始写入值
+                sw.Close();
+                fs.Close();
+
+            }
+           
+            
+
+           /* FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
             string s;
             List<CanMessage> cm = new List<CanMessage>();
@@ -292,7 +361,7 @@ namespace formatConversion
                 Console.Write(t.DLC);
                 Console.Write(t.mNodeName);
 
-            }
+            }*/
         }
 
 

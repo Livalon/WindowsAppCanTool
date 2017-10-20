@@ -12,7 +12,7 @@ namespace formatConversion
         static void Main(string[] args)
         {
          ConversionFormat c = new ConversionFormat();
-         c.conversionToXml("canmsg-sample.dbc");
+         c.reconversionToXml("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.xml");
          System.Console.ReadKey();
         // Application.EnableVisualStyles();
         // Application.SetCompatibleTextRenderingDefault(false);
