@@ -26,9 +26,11 @@ namespace CanTool
         public string CanMessget;
         string buffread = ""; //缓冲区字符
         Form2 f2;
-        public bool open=false;
-        public bool Sn=false;
-        public bool Close = true;
+
+        public int version = 0;
+        public int open = 0;
+        public int Sn = 0;
+        public int Close = 1;
 
         //暂时不让用户选择奇偶校验以及停止位
 
@@ -77,7 +79,7 @@ namespace CanTool
             int a = byteArray[0];
             CanMessageReceiveTextBox.Text = a.ToString();*/
             //暂时不考虑/r后面有数据的情况
-            if (!open && string.Equals(buffread,"\r")) //如果没有打开
+            /*if (!open && string.Equals(buffread,"\r")) //如果没有打开
             {
                 //输出设备打开
                 Control.CheckForIllegalCrossThreadCalls = false;
@@ -109,8 +111,24 @@ namespace CanTool
             {
                 Control.CheckForIllegalCrossThreadCalls = false;
                 CanMessageReceiveTextBox.Text = "Closet false";
-            }
+            }*/
+            /*if(!(!version && open && !Sn && !Close)) //如果不是数据传输状态
+            {
+                Analysis ay = new Analysis();
+                string show=ay.canReceipt(buffread, version, open, Sn, Close);
+                MessageBox.Show(show);
+            }*/
 
+            if (version==2 || open==2 || Sn==2 || Close==2) //如果不是数据传输状态
+            {
+                Analysis ay = new Analysis();
+                string show = ay.canReceipt(buffread, version, open, Sn, Close);
+                version = ay.m_version;
+                open = ay.m_open;
+                Sn = ay.m_Sn;
+                Close = ay.m_Close;
+                MessageBox.Show(show);
+            }
             else
             {
                 string[] strlist = buffread.Split("\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries); //遇到/r就取出来
@@ -196,7 +214,10 @@ namespace CanTool
                 {
                     //serialPort1.WriteLine(CanMessageSendTextBox.Text);
                     //serialPort1.WriteLine("t3581122334455667788\rt3201122334455667788\rt3601122334455667788\rt3211122334455667788\r");
-                    serialPort1.Write("\r");
+                    byte[] bsTest = new byte[1];
+                    bsTest[0] = 0x07;
+                    string t = System.Text.Encoding.Default.GetString(bsTest);
+                    serialPort1.Write(t);
                     CanMessageSendTextBox.Clear();
                 }
             }
@@ -217,6 +238,74 @@ namespace CanTool
             f2 = new Form2(new SetVisiableHandler(SetVisiable));
             f2.Show();
             //this.Hide(); //后期看是否需要隐藏之前的窗口
+        }
+
+        private void getversionbutton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPort1.IsOpen)
+                {
+                    version = 2;
+                    serialPort1.Write("V\r");
+                    CanMessageSendTextBox.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void openCanToolbutton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPort1.IsOpen)
+                {
+                    open = 2;
+                    serialPort1.Write("O1\r");
+                    CanMessageSendTextBox.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void setSnbutton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPort1.IsOpen)
+                {
+                    Sn = 2;
+                    serialPort1.Write("1000\r");
+                    CanMessageSendTextBox.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void closeCanToolbutton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPort1.IsOpen)
+                {
+                    Close = 2;
+                    serialPort1.Write("C\r");
+                    CanMessageSendTextBox.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)

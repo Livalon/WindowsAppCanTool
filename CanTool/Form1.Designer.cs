@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Canform = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.openButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -43,13 +44,16 @@
             this.BaudRatecomobox = new System.Windows.Forms.ComboBox();
             this.ComComobox = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.closeCanToolbutton = new System.Windows.Forms.Button();
+            this.setSnbutton = new System.Windows.Forms.Button();
+            this.openCanToolbutton = new System.Windows.Forms.Button();
+            this.getversionbutton = new System.Windows.Forms.Button();
             this.SendButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.CanMessageReceiveTextBox = new System.Windows.Forms.TextBox();
             this.CanMessageSendTextBox = new System.Windows.Forms.TextBox();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.Canform = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -75,6 +79,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "选项";
+            // 
+            // Canform
+            // 
+            this.Canform.Location = new System.Drawing.Point(65, 312);
+            this.Canform.Name = "Canform";
+            this.Canform.Size = new System.Drawing.Size(110, 23);
+            this.Canform.TabIndex = 12;
+            this.Canform.Text = "CanMessage";
+            this.Canform.UseVisualStyleBackColor = true;
+            this.Canform.Click += new System.EventHandler(this.Canform_Click);
             // 
             // closeButton
             // 
@@ -194,6 +208,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.closeCanToolbutton);
+            this.groupBox2.Controls.Add(this.setSnbutton);
+            this.groupBox2.Controls.Add(this.openCanToolbutton);
+            this.groupBox2.Controls.Add(this.getversionbutton);
             this.groupBox2.Controls.Add(this.SendButton);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
@@ -205,6 +223,46 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "CanMessage";
+            // 
+            // closeCanToolbutton
+            // 
+            this.closeCanToolbutton.Location = new System.Drawing.Point(305, 318);
+            this.closeCanToolbutton.Name = "closeCanToolbutton";
+            this.closeCanToolbutton.Size = new System.Drawing.Size(75, 23);
+            this.closeCanToolbutton.TabIndex = 15;
+            this.closeCanToolbutton.Text = "关闭装置";
+            this.closeCanToolbutton.UseVisualStyleBackColor = true;
+            this.closeCanToolbutton.Click += new System.EventHandler(this.closeCanToolbutton_Click);
+            // 
+            // setSnbutton
+            // 
+            this.setSnbutton.Location = new System.Drawing.Point(207, 318);
+            this.setSnbutton.Name = "setSnbutton";
+            this.setSnbutton.Size = new System.Drawing.Size(75, 23);
+            this.setSnbutton.TabIndex = 14;
+            this.setSnbutton.Text = "设置速率";
+            this.setSnbutton.UseVisualStyleBackColor = true;
+            this.setSnbutton.Click += new System.EventHandler(this.setSnbutton_Click);
+            // 
+            // openCanToolbutton
+            // 
+            this.openCanToolbutton.Location = new System.Drawing.Point(108, 318);
+            this.openCanToolbutton.Name = "openCanToolbutton";
+            this.openCanToolbutton.Size = new System.Drawing.Size(75, 23);
+            this.openCanToolbutton.TabIndex = 13;
+            this.openCanToolbutton.Text = "打开装置";
+            this.openCanToolbutton.UseVisualStyleBackColor = true;
+            this.openCanToolbutton.Click += new System.EventHandler(this.openCanToolbutton_Click);
+            // 
+            // getversionbutton
+            // 
+            this.getversionbutton.Location = new System.Drawing.Point(16, 318);
+            this.getversionbutton.Name = "getversionbutton";
+            this.getversionbutton.Size = new System.Drawing.Size(75, 23);
+            this.getversionbutton.TabIndex = 12;
+            this.getversionbutton.Text = "获取版本";
+            this.getversionbutton.UseVisualStyleBackColor = true;
+            this.getversionbutton.Click += new System.EventHandler(this.getversionbutton_Click);
             // 
             // SendButton
             // 
@@ -250,16 +308,6 @@
             this.CanMessageSendTextBox.Size = new System.Drawing.Size(364, 94);
             this.CanMessageSendTextBox.TabIndex = 0;
             // 
-            // Canform
-            // 
-            this.Canform.Location = new System.Drawing.Point(65, 312);
-            this.Canform.Name = "Canform";
-            this.Canform.Size = new System.Drawing.Size(110, 23);
-            this.Canform.TabIndex = 12;
-            this.Canform.Text = "CanMessage";
-            this.Canform.UseVisualStyleBackColor = true;
-            this.Canform.Click += new System.EventHandler(this.Canform_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -302,6 +350,10 @@
         private System.Windows.Forms.Button SendButton;
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.Button Canform;
+        private System.Windows.Forms.Button closeCanToolbutton;
+        private System.Windows.Forms.Button setSnbutton;
+        private System.Windows.Forms.Button openCanToolbutton;
+        private System.Windows.Forms.Button getversionbutton;
     }
 }
 

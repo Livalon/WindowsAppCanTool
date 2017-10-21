@@ -10,26 +10,93 @@ namespace CanTool
     class Analysis
     {
         List<string> CanIDselect = new List<string>();
+        public int m_version = 0;
+        public int m_open = 0;
+        public int m_Sn = 0;
+        public int m_Close = 1;
 
-        public string canReceipt(string CantoolMessage) //接收CanTool装置的信息
+        public string canReceipt(string CantoolMessage,int version, int open, int Sn, int Close) //接收CanTool装置的信息
         {
-
-            string canReceiptinfo = null;
+        m_version = version;
+        m_open = open;
+        m_Sn = Sn;
+        m_Close = Close;
             string s = CantoolMessage;
-            if (string.Equals(s, "\r"))
+            string canReceiptinfo = null;
+            byte[] bsTest = new byte[1];
+            bsTest[0] = 0x07;
+            string wrong= System.Text.Encoding.Default.GetString(bsTest);
+            /*public bool version = false;
+            public bool open = false;
+            public bool Sn = false;
+            public bool Close = true;*/
+            
+            if (version==2)
             {
-                //Console.WriteLine("open ok");
-                canReceiptinfo = "open ok";
+                //返回信息 不影响其它状态
+                //返回速率
+                if (string.Equals(s, "\r"))
+                {
+                    canReceiptinfo = "get version ok";
+                    m_version = 0;
+                }
+                else if (string.Equals(s, wrong))
+                {
+                    //返回打开失败
+
+                    canReceiptinfo = "get version false";
+                }
             }
-            else if (string.Equals(s, "0x07"))// \BEL
+            if(open==2)
             {
-                //Console.WriteLine("Failure");
-                canReceiptinfo = "Failure";
+                //返回打开
+                if(string.Equals(s, "\r"))
+                {
+                    m_open = 1;
+                    m_Close = 0;
+                    canReceiptinfo = "open ok";
+                }
+                else if(string.Equals(s, wrong))
+                {
+                    //返回打开失败
+                    m_open = 0;
+                    m_Close = 1;
+                    canReceiptinfo = "open false";
+                }
+                
             }
-            else if(string.Equals(s.Substring(0,2), "SV"))
+            if(Sn==2)
             {
-                //Console.WriteLine("SV2.5-HV2.0");
-                canReceiptinfo = "SV2.5-HV2.0";
+                //返回速率
+                if (string.Equals(s, "\r"))
+                {
+                    m_Sn = 0;
+                    canReceiptinfo = "Sn set ok";
+                }
+                else if (string.Equals(s, wrong))
+                {
+                    //返回打开失败
+
+                    canReceiptinfo = "Sn set false";
+                }
+                
+            }
+            if(Close==2)
+            {
+                //返回关闭
+                if (string.Equals(s, "\r"))
+                {
+                    m_Close = 1;
+                    m_open = 0;
+                    canReceiptinfo = "close ok";
+                }
+                else if (string.Equals(s, wrong))
+                {
+                    //返回打开失败
+                    m_open = 1;
+                    m_Close = 0;
+                    canReceiptinfo = "close false";
+                }
             }
             return canReceiptinfo;
         }
