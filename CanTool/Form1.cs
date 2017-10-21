@@ -26,6 +26,9 @@ namespace CanTool
         public string CanMessget;
         string buffread = ""; //缓冲区字符
         Form2 f2;
+        public bool open=false;
+        public bool Sn=false;
+        public bool Close = true;
 
         //暂时不让用户选择奇偶校验以及停止位
 
@@ -68,43 +71,96 @@ namespace CanTool
             byte[] buf = new byte[n];
             serialPort1.Read(buf, 0, n);//该部分取出后串口缓冲区的数据就没了
             buffread += System.Text.Encoding.Default.GetString(buf);
-            string[] strlist = buffread.Split("\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-            string outp = "";
-            List<string> Caninfos = new List<string>();
-            if (buffread.Length != strlist[0].Length) //ifbuffread的长度等于strlist第0项目的长度，说明没有\r
+            //CanMessageReceiveTextBox.Text ="******";
+            /*byte[] byteArray = System.Text.Encoding.Default.GetBytes(buffread);
+            int a = byteArray[0];
+            CanMessageReceiveTextBox.Text = a.ToString();*/
+            //暂时不考虑/r后面有数据的情况
+            if (!open && string.Equals(buffread,"\r")) //如果没有打开
             {
-                if (strlist.Length > 1)
-                {
-                    for (int i = 0; i < strlist.Length - 1; i++)
-                    {
-                        //输出所有ID信息
-                        outp += strlist[i];
-                        Caninfos.Add(strlist[i]);
-                    }
-
-                    //把strlist数组最后一个值赋给bufferead
-                    if (string.Equals(buffread.Substring(buffread.Length - 1, 1), "\r"))
-                    {
-                        outp += strlist[strlist.Length - 1];
-                        Caninfos.Add(strlist[strlist.Length - 1]);
-                    }
-                    Control.CheckForIllegalCrossThreadCalls = false;
-                    CanMessageReceiveTextBox.Text = outp;
-                    buffread = strlist[strlist.Length - 1];
-                }
-                else
-                {
-                    outp = strlist[0];
-                    Caninfos.Add(strlist[0]);
-                    Control.CheckForIllegalCrossThreadCalls = false;
-                    CanMessageReceiveTextBox.Text = outp;
-                }
-                buffread = "";
-                //f2.filterCanID(Caninfos, 3);
-                f2.flushMesslist(f2.filterCanID(Caninfos, 3));
-                //f2.flushMesslist(Caninfos);
+                //输出设备打开
+                Control.CheckForIllegalCrossThreadCalls = false;
+                CanMessageReceiveTextBox.Text = "open ok";
+                open = true;
+                Close = false;
             }
+            else if(!open && string.Equals(buffread, "\a"))
+            {
+                Control.CheckForIllegalCrossThreadCalls = false;
+                CanMessageReceiveTextBox.Text = "open false";
+            }else if(open && !Sn && string.Equals(buffread, "\r"))
+            {
+                Control.CheckForIllegalCrossThreadCalls = false;
+                CanMessageReceiveTextBox.Text = "Sn set ok";
+                Sn = true;
+            }
+            else if (open && !Sn && string.Equals(buffread, "\a"))
+            {
+                Control.CheckForIllegalCrossThreadCalls = false;
+                CanMessageReceiveTextBox.Text = "Sn set false";
+            }else if(open && !Close && string.Equals(buffread, "\r"))
+            {
+                Control.CheckForIllegalCrossThreadCalls = false;
+                CanMessageReceiveTextBox.Text = "Closet ok";
+                Close = true;
+                open = false;
+            }else if (open && !Close && string.Equals(buffread, "\a"))
+            {
+                Control.CheckForIllegalCrossThreadCalls = false;
+                CanMessageReceiveTextBox.Text = "Closet false";
+            }
+
+            else
+            {
+                string[] strlist = buffread.Split("\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries); //遇到/r就取出来
+                string outp = "";
+                List<string> Caninfos = new List<string>();
+                if (buffread.Length != strlist[0].Length) //ifbuffread的长度不等于strlist第0项目的长度，说明有\r
+                {
+                    if (string.Equals(strlist[0].Substring(0, 1), "t") || string.Equals(strlist[0].Substring(0, 1), "T"))
+                    {
+
+                        if (strlist.Length > 1)
+                        {
+                            for (int i = 0; i < strlist.Length - 1; i++)
+                            {
+                                //输出所有ID信息
+                                outp += strlist[i];
+                                Caninfos.Add(strlist[i]);
+                            }
+
+                            //把strlist数组最后一个值赋给bufferead
+                            if (string.Equals(buffread.Substring(buffread.Length - 1, 1), "\r"))
+                            {
+                                outp += strlist[strlist.Length - 1];
+                                Caninfos.Add(strlist[strlist.Length - 1]);
+                            }
+                            Control.CheckForIllegalCrossThreadCalls = false;
+                            CanMessageReceiveTextBox.Text = outp;
+                            buffread = strlist[strlist.Length - 1];
+                        }
+                        else
+                        {
+                            outp = strlist[0];
+                            Caninfos.Add(strlist[0]);
+                            Control.CheckForIllegalCrossThreadCalls = false;
+                            CanMessageReceiveTextBox.Text = outp;
+                        }
+                        buffread = "";
+                        //f2.filterCanID(Caninfos, 3);
+                        f2.flushMesslist(f2.filterCanID(Caninfos, 3));
+                    }
+                    /*else
+                    {
+                        Analysis ay = new Analysis();
+                        string get=ay.canReceipt(strlist[0]);
+                        CanMessageReceiveTextBox.Text = get;
+                    }*/
+                }
+            }
+            buffread = "";
+
 
         }
         #endregion
@@ -139,7 +195,8 @@ namespace CanTool
                 if (serialPort1.IsOpen)
                 {
                     //serialPort1.WriteLine(CanMessageSendTextBox.Text);
-                    serialPort1.WriteLine("t3581122334455667788\rt3201122334455667788\rt3601122334455667788\rt3211122334455667788\r");
+                    //serialPort1.WriteLine("t3581122334455667788\rt3201122334455667788\rt3601122334455667788\rt3211122334455667788\r");
+                    serialPort1.Write("\r");
                     CanMessageSendTextBox.Clear();
                 }
             }

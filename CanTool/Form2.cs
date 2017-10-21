@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,28 +42,9 @@ namespace CanTool
             }*/
             #endregion
 
-
-
             Analysis ay = new Analysis();
             List<string> Cangets = new List<string>();
             Cangets.Add("t8561122334455667788");
-
-            #region
-            //Form1 nf = new Form1();
-            //nf.RaiseEvent += new Form1.RaiseEventHandler(flushMesslist);
-            //CanMessageReceiveTextBox.Text;
-            //CanMessget;
-
-            /*foreach (string CanData in ay.canReceiptAnalysis(Canget)) //该部分的显示方式不是刷新，是增加
-            {
-                string[] Data = CanData.Split(',');
-                //Console.WriteLine(Data[0] + "----------" + Data[1]);
-                ListViewItem listv = new ListViewItem();
-                listv.Text = Data[0]; //第一列
-                listv.SubItems.Add(Data[1]);
-                CanMesslistView.Items.Add(listv);
-            }*/
-            #endregion
 
             flushMesslist(Cangets);
             textBox1.Text = "tttttttt";
@@ -98,6 +80,7 @@ namespace CanTool
 
         private void seletCanIDbutton_Click(object sender, EventArgs e)
         {
+            CanIDcheckedListBox1.Items.Clear();
             Analysis ayselect = new Analysis();
             foreach (string CanID in ayselect.getCanIDFromDatabase())
             {
@@ -183,9 +166,14 @@ namespace CanTool
 
                 foreach(string Caninfo in CanInfos)
                 {
+                    string[] canblock = Caninfo.Split(' ');
                     ListTree p = new ListTree();
-                    p.ID = Caninfo;
+                    /*p.ID = Caninfo;
                     p.Data = "0";
+                    p.Range ="0";*/
+                    p.ID = canblock[0];
+                    p.Data = "0";
+                    p.Range = canblock[1]+"~"+canblock[2];
                     pList.Add(p);
                 }
             }
@@ -239,12 +227,59 @@ namespace CanTool
                 this.m_setVisible();
             }
         }
+
+        private void getDatabasebutton_Click(object sender, EventArgs e)
+        {
+            /*FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.Description = "请选择文件路径";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                string foldPath = dialog.SelectedPath;
+                DirectoryInfo theFolder = new DirectoryInfo(foldPath);
+                FileInfo[] dirInfo = theFolder.GetFiles();
+                //遍历文件夹  
+                foreach (FileInfo file in dirInfo)
+                {
+                    MessageBox.Show(file.ToString());
+                }
+            }*/
+
+
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Multiselect = false;
+            fileDialog.Title = "请选择文件";
+            fileDialog.Filter = "所有文件(*.*)|*.*";
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string[] names = fileDialog.FileNames;
+
+                foreach (string file in names)
+                {
+                    MessageBox.Show("已选择文件:" + file, "选择文件提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    FileStream fsSource = new FileStream(file, FileMode.Open);
+                    FileStream fsTarget = new FileStream("2.txt", FileMode.OpenOrCreate);
+                    byte[] sourceArr = new byte[fsSource.Length];
+                    fsSource.Read(sourceArr, 0, sourceArr.Length);
+                    fsTarget.Position = fsTarget.Length;
+                    byte[] full = System.Text.Encoding.Default.GetBytes("\r");
+                    fsTarget.Write(full, 0, full.Length);
+                    fsTarget.Position = fsTarget.Length;
+                    fsTarget.Write(sourceArr, 0, sourceArr.Length);
+                    fsSource.Close();
+                    fsTarget.Close();
+                }
+
+            }
+            textBox1.Text= System.IO.Path.GetDirectoryName(fileDialog.FileName);
+        }
     }
 
     public class ListTree
     {
-        private string m_ID;
+        private string m_ID= string.Empty;
         private string m_Data = string.Empty;
+        private string m_Range= string.Empty;
 
         public string ID
         {
@@ -267,6 +302,17 @@ namespace CanTool
             set
             {
                 m_Data = value;
+            }
+        }
+        public string Range
+        {
+            get
+            {
+                return m_Range;
+            }
+            set
+            {
+                m_Range = value;
             }
         }
 

@@ -42,6 +42,7 @@
             this.Data = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.Range = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.CanMessInputbutton = new System.Windows.Forms.Button();
+            this.getDatabasebutton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,9 +51,9 @@
             this.CanMesslistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.CanIDcolumn,
             this.CanMessValue});
-            this.CanMesslistView.Location = new System.Drawing.Point(12, 31);
+            this.CanMesslistView.Location = new System.Drawing.Point(12, 12);
             this.CanMesslistView.Name = "CanMesslistView";
-            this.CanMesslistView.Size = new System.Drawing.Size(382, 457);
+            this.CanMesslistView.Size = new System.Drawing.Size(382, 479);
             this.CanMesslistView.TabIndex = 0;
             this.CanMesslistView.UseCompatibleStateImageBehavior = false;
             this.CanMesslistView.View = System.Windows.Forms.View.Details;
@@ -69,7 +70,7 @@
             // 
             // ShowMessbutton
             // 
-            this.ShowMessbutton.Location = new System.Drawing.Point(12, 2);
+            this.ShowMessbutton.Location = new System.Drawing.Point(424, 2);
             this.ShowMessbutton.Name = "ShowMessbutton";
             this.ShowMessbutton.Size = new System.Drawing.Size(174, 23);
             this.ShowMessbutton.TabIndex = 1;
@@ -79,7 +80,7 @@
             // 
             // seletCanIDbutton
             // 
-            this.seletCanIDbutton.Location = new System.Drawing.Point(455, 31);
+            this.seletCanIDbutton.Location = new System.Drawing.Point(530, 31);
             this.seletCanIDbutton.Name = "seletCanIDbutton";
             this.seletCanIDbutton.Size = new System.Drawing.Size(105, 23);
             this.seletCanIDbutton.TabIndex = 2;
@@ -90,15 +91,15 @@
             // CanIDcheckedListBox1
             // 
             this.CanIDcheckedListBox1.FormattingEnabled = true;
-            this.CanIDcheckedListBox1.Location = new System.Drawing.Point(419, 60);
+            this.CanIDcheckedListBox1.Location = new System.Drawing.Point(400, 60);
             this.CanIDcheckedListBox1.Name = "CanIDcheckedListBox1";
-            this.CanIDcheckedListBox1.Size = new System.Drawing.Size(209, 364);
+            this.CanIDcheckedListBox1.Size = new System.Drawing.Size(246, 404);
             this.CanIDcheckedListBox1.TabIndex = 3;
             this.CanIDcheckedListBox1.SelectedIndexChanged += new System.EventHandler(this.CanIDcheckedListBox1_SelectedIndexChanged);
             // 
             // selectbuttonshow
             // 
-            this.selectbuttonshow.Location = new System.Drawing.Point(419, 440);
+            this.selectbuttonshow.Location = new System.Drawing.Point(400, 468);
             this.selectbuttonshow.Name = "selectbuttonshow";
             this.selectbuttonshow.Size = new System.Drawing.Size(100, 23);
             this.selectbuttonshow.TabIndex = 4;
@@ -108,7 +109,7 @@
             // 
             // selectbuttoninput
             // 
-            this.selectbuttoninput.Location = new System.Drawing.Point(525, 440);
+            this.selectbuttoninput.Location = new System.Drawing.Point(543, 468);
             this.selectbuttoninput.Name = "selectbuttoninput";
             this.selectbuttoninput.Size = new System.Drawing.Size(103, 23);
             this.selectbuttoninput.TabIndex = 5;
@@ -118,7 +119,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(755, 439);
+            this.textBox1.Location = new System.Drawing.Point(661, 439);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(230, 52);
@@ -167,7 +168,7 @@
             // 
             // CanMessInputbutton
             // 
-            this.CanMessInputbutton.Location = new System.Drawing.Point(1107, 439);
+            this.CanMessInputbutton.Location = new System.Drawing.Point(1107, 468);
             this.CanMessInputbutton.Name = "CanMessInputbutton";
             this.CanMessInputbutton.Size = new System.Drawing.Size(75, 23);
             this.CanMessInputbutton.TabIndex = 8;
@@ -175,11 +176,22 @@
             this.CanMessInputbutton.UseVisualStyleBackColor = true;
             this.CanMessInputbutton.Click += new System.EventHandler(this.CanMessInputbutton_Click);
             // 
+            // getDatabasebutton
+            // 
+            this.getDatabasebutton.Location = new System.Drawing.Point(411, 31);
+            this.getDatabasebutton.Name = "getDatabasebutton";
+            this.getDatabasebutton.Size = new System.Drawing.Size(96, 23);
+            this.getDatabasebutton.TabIndex = 9;
+            this.getDatabasebutton.Text = "加载数据库";
+            this.getDatabasebutton.UseVisualStyleBackColor = true;
+            this.getDatabasebutton.Click += new System.EventHandler(this.getDatabasebutton_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1232, 500);
+            this.Controls.Add(this.getDatabasebutton);
             this.Controls.Add(this.CanMessInputbutton);
             this.Controls.Add(this.treeList1);
             this.Controls.Add(this.textBox1);
@@ -213,5 +225,6 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn Data;
         private System.Windows.Forms.Button CanMessInputbutton;
         private DevExpress.XtraTreeList.Columns.TreeListColumn Range;
+        private System.Windows.Forms.Button getDatabasebutton;
     }
 }

@@ -11,21 +11,27 @@ namespace CanTool
     {
         List<string> CanIDselect = new List<string>();
 
-        public void canReceipt(string CantoolMessage) //接收CanTool装置的信息
+        public string canReceipt(string CantoolMessage) //接收CanTool装置的信息
         {
 
-            /*string s = Console.ReadLine();
-
+            string canReceiptinfo = null;
+            string s = CantoolMessage;
             if (string.Equals(s, "\r"))
             {
-                Console.WriteLine("open ok");
+                //Console.WriteLine("open ok");
+                canReceiptinfo = "open ok";
             }
-            else if (string.Equals(s, "\\BEL"))
+            else if (string.Equals(s, "0x07"))// \BEL
             {
-                Console.WriteLine("Failure");
-            }*/
-
-
+                //Console.WriteLine("Failure");
+                canReceiptinfo = "Failure";
+            }
+            else if(string.Equals(s.Substring(0,2), "SV"))
+            {
+                //Console.WriteLine("SV2.5-HV2.0");
+                canReceiptinfo = "SV2.5-HV2.0";
+            }
+            return canReceiptinfo;
         }
 
         public List<string> getCanIDFromDatabase()
@@ -66,7 +72,7 @@ namespace CanTool
                         {
                             s = sr.ReadLine(); //跳到有效行
                             string[] arr1 = s.Split(' ');
-                            CanInfos.Add(arr1[0]);
+                            CanInfos.Add(arr1[0]+" "+ arr1[6] + " "+ arr1[7]);
                         }
                     }
                 }
