@@ -54,6 +54,7 @@
             this.CanMessageReceiveTextBox = new System.Windows.Forms.TextBox();
             this.CanMessageSendTextBox = new System.Windows.Forms.TextBox();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.setSncomboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -208,6 +209,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.setSncomboBox);
             this.groupBox2.Controls.Add(this.closeCanToolbutton);
             this.groupBox2.Controls.Add(this.setSnbutton);
             this.groupBox2.Controls.Add(this.openCanToolbutton);
@@ -236,7 +238,7 @@
             // 
             // setSnbutton
             // 
-            this.setSnbutton.Location = new System.Drawing.Point(207, 318);
+            this.setSnbutton.Location = new System.Drawing.Point(143, 290);
             this.setSnbutton.Name = "setSnbutton";
             this.setSnbutton.Size = new System.Drawing.Size(75, 23);
             this.setSnbutton.TabIndex = 14;
@@ -246,7 +248,7 @@
             // 
             // openCanToolbutton
             // 
-            this.openCanToolbutton.Location = new System.Drawing.Point(108, 318);
+            this.openCanToolbutton.Location = new System.Drawing.Point(305, 290);
             this.openCanToolbutton.Name = "openCanToolbutton";
             this.openCanToolbutton.Size = new System.Drawing.Size(75, 23);
             this.openCanToolbutton.TabIndex = 13;
@@ -256,7 +258,7 @@
             // 
             // getversionbutton
             // 
-            this.getversionbutton.Location = new System.Drawing.Point(16, 318);
+            this.getversionbutton.Location = new System.Drawing.Point(305, 261);
             this.getversionbutton.Name = "getversionbutton";
             this.getversionbutton.Size = new System.Drawing.Size(75, 23);
             this.getversionbutton.TabIndex = 12;
@@ -266,7 +268,7 @@
             // 
             // SendButton
             // 
-            this.SendButton.Location = new System.Drawing.Point(305, 142);
+            this.SendButton.Location = new System.Drawing.Point(305, 102);
             this.SendButton.Name = "SendButton";
             this.SendButton.Size = new System.Drawing.Size(75, 23);
             this.SendButton.TabIndex = 11;
@@ -277,7 +279,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(13, 176);
+            this.label7.Location = new System.Drawing.Point(13, 133);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(63, 15);
             this.label7.TabIndex = 7;
@@ -294,7 +296,7 @@
             // 
             // CanMessageReceiveTextBox
             // 
-            this.CanMessageReceiveTextBox.Location = new System.Drawing.Point(16, 200);
+            this.CanMessageReceiveTextBox.Location = new System.Drawing.Point(16, 151);
             this.CanMessageReceiveTextBox.Multiline = true;
             this.CanMessageReceiveTextBox.Name = "CanMessageReceiveTextBox";
             this.CanMessageReceiveTextBox.Size = new System.Drawing.Size(364, 104);
@@ -305,8 +307,17 @@
             this.CanMessageSendTextBox.Location = new System.Drawing.Point(16, 42);
             this.CanMessageSendTextBox.Multiline = true;
             this.CanMessageSendTextBox.Name = "CanMessageSendTextBox";
-            this.CanMessageSendTextBox.Size = new System.Drawing.Size(364, 94);
+            this.CanMessageSendTextBox.Size = new System.Drawing.Size(364, 54);
             this.CanMessageSendTextBox.TabIndex = 0;
+            // 
+            // setSncomboBox
+            // 
+            this.setSncomboBox.FormattingEnabled = true;
+            this.setSncomboBox.Location = new System.Drawing.Point(16, 290);
+            this.setSncomboBox.Name = "setSncomboBox";
+            this.setSncomboBox.Size = new System.Drawing.Size(121, 23);
+            this.setSncomboBox.TabIndex = 16;
+            this.setSncomboBox.SelectedIndexChanged += new System.EventHandler(this.setSncomboBox_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -354,6 +365,7 @@
         private System.Windows.Forms.Button setSnbutton;
         private System.Windows.Forms.Button openCanToolbutton;
         private System.Windows.Forms.Button getversionbutton;
+        private System.Windows.Forms.ComboBox setSncomboBox;
     }
 }
 

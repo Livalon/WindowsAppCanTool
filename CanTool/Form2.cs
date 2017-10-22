@@ -53,26 +53,38 @@ namespace CanTool
         public void flushMesslist(List<string> Cangets)
         {
             //CanMesslistView.Clear();
-            CanMesslistView.Items.Clear();
+            //CanMesslistView.Items.Clear();
             Analysis ay = new Analysis();
             //string Canget = "t8561122334455667788\r";
-            foreach (string Canget in Cangets) //此处疑似有重复
+
+
+            /*foreach (string Canget in Cangets) //此处疑似有重复
             {
                 ListViewItem listv = new ListViewItem();
                 listv.Text = Canget;
                 CanMesslistView.Items.Add(listv);
-            }
+            }*/
             foreach (string Canget in Cangets)
             {
-                foreach (string CanData in ay.canReceiptAnalysis(Canget))
+                if(string.Equals("t",Canget.Substring(0,1)) || string.Equals("T", Canget.Substring(0, 1)))
                 {
-                    string[] Data = CanData.Split(',');
-                    //Console.WriteLine(Data[0] + "----------" + Data[1]);
+                    foreach (string CanData in ay.canReceiptAnalysis(Canget))
+                    {
+                        string[] Data = CanData.Split(',');
+                        //Console.WriteLine(Data[0] + "----------" + Data[1]);
+                        ListViewItem listv = new ListViewItem();
+                        listv.Text = Data[0]; //第一列
+                        listv.SubItems.Add(Data[1]); //没有报错提示
+                        CanMesslistView.Items.Add(listv);
+                    }
+                }
+                else
+                {
                     ListViewItem listv = new ListViewItem();
-                    listv.Text = Data[0]; //第一列
-                    listv.SubItems.Add(Data[1]); //没有报错提示
+                    listv.Text = Canget;
                     CanMesslistView.Items.Add(listv);
                 }
+                
             }
 
             textBox1.Text = "***************";

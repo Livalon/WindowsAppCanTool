@@ -79,45 +79,6 @@ namespace CanTool
             int a = byteArray[0];
             CanMessageReceiveTextBox.Text = a.ToString();*/
             //暂时不考虑/r后面有数据的情况
-            /*if (!open && string.Equals(buffread,"\r")) //如果没有打开
-            {
-                //输出设备打开
-                Control.CheckForIllegalCrossThreadCalls = false;
-                CanMessageReceiveTextBox.Text = "open ok";
-                open = true;
-                Close = false;
-            }
-            else if(!open && string.Equals(buffread, "\a"))
-            {
-                Control.CheckForIllegalCrossThreadCalls = false;
-                CanMessageReceiveTextBox.Text = "open false";
-            }else if(open && !Sn && string.Equals(buffread, "\r"))
-            {
-                Control.CheckForIllegalCrossThreadCalls = false;
-                CanMessageReceiveTextBox.Text = "Sn set ok";
-                Sn = true;
-            }
-            else if (open && !Sn && string.Equals(buffread, "\a"))
-            {
-                Control.CheckForIllegalCrossThreadCalls = false;
-                CanMessageReceiveTextBox.Text = "Sn set false";
-            }else if(open && !Close && string.Equals(buffread, "\r"))
-            {
-                Control.CheckForIllegalCrossThreadCalls = false;
-                CanMessageReceiveTextBox.Text = "Closet ok";
-                Close = true;
-                open = false;
-            }else if (open && !Close && string.Equals(buffread, "\a"))
-            {
-                Control.CheckForIllegalCrossThreadCalls = false;
-                CanMessageReceiveTextBox.Text = "Closet false";
-            }*/
-            /*if(!(!version && open && !Sn && !Close)) //如果不是数据传输状态
-            {
-                Analysis ay = new Analysis();
-                string show=ay.canReceipt(buffread, version, open, Sn, Close);
-                MessageBox.Show(show);
-            }*/
 
             if (version==2 || open==2 || Sn==2 || Close==2) //如果不是数据传输状态
             {
@@ -128,6 +89,8 @@ namespace CanTool
                 Sn = ay.m_Sn;
                 Close = ay.m_Close;
                 MessageBox.Show(show);
+
+                buffread = "";
             }
             else
             {
@@ -175,9 +138,9 @@ namespace CanTool
                         string get=ay.canReceipt(strlist[0]);
                         CanMessageReceiveTextBox.Text = get;
                     }*/
+                    buffread = "";
                 }
             }
-            buffread = "";
 
 
         }
@@ -213,11 +176,12 @@ namespace CanTool
                 if (serialPort1.IsOpen)
                 {
                     //serialPort1.WriteLine(CanMessageSendTextBox.Text);
-                    //serialPort1.WriteLine("t3581122334455667788\rt3201122334455667788\rt3601122334455667788\rt3211122334455667788\r");
-                    byte[] bsTest = new byte[1];
+                    serialPort1.WriteLine("t35881122334455667788\rt32081122334455667788\rt36081122334455667788\rt32181122334455667788\r");
+                    /*byte[] bsTest = new byte[1];
                     bsTest[0] = 0x07;
                     string t = System.Text.Encoding.Default.GetString(bsTest);
-                    serialPort1.Write(t);
+
+                    serialPort1.Write(t);*/
                     CanMessageSendTextBox.Clear();
                 }
             }
@@ -276,12 +240,17 @@ namespace CanTool
 
         private void setSnbutton_Click(object sender, EventArgs e)
         {
+            /*Form3 f3= new Form3();
+            f3.Show();
+            String Snstr = f3.Sn;*/
+            
+            string Snstr = setSncomboBox.Text;
             try
             {
                 if (serialPort1.IsOpen)
                 {
                     Sn = 2;
-                    serialPort1.Write("1000\r");
+                    serialPort1.Write(Snstr+"\r");
                     CanMessageSendTextBox.Clear();
                 }
             }
@@ -306,6 +275,11 @@ namespace CanTool
             {
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void setSncomboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -349,6 +323,12 @@ namespace CanTool
 
             DataBitscomobox.SelectedText = "8"; //默认填入8
 
+            //设置Cantool速率
+            string[] Sns = { "S0", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", };
+            for (int i = 0; i < Sns.Length; i++)
+            {
+                setSncomboBox.Items.Add(Convert.ToString(Sns[i]));
+            }
 
         }
 
