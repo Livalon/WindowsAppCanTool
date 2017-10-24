@@ -26,11 +26,14 @@ namespace CanTool
         public string CanMessget;
         string buffread = ""; //缓冲区字符
         Form2 f2;
+        Form3 f3;
 
         public int version = 0;
         public int open = 0;
         public int Sn = 0;
         public int Close = 1;
+
+        int flushtype = 0;
 
         //暂时不让用户选择奇偶校验以及停止位
 
@@ -130,7 +133,19 @@ namespace CanTool
                         }
                         buffread = "";
                         //f2.filterCanID(Caninfos, 3);
-                        f2.flushMesslist(f2.filterCanID(Caninfos, 3));
+                        //f2.flushMesslist(f2.filterCanID(Caninfos, 3), flushtype);
+                        if(flushtype==0)
+                        {
+                            //f3.changeLED("10,000");
+                            f2.flushMesslist(f2.filterCanID(Caninfos, 3), flushtype);
+                        }
+                        else if (flushtype == 1)
+                        {
+                            f2.flushf3test(f2.filterCanID(Caninfos, 3), flushtype,f3);
+                        }
+
+                        //设置后，刷新的时候返回具体的值
+                        //f2.flushMesslist(f2.filterCanID(Caninfos, 3),1);
                     }
                     /*else
                     {
@@ -145,6 +160,18 @@ namespace CanTool
 
         }
         #endregion
+
+        /*public void selectflushtype(int type, List<string> Caninfos)
+        {
+            if(type==0)
+            {
+                f2.flushMesslist(f2.filterCanID(Caninfos, 3),0);
+            }
+            else
+            {
+                f2.flushMesslist(f2.filterCanID(Caninfos, 3),1);
+            }
+        }*/
 
         private void closeButton_Click(object sender, EventArgs e)
         {
@@ -195,6 +222,11 @@ namespace CanTool
         {
             //CanMessageReceiveTextBox.Text = "**********";
             CanMessageReceiveTextBox.Text = f2.test();
+        }
+
+        private void SetVisiable1()
+        {
+            flushtype = 1;
         }
 
         private void Canform_Click(object sender, EventArgs e)
@@ -280,6 +312,12 @@ namespace CanTool
         private void setSncomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void showconwindbutton_Click(object sender, EventArgs e)
+        {
+            f3 = new Form3(new SetVisiableHandler(SetVisiable1));
+            f3.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)
