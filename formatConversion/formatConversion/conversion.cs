@@ -11,6 +11,11 @@ using System.Runtime.InteropServices;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
+using System.Runtime.Serialization.Json;
+//using System.Web;
+//using System.Web.UI;
+//using System.Web.UI.WebControls;
 
 namespace formatConversion
 {
@@ -95,7 +100,7 @@ namespace formatConversion
         { //将dbc文件转换为XML文件
 
             FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-            StreamReader sr = new StreamReader(fs);
+            StreamReader sr = new StreamReader(fs, System.Text.Encoding.GetEncoding("GB2312"));
 
             ToXml tx = new ToXml();
             tx.cmarr = new List<CanMessageAndSignal>();
@@ -105,12 +110,14 @@ namespace formatConversion
             List<CanSignal> cs = new List<CanSignal>();
              //信号为ts，与之相对应
             int[] signalnum = new int [100];// 每条CAN信息中的CAN Signal的数目 不能够超过99，这个数组熊1开始
+            int snum = 0; // 每条CAN信息中的CAN Signal的数目
+            int cnt = 0;
 
             while ((s = sr.ReadLine()) != null)
             {
                 string[] arr = s.Split(' ');
-                int cnt = 0;
-                int snum = 0; // 每条CAN信息中的CAN Signal的数目
+                
+                
                 if(string.IsNullOrWhiteSpace(s))
                 {
                     cs = new List<CanSignal>();
@@ -163,7 +170,8 @@ namespace formatConversion
                 }
 
             }
-          
+            signalnum[cnt] = snum; // 这个数组从1开始
+
             if (!File.Exists("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.xml"))
             {
                 string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.xml";
@@ -172,7 +180,7 @@ namespace formatConversion
                 if (tx != null && !string.IsNullOrEmpty(fn))
                 {
 
-                    using (StreamWriter sw1 = new StreamWriter(fs1))
+                    using (StreamWriter sw1 = new StreamWriter(fs1, System.Text.Encoding.GetEncoding("GB2312")))
                     {
                         XmlSerializer xs = string.IsNullOrEmpty(null) ?
                             new XmlSerializer(tx.GetType()) :
@@ -195,7 +203,7 @@ namespace formatConversion
                 if (tx != null && !string.IsNullOrEmpty(fn))
                 {
 
-                    using (StreamWriter sw1 = new StreamWriter(fs1))
+                    using (StreamWriter sw1 = new StreamWriter(fs1, System.Text.Encoding.GetEncoding("GB2312")))
                     {
                         XmlSerializer xs = string.IsNullOrEmpty(null) ?
                             new XmlSerializer(tx.GetType()) :
@@ -208,6 +216,7 @@ namespace formatConversion
                
                fs1.Close();
             }
+            //int a = signalnum[1];
 
         }
 
@@ -226,7 +235,7 @@ namespace formatConversion
             object result = null;
             if (File.Exists(xmlFilePath))
             {
-                using (StreamReader reader = new StreamReader(xmlFilePath))
+                using (StreamReader reader = new StreamReader(xmlFilePath, System.Text.Encoding.GetEncoding("GB2312")))
                 {
                     XmlSerializer xs = new XmlSerializer(tx.GetType());
                     result = xs.Deserialize(reader);
@@ -239,7 +248,7 @@ namespace formatConversion
             {
                 string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample1.dbc";
                 FileStream fs = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample1.dbc", FileMode.Create, FileAccess.Write);//创建写入文件 
-                StreamWriter sw = new StreamWriter(fs);
+                StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.GetEncoding("GB2312"));
 
                 foreach (CanMessageAndSignal cmas in tx.cmarr)
                 {
@@ -267,7 +276,7 @@ namespace formatConversion
             {
                 string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample1.dbc";
                 FileStream fs = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample1.dbc", FileMode.Create, FileAccess.Write);//创建写入文件 
-                StreamWriter sw = new StreamWriter(fs);
+                StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.GetEncoding("GB2312"));
 
                 foreach (CanMessageAndSignal cmas in tx.cmarr)
                 {
@@ -293,11 +302,23 @@ namespace formatConversion
            
             
 
-           /* FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-            StreamReader sr = new StreamReader(fs);
+          
+        }
+
+
+
+        public void conversionToJson(string filePath)
+        {//将dbc文件转换为JSON文件
+            FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs, System.Text.Encoding.GetEncoding("GB2312"));
+
+            ToXml tx = new ToXml();
+            tx.cmarr = new List<CanMessageAndSignal>();
+            CanMessage tm;
+            CanMessageAndSignal cms = new CanMessageAndSignal();
             string s;
-            List<CanMessage> cm = new List<CanMessage>();
             List<CanSignal> cs = new List<CanSignal>();
+            //信号为ts，与之相对应
             int[] signalnum = new int[100];// 每条CAN信息中的CAN Signal的数目 不能够超过99，这个数组熊1开始
 
             while ((s = sr.ReadLine()) != null)
@@ -307,22 +328,27 @@ namespace formatConversion
                 int snum = 0; // 每条CAN信息中的CAN Signal的数目
                 if (string.IsNullOrWhiteSpace(s))
                 {
+                    cs = new List<CanSignal>();
                     continue;
                 }
                 else if (arr.Length == 5) //CAN message
                 {
-                    //Console.WriteLine(arr[0]);
-                    //string tmp;
-                    CanMessage tm = new CanMessage(); //信号为ts，与之相对应
+                    // cs = new List<CanSignal>();
+                    cms = new CanMessageAndSignal();
+                    tm = new CanMessage();
+                    cs = new List<CanSignal>();
+                    cms.canm = tm;
+                    cms.cansarr = cs;
+                    tx.cmarr.Add(cms);
+
                     tm.CANmessageTAG = arr[0];
                     tm.mId = Convert.ToUInt32(arr[1]);
                     int n;//表示“：”在数组中的位置；
                     n = arr[2].IndexOf(':');
                     tm.messageName = arr[2].Substring(0, n);
-                    tm.mSeparator =Convert.ToString( arr[2][n]);
+                    tm.mSeparator = ":";
                     tm.DLC = Convert.ToInt32(arr[3]);
                     tm.mNodeName = arr[4];
-                    cm.Add(tm);
 
                     signalnum[cnt] = snum; // 这个数组从1开始
                     cnt++;
@@ -332,7 +358,7 @@ namespace formatConversion
                 }
                 else
                 {
-                    string[] arr1 = s.Split(' ');
+                    string[] arr1 = s.Trim().Split(' ');
                     CanSignal ts = new CanSignal();
                     ts.CANsignalTAG = arr1[0];
                     //Console.Write(arr1[0]);
@@ -344,7 +370,7 @@ namespace formatConversion
                     ts.AB = arr1[4];
                     ts.CD = arr1[5];
                     ts.unit = arr1[6];
-                    ts.sNodeName = arr1[7];
+                    ts.sNodeName = arr1[8];
                     cs.Add(ts);
 
                     snum++;
@@ -352,38 +378,332 @@ namespace formatConversion
                 }
 
             }
-            foreach (CanMessage t in cm)
-            {
-                Console.Write(t.CANmessageTAG);
-                Console.Write(t.mId);
-                Console.Write(t.messageName);
-                Console.Write(t.mSeparator);
-                Console.Write(t.DLC);
-                Console.Write(t.mNodeName);
 
-            }*/
+            if (!File.Exists("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.json"))
+            {
+                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.json";
+                FileStream fs1 = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.json", FileMode.Create, FileAccess.Write);//创建写入文件 
+                string tmp;
+                StreamWriter sw1 = new StreamWriter(fs1, System.Text.Encoding.GetEncoding("GB2312"));
+                if (tx != null && !string.IsNullOrEmpty(fn))
+                {
+
+                    tmp = JsonConvert.SerializeObject(tx.cmarr, Newtonsoft.Json.Formatting.Indented);
+       
+                    sw1.WriteLine(tmp + "\n");
+                }
+                //sw.WriteLine(this.textBox3.Text.Trim() + "+" + this.textBox4.Text);//开始写入值
+                sw1.Close();
+                fs1.Close();
+
+            }
+
+            else
+            {
+                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.json";
+                FileStream fs1 = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.json", FileMode.Create, FileAccess.Write);//创建写入文件 
+                string tmp;
+                StreamWriter sw1 = new StreamWriter(fs1, System.Text.Encoding.GetEncoding("GB2312"));
+                if (tx != null && !string.IsNullOrEmpty(fn))
+                {
+                    tmp = JsonConvert.SerializeObject(tx.cmarr, Newtonsoft.Json.Formatting.Indented);
+
+                    sw1.WriteLine(tmp + "\n");
+
+                    /* 另一种方法，不过转换成的格式都集中在一行，不太智能
+                     * System.Runtime.Serialization.Json.DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(tx.cmarr.GetType());
+                     using (MemoryStream ms = new MemoryStream())
+                     {
+                         serializer.WriteObject(ms, tx.cmarr);
+                         tmp = Encoding.UTF8.GetString(ms.ToArray());
+                     }
+                     sw1.WriteLine(tmp + "\n");*/
+                }
+                //sw.WriteLine(this.textBox3.Text.Trim() + "+" + this.textBox4.Text);//开始写入值
+                sw1.Close();
+                fs1.Close();
+            }
+
         }
 
-
-
-        public void conversionToJson(string fileName)
-        {//将dbc文件转换为JSON文件
-            FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-            StreamReader sr = new StreamReader(fs);
-            string s;
-            while ((s = sr.ReadLine()) != null)
+        public void reconversionToJson(string jsonFilePath)
+        {//将XML文件逆序列化成CAN信息和信号数据库格式
+            ToXml tx = new ToXml();
+            if (File.Exists(jsonFilePath))
             {
+                string json = string.Empty;
+                
+                using (FileStream fs = new FileStream(jsonFilePath, FileMode.Open, System.IO.FileAccess.Read, FileShare.ReadWrite))
+                {
+                    using (StreamReader sr = new StreamReader(fs, System.Text.Encoding.GetEncoding("GB2312")))
+                    {
+                        json = sr.ReadToEnd().ToString();
+                    }
+                }
+
+
+                //string strSerializeJSON = JsonConvert.SerializeObject(person);
+                List<CanMessageAndSignal> user = (List<CanMessageAndSignal>)JsonConvert.DeserializeObject(json, typeof(List<CanMessageAndSignal>));
+                // List<CanMessageAndSignal>  obji = JsonConvert.DeserializeObject< List<CanMessageAndSignal>>(File.ReadAllText(json));
+
+                //json = "[" + json + "]";
+                // MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
+                // 使用ReadObject方法反序列化成对象  
+                // object ob = JsonConvert.SerializeObject(stream);
+                // List<CanMessageAndSignal> ls = (List<CanMessageAndSignal>)ob;
+                tx.cmarr = user;
+                // {
+                // DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<CanMessageAndSignal>));
+                //把Json传入内存流中保存
+
+                // MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(reader));
+                // 使用ReadObject方法反序列化成对象
+                //object ob = serializer.ReadObject(stream);
+                //List <CanMessageAndSignal > ls = (List < CanMessageAndSignal >)ob;
+                //tx.cmarr = ls;
+               //JsonReader reader = new JsonTextReader(new StreamReader(jsonFilePath));
+              // DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<CanMessageAndSignal>));
+                    //把Json传入内存流中保存  
+                    
+                    //string strSerializeJSON = JsonConvert.SerializeObject(reader);
+                    // tx = (ToXml)JsonConvert.DeserializeObject(strSerializeJSON, typeof(ToXml));
+                    //XmlSerializer xs = new XmlSerializer(tx.GetType());
+                    // result = xs.Deserialize(reader);
+
+               // }
+               
+            }
+
+            if (!File.Exists("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample2.dbc"))
+            {
+                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample2.dbc";
+                FileStream fs = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample2.dbc", FileMode.Create, FileAccess.Write);//创建写入文件 
+                StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.GetEncoding("GB2312"));
+
+                foreach (CanMessageAndSignal cmas in tx.cmarr)
+                {
+                    CanMessage canm1 = new CanMessage();
+                    canm1 = cmas.canm;
+                    string s;
+                    s = canm1.CANmessageTAG + " " + canm1.mId + " " + canm1.messageName + canm1.mSeparator + " " + canm1.DLC + " " + canm1.mNodeName;
+                    sw.WriteLine(s);
+                    foreach (CanSignal cs in cmas.cansarr)
+                    {
+                        string s1;
+                        s1 = " " + cs.CANsignalTAG + " " + cs.signalName + " " + cs.sSeparator + " " + cs.startToEnd + " " + cs.AB + " " + cs.CD + " " + cs.unit + "  " + cs.sNodeName;
+                        sw.WriteLine(s1);
+                    }
+                    sw.WriteLine();
+
+                }
+                //sw.WriteLine(this.textBox3.Text.Trim() + "+" + this.textBox4.Text);//开始写入值
+                sw.Close();
+                fs.Close();
+
+            }
+
+            else
+            {
+                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample2.dbc";
+                FileStream fs = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample2.dbc", FileMode.Create, FileAccess.Write);//创建写入文件 
+                StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.GetEncoding("GB2312"));
+
+                foreach (CanMessageAndSignal cmas in tx.cmarr)
+                {
+                    CanMessage canm1 = new CanMessage();
+                    canm1 = cmas.canm;
+                    string s;
+                    s = canm1.CANmessageTAG + " " + canm1.mId + " " + canm1.messageName + canm1.mSeparator + " " + canm1.DLC + " " + canm1.mNodeName;
+                    sw.WriteLine(s);
+                    foreach (CanSignal cs in cmas.cansarr)
+                    {
+                        string s1;
+                        
+                        s1 = " " + cs.CANsignalTAG + " " + cs.signalName + " " + cs.sSeparator + " " + cs.startToEnd + " " + cs.AB + " " + cs.CD + " " + cs.unit + "  " + cs.sNodeName;
+                        sw.WriteLine(s1);
+                    }
+                    sw.WriteLine();
+
+                }
+                //sw.WriteLine(this.textBox3.Text.Trim() + "+" + this.textBox4.Text);//开始写入值
+                sw.Close();
+                fs.Close();
 
             }
         }
 
-        public void reconversionToJson(string fileName)
-        {//将XML文件逆序列化成CAN信息和信号数据库格式
-            FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-            StreamReader sr = new StreamReader(fs);
+        public void dbcPreprocess(string filePath)
+        { //将dbc文件转换为XML文件
+
+
+            FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs, System.Text.Encoding.GetEncoding("GB2312"));
+
+            ToXml tx = new ToXml();
+            tx.cmarr = new List<CanMessageAndSignal>();
+            CanMessage tm;
+            CanMessageAndSignal cms = new CanMessageAndSignal();
             string s;
+            List<CanSignal> cs = new List<CanSignal>();
+            //信号为ts，与之相对应
+            int[] signalnum = new int[100];// 每条CAN信息中的CAN Signal的数目 不能够超过99，这个数组熊1开始
+            int snum = 0; // 每条CAN信息中的CAN Signal的数目
+            int cnt = 0;
+
             while ((s = sr.ReadLine()) != null)
             {
+                string[] arr = s.Split(' ');
+
+
+                if (string.IsNullOrWhiteSpace(s))
+                {
+                    cs = new List<CanSignal>();
+                    continue;
+                }
+                else if (arr.Length == 5) //CAN message
+                {
+                    // cs = new List<CanSignal>();
+                    cms = new CanMessageAndSignal();
+                    tm = new CanMessage();
+                    cs = new List<CanSignal>();
+                    cms.canm = tm;
+                    cms.cansarr = cs;
+                    tx.cmarr.Add(cms);
+
+                    tm.CANmessageTAG = arr[0];
+                    tm.mId = Convert.ToUInt32(arr[1]);
+                    int n;//表示“：”在数组中的位置；
+                    n = arr[2].IndexOf(':');
+                    tm.messageName = arr[2].Substring(0, n);
+                    tm.mSeparator = ":";
+                    tm.DLC = Convert.ToInt32(arr[3]);
+                    tm.mNodeName = arr[4];
+
+                    signalnum[cnt] = snum; // 这个数组从1开始
+                    cnt++;
+                    snum = 0;
+
+
+                }
+                else
+                {
+                    string[] arr1 = s.Trim().Split(' ');
+                    CanSignal ts = new CanSignal();
+                    ts.CANsignalTAG = arr1[0];
+                    //Console.Write(arr1[0]);
+                    //Console.Write(arr1[1]);
+                    ts.signalName = arr1[1];
+                    //Console.Write(arr1[2]);
+                    ts.sSeparator = arr1[2];
+                    ts.startToEnd = arr1[3];
+                    ts.AB = arr1[4];
+                    ts.CD = arr1[5];
+                    ts.unit = arr1[6];
+                    ts.sNodeName = arr1[8];
+                    cs.Add(ts);
+
+                    snum++;
+
+                }
+
+            }
+            signalnum[cnt] = snum; // 这个数组从1开始
+            /*int cancnt = 0;
+            for(int i = 0; i < 100; i++)
+            {
+                if(signalnum[i] != 0)
+                {
+                    cancnt++;
+                }
+            }*/
+
+            if (!File.Exists("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\data.txt"))
+            {
+                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\data.txt";
+                FileStream fs1 = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\data.txt", FileMode.Create, FileAccess.Write);//创建写入文件 
+                StreamWriter sw = new StreamWriter(fs1, System.Text.Encoding.GetEncoding("GB2312"));
+                //StreamWriter sw1 = new StreamWriter(fs1);
+                int pointer = 1;
+                foreach (CanMessageAndSignal cmas in tx.cmarr)
+                {
+                    CanMessage canm1 = new CanMessage();
+                    canm1 = cmas.canm;
+                    string ss;
+                    ss = canm1.messageName + canm1.mSeparator + " " + canm1.mId + " " + canm1.DLC;
+                    sw.WriteLine(ss);
+                    sw.WriteLine(signalnum[pointer]);
+                    sw.WriteLine();
+                    pointer++;
+                    foreach (CanSignal cs1 in cmas.cansarr)
+                    {
+                        string s1;
+                        int m = cs1.AB.IndexOf(",");
+                        int i = cs1.AB.Length;
+                        int n = cs1.CD.IndexOf("|");
+                        int j = cs1.CD.Length;
+                        string a;
+                        string b;
+                        a = cs1.AB;
+                        b = cs1.CD;
+
+                        int p = cs1.startToEnd.IndexOf("|");
+                        int q = cs1.startToEnd.IndexOf("@");
+                        int r = cs1.startToEnd.Length;
+
+                        s1 = cs1.signalName + " " + cs1.startToEnd.Substring(0, p) + " " + cs1.startToEnd.Substring(p + 1, q - p - 1) + " " + cs1.startToEnd.Substring(q + 1, r - q - 2) + " " + a.Substring(1, m - 1) + " " + a.Substring(m + 1, i + -m - 2) + " " + b.Substring(1, n - 1) + " " + b.Substring(n + 1, j - n - 2) + " " + cs1.unit;
+                        sw.WriteLine(s1);
+                    }
+                    sw.WriteLine();
+
+                }
+                //sw.WriteLine(this.textBox3.Text.Trim() + "+" + this.textBox4.Text);//开始写入值
+                sw.Close();
+                fs1.Close();
+
+            }
+
+            else
+            {
+                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\data.txt";
+                FileStream fs1 = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\data.txt", FileMode.Create, FileAccess.Write);//创建写入文件 
+                StreamWriter sw = new StreamWriter(fs1, System.Text.Encoding.GetEncoding("GB2312"));
+                //StreamWriter sw1 = new StreamWriter(fs1);
+                int pointer = 1;
+                foreach (CanMessageAndSignal cmas in tx.cmarr)
+                {
+                    CanMessage canm1 = new CanMessage();
+                    canm1 = cmas.canm;
+                    string ss;
+                    ss = canm1.messageName + canm1.mSeparator + " " + canm1.mId + " " + canm1.DLC;
+                    sw.WriteLine(ss);
+                    sw.WriteLine(signalnum[pointer]);
+                    sw.WriteLine();
+                    pointer++;
+                    foreach (CanSignal cs1 in cmas.cansarr)
+                    {
+                        string s1;
+                        int m = cs1.AB.IndexOf(",");
+                        int i = cs1.AB.Length;
+                        int n = cs1.CD.IndexOf("|");
+                        int j = cs1.CD.Length;
+                        string a;
+                        string b;
+                        a = cs1.AB;
+                        b = cs1.CD;
+
+                        int p = cs1.startToEnd.IndexOf("|");
+                        int q = cs1.startToEnd.IndexOf("@");
+                        int r = cs1.startToEnd.Length;
+
+                        s1 = cs1.signalName + " " + cs1.startToEnd.Substring(0 , p) + " " + cs1.startToEnd.Substring(p+1 , q -p -1) + " " + cs1.startToEnd.Substring(q+1 , r-q-2) + " " + a.Substring(1, m - 1) + " " + a.Substring(m + 1, i +-m - 2) + " " + b.Substring(1, n - 1) + " " + b.Substring(n + 1, j - n - 2) + " " + cs1.unit;
+                        sw.WriteLine(s1);
+                    }
+                    sw.WriteLine();
+
+                }
+                //sw.WriteLine(this.textBox3.Text.Trim() + "+" + this.textBox4.Text);//开始写入值
+                sw.Close();
+                fs1.Close();
 
             }
         }
