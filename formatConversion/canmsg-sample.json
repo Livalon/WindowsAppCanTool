@@ -1,0 +1,1179 @@
+[
+  {
+    "canm": {
+      "CANmessageTAG": "BO_",
+      "mId": 856,
+      "messageName": "CDU_1",
+      "mSeparator": ":",
+      "DLC": 8,
+      "mNodeName": "CDU"
+    },
+    "cansarr": [
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACOffButtonSt",
+        "sSeparator": ":",
+        "startToEnd": "0|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACOffButtonStVD",
+        "sSeparator": ":",
+        "startToEnd": "1|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACAutoModeButtonSt",
+        "sSeparator": ":",
+        "startToEnd": "2|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACAutoModeButtonStVD",
+        "sSeparator": ":",
+        "startToEnd": "3|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACFDefrostButtonSt",
+        "sSeparator": ":",
+        "startToEnd": "6|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACFDefrostButtonStVD",
+        "sSeparator": ":",
+        "startToEnd": "7|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACDualButtonSt",
+        "sSeparator": ":",
+        "startToEnd": "10|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACDualButtonStVD",
+        "sSeparator": ":",
+        "startToEnd": "11|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACIonButtonSt",
+        "sSeparator": ":",
+        "startToEnd": "12|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACIonButtonStVD",
+        "sSeparator": ":",
+        "startToEnd": "13|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACCirculationButtonSt",
+        "sSeparator": ":",
+        "startToEnd": "18|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACCirculationButtonStVD",
+        "sSeparator": ":",
+        "startToEnd": "19|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACACButtonSt",
+        "sSeparator": ":",
+        "startToEnd": "20|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACACButtonStVD",
+        "sSeparator": ":",
+        "startToEnd": "21|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACACMaxButtonSt",
+        "sSeparator": ":",
+        "startToEnd": "22|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACACMaxButtonStVD",
+        "sSeparator": ":",
+        "startToEnd": "23|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACModeButtonSt",
+        "sSeparator": ":",
+        "startToEnd": "26|3@0+",
+        "AB": "(1,0)",
+        "CD": "[0|7]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_WindExitSpd",
+        "sSeparator": ":",
+        "startToEnd": "30|4@0+",
+        "AB": "(1,0)",
+        "CD": "[0|15]",
+        "unit": "\"\"",
+        "sNodeName": ""
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVAC_DriverTempSelect",
+        "sSeparator": ":",
+        "startToEnd": "36|5@0+",
+        "AB": "(0.5,18)",
+        "CD": "[18|32]",
+        "unit": "\"°„C\"",
+        "sNodeName": ""
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_PsnTempSelect",
+        "sSeparator": ":",
+        "startToEnd": "44|5@0+",
+        "AB": "(0.5,18)",
+        "CD": "[18|32]",
+        "unit": "\"\"",
+        "sNodeName": ""
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACCtrlModeSt",
+        "sSeparator": ":",
+        "startToEnd": "54|3@0+",
+        "AB": "(1,0)",
+        "CD": "[0|7]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_ControlSt",
+        "sSeparator": ":",
+        "startToEnd": "55|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      }
+    ]
+  },
+  {
+    "canm": {
+      "CANmessageTAG": "BO_",
+      "mId": 61,
+      "messageName": "CDU_4",
+      "mSeparator": ":",
+      "DLC": 8,
+      "mNodeName": "CDU"
+    },
+    "cansarr": [
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACACCfg",
+        "sSeparator": ":",
+        "startToEnd": "1|2@0+",
+        "AB": "(1,0)",
+        "CD": "[0|3]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACAirCirCfg",
+        "sSeparator": ":",
+        "startToEnd": "3|2@0+",
+        "AB": "(1,0)",
+        "CD": "[0|3]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_HVACComfortCfg",
+        "sSeparator": ":",
+        "startToEnd": "5|2@0+",
+        "AB": "(1,0)",
+        "CD": "[0|3]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      }
+    ]
+  },
+  {
+    "canm": {
+      "CANmessageTAG": "BO_",
+      "mId": 1067,
+      "messageName": "CDU_NM",
+      "mSeparator": ":",
+      "DLC": 8,
+      "mNodeName": "CDU"
+    },
+    "cansarr": [
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_NMDestAddress",
+        "sSeparator": ":",
+        "startToEnd": "7|8@0+",
+        "AB": "(1,0)",
+        "CD": "[0|255]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_NMAlive",
+        "sSeparator": ":",
+        "startToEnd": "8|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_NMRing",
+        "sSeparator": ":",
+        "startToEnd": "9|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_NMLimpHome",
+        "sSeparator": ":",
+        "startToEnd": "10|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_NMSleepInd",
+        "sSeparator": ":",
+        "startToEnd": "12|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_NMSleepAck",
+        "sSeparator": ":",
+        "startToEnd": "13|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_NMWakeupOrignin",
+        "sSeparator": ":",
+        "startToEnd": "23|8@0+",
+        "AB": "(1,0)",
+        "CD": "[0|255]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "CDU_NMDataField",
+        "sSeparator": ":",
+        "startToEnd": "31|40@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      }
+    ]
+  },
+  {
+    "canm": {
+      "CANmessageTAG": "BO_",
+      "mId": 1056,
+      "messageName": "BCM_NM",
+      "mSeparator": ":",
+      "DLC": 8,
+      "mNodeName": "BCM"
+    },
+    "cansarr": [
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "BCM_NMDestAddress",
+        "sSeparator": ":",
+        "startToEnd": "7|8@0+",
+        "AB": "(1,0)",
+        "CD": "[0|255]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "BCM_NMAlive",
+        "sSeparator": ":",
+        "startToEnd": "8|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "BCM_NMRing",
+        "sSeparator": ":",
+        "startToEnd": "9|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "BCM_NMLimpHome",
+        "sSeparator": ":",
+        "startToEnd": "10|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "BCM_NMSleepInd",
+        "sSeparator": ":",
+        "startToEnd": "12|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "BCM_NMSleepAck",
+        "sSeparator": ":",
+        "startToEnd": "13|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "BCM_NMWakeupOrignin",
+        "sSeparator": ":",
+        "startToEnd": "23|8@0+",
+        "AB": "(1,0)",
+        "CD": "[0|255]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "BCM_NMDataField",
+        "sSeparator": ":",
+        "startToEnd": "31|40@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,CDU"
+      }
+    ]
+  },
+  {
+    "canm": {
+      "CANmessageTAG": "BO_",
+      "mId": 792,
+      "messageName": "BCM_BCAN_1",
+      "mSeparator": ":",
+      "DLC": 8,
+      "mNodeName": "BCM"
+    },
+    "cansarr": [
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "BCM_KeySt",
+        "sSeparator": ":",
+        "startToEnd": "1|2@0+",
+        "AB": "(1,0)",
+        "CD": "[1|3]",
+        "unit": "\"\"",
+        "sNodeName": "PEPS,ICM,AVM,CDU,HVAC"
+      }
+    ]
+  },
+  {
+    "canm": {
+      "CANmessageTAG": "BO_",
+      "mId": 837,
+      "messageName": "BCM_ESC_2",
+      "mSeparator": ":",
+      "DLC": 8,
+      "mNodeName": "BCM"
+    },
+    "cansarr": [
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "ESC_VehSpdVD",
+        "sSeparator": ":",
+        "startToEnd": "37|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,AVM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "ESC_VehSpd",
+        "sSeparator": ":",
+        "startToEnd": "36|13@0+",
+        "AB": "(0.05625,0)",
+        "CD": "[0|240]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,PEPS,ICM,AVM,CDU"
+      }
+    ]
+  },
+  {
+    "canm": {
+      "CANmessageTAG": "BO_",
+      "mId": 915,
+      "messageName": "BCM_VCU_2",
+      "mSeparator": ":",
+      "DLC": 8,
+      "mNodeName": "BCM"
+    },
+    "cansarr": [
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "VCU_CompressorPwrLimit",
+        "sSeparator": ":",
+        "startToEnd": "21|6@0+",
+        "AB": "(100,0)",
+        "CD": "[0|6000]",
+        "unit": "\"w\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "VCU_CompressorPwrLimitAct",
+        "sSeparator": ":",
+        "startToEnd": "32|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "VCU_PTCPwrLimit",
+        "sSeparator": ":",
+        "startToEnd": "29|6@0+",
+        "AB": "(100,0)",
+        "CD": "[0|6000]",
+        "unit": "\"w\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "VCU_PTCrPwrLimitAct",
+        "sSeparator": ":",
+        "startToEnd": "33|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "VCU_AirCompressorReq",
+        "sSeparator": ":",
+        "startToEnd": "36|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "VCU_AirCompressorReqVD",
+        "sSeparator": ":",
+        "startToEnd": "37|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      }
+    ]
+  },
+  {
+    "canm": {
+      "CANmessageTAG": "BO_",
+      "mId": 800,
+      "messageName": "HVAC_1",
+      "mSeparator": ":",
+      "DLC": 8,
+      "mNodeName": "HVAC"
+    },
+    "cansarr": [
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_AirCompressorSt",
+        "sSeparator": ":",
+        "startToEnd": "2|3@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_CorrectedExterTempVD",
+        "sSeparator": ":",
+        "startToEnd": "3|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "BCM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_RawExterTempVD",
+        "sSeparator": ":",
+        "startToEnd": "4|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_EngIdleStopProhibitReq",
+        "sSeparator": ":",
+        "startToEnd": "5|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_ACSt",
+        "sSeparator": ":",
+        "startToEnd": "6|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_ACmaxSt",
+        "sSeparator": ":",
+        "startToEnd": "7|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_CorrectedExterTemp",
+        "sSeparator": ":",
+        "startToEnd": "15|8@0+",
+        "AB": "(0.5,-40)",
+        "CD": "[-40|87.5]",
+        "unit": "\"°„C\"",
+        "sNodeName": "BCM,CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_RawExterTemp",
+        "sSeparator": ":",
+        "startToEnd": "23|8@0+",
+        "AB": "(0.5,-40)",
+        "CD": "[-40|87.5]",
+        "unit": "\"°„C\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_TempSelect",
+        "sSeparator": ":",
+        "startToEnd": "28|5@0+",
+        "AB": "(0.5,18)",
+        "CD": "[18|32]",
+        "unit": "\"°„C\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_DualSt",
+        "sSeparator": ":",
+        "startToEnd": "29|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_AutoSt",
+        "sSeparator": ":",
+        "startToEnd": "30|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_Type",
+        "sSeparator": ":",
+        "startToEnd": "31|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_WindExitMode",
+        "sSeparator": ":",
+        "startToEnd": "34|3@0+",
+        "AB": "(1,0)",
+        "CD": "[0|7]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_SpdFanReq",
+        "sSeparator": ":",
+        "startToEnd": "36|2@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_TelematicsSt",
+        "sSeparator": ":",
+        "startToEnd": "42|3@0+",
+        "AB": "(1,0)",
+        "CD": "[0|7]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_AirCirculationSt",
+        "sSeparator": ":",
+        "startToEnd": "46|2@0+",
+        "AB": "(1,0)",
+        "CD": "[0|3]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_PopUpDisplayReq",
+        "sSeparator": ":",
+        "startToEnd": "47|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_DriverTempSelect",
+        "sSeparator": ":",
+        "startToEnd": "53|5@0+",
+        "AB": "(0.5,18)",
+        "CD": "[18|32]",
+        "unit": "\"°„C\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_IonMode",
+        "sSeparator": ":",
+        "startToEnd": "55|2@0+",
+        "AB": "(1,0)",
+        "CD": "[0|3]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_WindExitSpd",
+        "sSeparator": ":",
+        "startToEnd": "59|4@0+",
+        "AB": "(1,0)",
+        "CD": "[0|15]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_PsnTempSelect",
+        "sSeparator": ":",
+        "startToEnd": "48|5@0+",
+        "AB": "(0.5,18)",
+        "CD": "[18|32]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      }
+    ]
+  },
+  {
+    "canm": {
+      "CANmessageTAG": "BO_",
+      "mId": 801,
+      "messageName": "HVAC_2",
+      "mSeparator": ":",
+      "DLC": 8,
+      "mNodeName": "HVAC"
+    },
+    "cansarr": [
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_RawCabinTemp",
+        "sSeparator": ":",
+        "startToEnd": "7|8@0+",
+        "AB": "(0.5,-40)",
+        "CD": "[-40|87.5]",
+        "unit": "\"°„C\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_CorrectedCabinTemp",
+        "sSeparator": ":",
+        "startToEnd": "15|8@0+",
+        "AB": "(0.5,-40)",
+        "CD": "[-40|87.5]",
+        "unit": "\"°„C\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_RawCabinTempVD",
+        "sSeparator": ":",
+        "startToEnd": "19|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_CompressorComsumpPwr",
+        "sSeparator": ":",
+        "startToEnd": "17|10@0+",
+        "AB": "(10,0)",
+        "CD": "[0|8000]",
+        "unit": "\"w\"",
+        "sNodeName": "BCM"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_PTCPwrAct",
+        "sSeparator": ":",
+        "startToEnd": "33|10@0+",
+        "AB": "(10,0)",
+        "CD": "[0|8000]",
+        "unit": "\"w\"",
+        "sNodeName": "BCM"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_stPTCAct",
+        "sSeparator": ":",
+        "startToEnd": "55|3@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "BCM"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_CorrectedCabinTempVD",
+        "sSeparator": ":",
+        "startToEnd": "18|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      }
+    ]
+  },
+  {
+    "canm": {
+      "CANmessageTAG": "BO_",
+      "mId": 797,
+      "messageName": "HVAC_3",
+      "mSeparator": ":",
+      "DLC": 8,
+      "mNodeName": "HVAC"
+    },
+    "cansarr": [
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_ACCfgSt",
+        "sSeparator": ":",
+        "startToEnd": "0|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_AirCirCfgSt",
+        "sSeparator": ":",
+        "startToEnd": "1|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_ComfortCfgSt",
+        "sSeparator": ":",
+        "startToEnd": "3|2@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "CDU"
+      }
+    ]
+  },
+  {
+    "canm": {
+      "CANmessageTAG": "BO_",
+      "mId": 864,
+      "messageName": "HVAC_4",
+      "mSeparator": ":",
+      "DLC": 8,
+      "mNodeName": "ACP"
+    },
+    "cansarr": [
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_ACPCommandVD",
+        "sSeparator": ":",
+        "startToEnd": "0|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "ACP"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_ACPCommand",
+        "sSeparator": ":",
+        "startToEnd": "2|2@0+",
+        "AB": "(1,0)",
+        "CD": "[0|3]",
+        "unit": "\"\"",
+        "sNodeName": "ACP"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_ACPSpeedSet",
+        "sSeparator": ":",
+        "startToEnd": "14|7@0+",
+        "AB": "(100,0)",
+        "CD": "[0|8600]",
+        "unit": "\"\"",
+        "sNodeName": "ACP"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_ACPHighSidePress",
+        "sSeparator": ":",
+        "startToEnd": "21|6@0+",
+        "AB": "(0.5,0)",
+        "CD": "[0|31]",
+        "unit": "\"\"",
+        "sNodeName": "ACP"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_PTCPowerRatio",
+        "sSeparator": ":",
+        "startToEnd": "31|8@0+",
+        "AB": "(1,0)",
+        "CD": "[0|100]",
+        "unit": "\"\"",
+        "sNodeName": "PTC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "HVAC_Checksum",
+        "sSeparator": ":",
+        "startToEnd": "39|8@0+",
+        "AB": "(1,0)",
+        "CD": "[155|255]",
+        "unit": "\"\"",
+        "sNodeName": "PTC"
+      }
+    ]
+  },
+  {
+    "canm": {
+      "CANmessageTAG": "BO_",
+      "mId": 867,
+      "messageName": "ACP_1",
+      "mSeparator": ":",
+      "DLC": 8,
+      "mNodeName": "ACP"
+    },
+    "cansarr": [
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "ACP_Speed",
+        "sSeparator": ":",
+        "startToEnd": "6|7@0+",
+        "AB": "(100,0)",
+        "CD": "[0|8600]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "ACPComsumpPwr",
+        "sSeparator": ":",
+        "startToEnd": "15|10@0+",
+        "AB": "(10,0)",
+        "CD": "[0|8000]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "ACP_Current",
+        "sSeparator": ":",
+        "startToEnd": "16|9@0+",
+        "AB": "(0.1,0)",
+        "CD": "[0|51]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "ACP_MotorTemp",
+        "sSeparator": ":",
+        "startToEnd": "39|8@0+",
+        "AB": "(1,-40)",
+        "CD": "[-40|140]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "ACP_HearBeat",
+        "sSeparator": ":",
+        "startToEnd": "55|4@0+",
+        "AB": "(1,0)",
+        "CD": "[0|15]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "ACP_ExtState",
+        "sSeparator": ":",
+        "startToEnd": "58|3@0+",
+        "AB": "(1,0)",
+        "CD": "[0|7]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "ACP_FailGrade",
+        "sSeparator": ":",
+        "startToEnd": "60|2@0+",
+        "AB": "(1,0)",
+        "CD": "[0|3]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "ACP_BaseState",
+        "sSeparator": ":",
+        "startToEnd": "63|3@0+",
+        "AB": "(1,0)",
+        "CD": "[0|7]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      }
+    ]
+  },
+  {
+    "canm": {
+      "CANmessageTAG": "BO_",
+      "mId": 868,
+      "messageName": "PTC_1",
+      "mSeparator": ":",
+      "DLC": 8,
+      "mNodeName": "PTC"
+    },
+    "cansarr": [
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "PTC_ElementError",
+        "sSeparator": ":",
+        "startToEnd": "7|4@0+",
+        "AB": "(1,0)",
+        "CD": "[0|15]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "PTC_TemperatureOver",
+        "sSeparator": ":",
+        "startToEnd": "3|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "PTC_VoltageFault",
+        "sSeparator": ":",
+        "startToEnd": "2|1@0+",
+        "AB": "(1,0)",
+        "CD": "[0|1]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "PTC_InternalError",
+        "sSeparator": ":",
+        "startToEnd": "1|2@0+",
+        "AB": "(1,0)",
+        "CD": "[0|3]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "PTC_Current",
+        "sSeparator": ":",
+        "startToEnd": "15|8@0+",
+        "AB": "(0.2,0)",
+        "CD": "[0|25.4]",
+        "unit": "\"A\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "PTCPwrAct",
+        "sSeparator": ":",
+        "startToEnd": "23|10@0+",
+        "AB": "(10,0)",
+        "CD": "[0|8000]",
+        "unit": "\"w\"",
+        "sNodeName": "HVAC"
+      },
+      {
+        "CANsignalTAG": "SG_",
+        "signalName": "PTCActst",
+        "sSeparator": ":",
+        "startToEnd": "26|3@0+",
+        "AB": "(1,0)",
+        "CD": "[0|7]",
+        "unit": "\"\"",
+        "sNodeName": "HVAC"
+      }
+    ]
+  }
+]
+
