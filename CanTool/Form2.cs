@@ -46,15 +46,16 @@ namespace CanTool
             List<string> Cangets = new List<string>();
             Cangets.Add("t8561122334455667788");
 
-            flushMesslist(Cangets);
+            flushMesslist(Cangets,0);
             textBox1.Text = "tttttttt";
         }
 
-        public void flushMesslist(List<string> Cangets)
+        public void flushMesslist(List<string> Cangets,int flushtype)
         {
+            #region
             //CanMesslistView.Clear();
             //CanMesslistView.Items.Clear();
-            Analysis ay = new Analysis();
+
             //string Canget = "t8561122334455667788\r";
 
 
@@ -64,18 +65,100 @@ namespace CanTool
                 listv.Text = Canget;
                 CanMesslistView.Items.Add(listv);
             }*/
+            #endregion
+                Analysis ay = new Analysis();
+                foreach (string Canget in Cangets)
+                {
+                    if (string.Equals("t", Canget.Substring(0, 1)) || string.Equals("T", Canget.Substring(0, 1)))
+                    {
+                        foreach (string CanData in ay.canReceiptAnalysis(Canget))
+                        {
+                            string[] Data = CanData.Split(',');
+                            //Console.WriteLine(Data[0] + "----------" + Data[1]);
+                            ListViewItem listv = new ListViewItem();
+                            listv.Text = Data[0]; //第一列
+                            listv.SubItems.Add(Data[1]); //没有报错提示
+                            CanMesslistView.Items.Add(listv);
+                        }
+                    }
+                    else
+                    {
+                        ListViewItem listv = new ListViewItem();
+                        listv.Text = Canget;
+                        CanMesslistView.Items.Add(listv);
+                    }
+
+                }
+
+                textBox1.Text = "***************";
+            
+           
+        }
+
+        public void flushf3test(List<string> Cangets, int flushtype,Form3 f3) //flushtype无效
+        {
+            Analysis ay = new Analysis();
+            List<string> AnalysisOK ;
             foreach (string Canget in Cangets)
             {
-                if(string.Equals("t",Canget.Substring(0,1)) || string.Equals("T", Canget.Substring(0, 1)))
+                if (string.Equals("t", Canget.Substring(0, 1)) || string.Equals("T", Canget.Substring(0, 1)))
                 {
-                    foreach (string CanData in ay.canReceiptAnalysis(Canget))
+                    AnalysisOK = ay.canReceiptAnalysis(Canget);
+                    foreach (string CanData in AnalysisOK)
                     {
                         string[] Data = CanData.Split(',');
                         //Console.WriteLine(Data[0] + "----------" + Data[1]);
                         ListViewItem listv = new ListViewItem();
                         listv.Text = Data[0]; //第一列
                         listv.SubItems.Add(Data[1]); //没有报错提示
+
+                        //Data[1]是数值
                         CanMesslistView.Items.Add(listv);
+                        
+
+                        //给出选择的器件序号
+                        
+                        
+                        //找出器件的值
+
+
+                        //刷新LED
+
+
+                        //ay.getCanAllInfoFromDatabase();
+                        //f3.changeLED("10,000");
+                    }
+                    List<string> retCanIDandlocal = f3.retCanIDandlocal;
+
+                    string anaresultID = Canget;
+
+                    int IDlen = 3;
+                    if (string.Equals(anaresultID.Substring(0, 1), "t")) //标准帧
+                    {
+                        IDlen = 3;
+                    }
+                    else if (string.Equals(anaresultID.Substring(0, 1), "T")) //扩展帧
+                    {
+                        IDlen = 8;
+                    }
+                    anaresultID = Canget.Substring(1, IDlen);
+                    anaresultID = (Int32.Parse(anaresultID, System.Globalization.NumberStyles.HexNumber)).ToString(); //16转10进制
+                                                                                                                      //判断是否在选中的ID中
+                    foreach (string Canselected in retCanIDandlocal)
+                    {
+                        string[] Canblock = Canselected.Split(' ');
+                        if (string.Equals(Canblock[0], anaresultID.ToString()))
+                        {
+                            //Data[1];
+                            string[] select=Canselected.Split(' ');
+                            int num=Convert.ToInt32(select[1]);
+                            string[] LED = AnalysisOK[num].Split(',');
+                            string Canvalue = string.Format("{0:00.000}", Convert.ToDouble(LED[1]));
+                            f3.changearcScale(Convert.ToSingle(LED[2]), Convert.ToSingle(LED[3]), Convert.ToSingle(LED[1])); 
+                            //f3.changearcScale(0F,100F,50F);
+                            f3.changeLED(Canvalue);
+                        }
+
                     }
                 }
                 else
@@ -84,11 +167,12 @@ namespace CanTool
                     listv.Text = Canget;
                     CanMesslistView.Items.Add(listv);
                 }
-                
+
             }
 
-            textBox1.Text = "***************";
+            //f3.changeLED("10,000");
         }
+
 
         private void seletCanIDbutton_Click(object sender, EventArgs e)
         {
@@ -115,7 +199,7 @@ namespace CanTool
                     CanIDselected.Add(CanIDcheckedListBox1.Items[i].ToString());
                 }
             }
-            flushMesslist(CanIDselected);
+            flushMesslist(CanIDselected,0);
         }
 
         public List<string> CanIDselected()
@@ -284,6 +368,11 @@ namespace CanTool
 
             }
             textBox1.Text= System.IO.Path.GetDirectoryName(fileDialog.FileName);
+        }
+
+        private void treeList1_FocusedNodeChanged(object sender, DevExpress.XtraTreeList.FocusedNodeChangedEventArgs e)
+        {
+
         }
     }
 

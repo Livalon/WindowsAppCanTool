@@ -44,6 +44,7 @@
             this.BaudRatecomobox = new System.Windows.Forms.ComboBox();
             this.ComComobox = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.setSncomboBox = new System.Windows.Forms.ComboBox();
             this.closeCanToolbutton = new System.Windows.Forms.Button();
             this.setSnbutton = new System.Windows.Forms.Button();
             this.openCanToolbutton = new System.Windows.Forms.Button();
@@ -54,7 +55,7 @@
             this.CanMessageReceiveTextBox = new System.Windows.Forms.TextBox();
             this.CanMessageSendTextBox = new System.Windows.Forms.TextBox();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.setSncomboBox = new System.Windows.Forms.ComboBox();
+            this.showconwindbutton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -209,6 +210,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.showconwindbutton);
             this.groupBox2.Controls.Add(this.setSncomboBox);
             this.groupBox2.Controls.Add(this.closeCanToolbutton);
             this.groupBox2.Controls.Add(this.setSnbutton);
@@ -226,6 +228,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "CanMessage";
             // 
+            // setSncomboBox
+            // 
+            this.setSncomboBox.FormattingEnabled = true;
+            this.setSncomboBox.Location = new System.Drawing.Point(16, 281);
+            this.setSncomboBox.Name = "setSncomboBox";
+            this.setSncomboBox.Size = new System.Drawing.Size(121, 23);
+            this.setSncomboBox.TabIndex = 16;
+            this.setSncomboBox.SelectedIndexChanged += new System.EventHandler(this.setSncomboBox_SelectedIndexChanged);
+            // 
             // closeCanToolbutton
             // 
             this.closeCanToolbutton.Location = new System.Drawing.Point(305, 318);
@@ -238,7 +249,7 @@
             // 
             // setSnbutton
             // 
-            this.setSnbutton.Location = new System.Drawing.Point(143, 290);
+            this.setSnbutton.Location = new System.Drawing.Point(143, 281);
             this.setSnbutton.Name = "setSnbutton";
             this.setSnbutton.Size = new System.Drawing.Size(75, 23);
             this.setSnbutton.TabIndex = 14;
@@ -310,14 +321,15 @@
             this.CanMessageSendTextBox.Size = new System.Drawing.Size(364, 54);
             this.CanMessageSendTextBox.TabIndex = 0;
             // 
-            // setSncomboBox
+            // showconwindbutton
             // 
-            this.setSncomboBox.FormattingEnabled = true;
-            this.setSncomboBox.Location = new System.Drawing.Point(16, 290);
-            this.setSncomboBox.Name = "setSncomboBox";
-            this.setSncomboBox.Size = new System.Drawing.Size(121, 23);
-            this.setSncomboBox.TabIndex = 16;
-            this.setSncomboBox.SelectedIndexChanged += new System.EventHandler(this.setSncomboBox_SelectedIndexChanged);
+            this.showconwindbutton.Location = new System.Drawing.Point(16, 317);
+            this.showconwindbutton.Name = "showconwindbutton";
+            this.showconwindbutton.Size = new System.Drawing.Size(75, 23);
+            this.showconwindbutton.TabIndex = 17;
+            this.showconwindbutton.Text = "显示控件";
+            this.showconwindbutton.UseVisualStyleBackColor = true;
+            this.showconwindbutton.Click += new System.EventHandler(this.showconwindbutton_Click);
             // 
             // Form1
             // 
@@ -366,6 +378,7 @@
         private System.Windows.Forms.Button openCanToolbutton;
         private System.Windows.Forms.Button getversionbutton;
         private System.Windows.Forms.ComboBox setSncomboBox;
+        private System.Windows.Forms.Button showconwindbutton;
     }
 }
 

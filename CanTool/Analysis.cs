@@ -112,6 +112,43 @@ namespace CanTool
             return CanIDs;
         }
 
+        public List<string> getCanAllInfoFromDatabase() //获取数据库所有信息，返回List
+        {
+
+            List<string> CanAllInfos = new List<string>();
+            FileStream fs = new FileStream("data.txt", FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs);
+            string s;
+
+
+            while ((s = sr.ReadLine()) != null) //没有跳过，性能损失，考虑hash实现
+            {
+                int i;
+                string[] arr = s.Split(' ');
+                if(arr.Length == 3) //查找ID数
+                {
+                    string CanAllInfo = "";
+                    CanAllInfo += (arr[0] +" "+ arr[1]);
+                    s = sr.ReadLine();
+                    Console.WriteLine(s);
+                    int Canline = Convert.ToInt32(s); //读入对应ID的Can信息行数
+                    s = sr.ReadLine(); //跳过空行
+                    
+                    for (i = 0; i < Canline; i++)
+                    {
+                        s = sr.ReadLine(); //跳到有效行
+                        string[] arr1 = s.Split(' '); //将每一行每一部分的有效信息放入arr1数组
+                                                      //arr1[1] arr[2]分别表示起始编号 长度
+                        CanAllInfo +=(" " + arr1[0]);
+                    }
+                    CanAllInfos.Add(CanAllInfo);
+                }
+
+            }
+
+            return CanAllInfos;
+        }
+
         public List<string> getCaninfoFromDatabase(string CanID) //通过ID获取具体的信息格式
         {
             int i;
@@ -280,7 +317,7 @@ namespace CanTool
                         //Console.WriteLine("x的值"+x); //显示x的数值
                         double Phy = phyCalculate(x, Convert.ToDouble(arr1[4]), Convert.ToDouble(arr1[5])); //计算用户能看懂的物理值
                                                                                                             //Console.WriteLine(arr1[0]+":"+Phy); //顺序显示CanMessage数值！！！
-                        CanDatas.Add(arr1[0] + ',' + Phy);
+                        CanDatas.Add(arr1[0] + ',' + Phy+','+arr1[6]+','+arr1[7]);
                     }
                     foreach (string CanData in CanDatas)
                     {
