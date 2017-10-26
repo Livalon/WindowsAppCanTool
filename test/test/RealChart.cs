@@ -15,7 +15,6 @@ namespace test
         private Queue<double> dataQueue = new Queue<double>(100);
 
         private int curValue = 0;
-
         private int num = 5;//每次删除增加几个点
 
         public RealChart()
@@ -123,10 +122,12 @@ namespace test
             }
             if (rb1.Checked)
             {
-                Random r = new Random();
+                //Random r = new Random();
+                double r = 10;
                 for (int i = 0; i < num; i++)
                 {
-                    dataQueue.Enqueue(r.Next(0, 100));
+                    //dataQueue.Enqueue(r.Next(0, 100));
+                    dataQueue.Enqueue(r);
                 }
             }
             if (rb2.Checked)
@@ -134,10 +135,12 @@ namespace test
                 for (int i = 0; i < num; i++)
                 {
                     //对curValue只取[0,360]之间的值
-                    curValue = curValue % 360;
+                    // curValue = curValue % 360;
+                    curValue = 2;
                     //对得到的正玄值，放大50倍，并上移50
-                    dataQueue.Enqueue((50 * Math.Sin(curValue * Math.PI / 180)) + 50);
-                    curValue = curValue + 10;
+                    //  dataQueue.Enqueue((50 * Math.Sin(curValue * Math.PI / 180)) + 50);
+                    dataQueue.Enqueue((50 * Math.Sin(curValue * Math.PI / 180)) );
+                    //  curValue = curValue + 10;
                 }
             }
         }
