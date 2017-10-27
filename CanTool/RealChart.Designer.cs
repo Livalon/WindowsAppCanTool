@@ -1,4 +1,4 @@
-﻿namespace test
+﻿namespace CanTool
 {
     partial class RealChart
     {
@@ -36,19 +36,8 @@
             this.btnInit = new System.Windows.Forms.Button();
             this.rb1 = new System.Windows.Forms.RadioButton();
             this.rb2 = new System.Windows.Forms.RadioButton();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ComboBox1
-            // 
-            this.comboBox1.Location = new System.Drawing.Point(621, 10);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(75, 23);
-            this.comboBox1.TabIndex = 0;
-            this.comboBox1.Text = "11111";
-            this.comboBox1.Visible = true;
             // 
             // btnStart
             // 
@@ -127,7 +116,6 @@
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.comboBox1);
             this.Name = "NetworkMonitor";
             this.Text = "Network";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
@@ -145,7 +133,6 @@
         private System.Windows.Forms.Button btnInit;
         private System.Windows.Forms.RadioButton rb1;
         private System.Windows.Forms.RadioButton rb2;
-        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

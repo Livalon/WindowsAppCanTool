@@ -36,31 +36,38 @@
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
             this.button1 = new System.Windows.Forms.Button();
+            this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).BeginInit();
             this.SuspendLayout();
             // 
             // treeList1
             // 
             this.treeList1.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
             this.treeListColumn1,
-            this.treeListColumn2});
+            this.treeListColumn2,
+            this.treeListColumn3,
+            this.treeListColumn4});
             this.treeList1.Location = new System.Drawing.Point(12, 12);
             this.treeList1.Name = "treeList1";
             this.treeList1.OptionsView.ShowCheckBoxes = true;
             this.treeList1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1,
             this.repositoryItemDateEdit1,
-            this.repositoryItemTextEdit1});
+            this.repositoryItemTextEdit1,
+            this.repositoryItemCheckEdit2});
             this.treeList1.Size = new System.Drawing.Size(1258, 508);
             this.treeList1.TabIndex = 0;
             // 
             // treeListColumn1
             // 
-            this.treeListColumn1.Caption = "ID";
+            this.treeListColumn1.Caption = "signal_name";
             this.treeListColumn1.ColumnEdit = this.repositoryItemTextEdit1;
             this.treeListColumn1.FieldName = "Name";
             this.treeListColumn1.MinWidth = 32;
@@ -76,11 +83,11 @@
             // 
             // treeListColumn2
             // 
-            this.treeListColumn2.Caption = "value";
+            this.treeListColumn2.Caption = "Value";
             this.treeListColumn2.ColumnEdit = this.repositoryItemTextEdit1;
             this.treeListColumn2.FieldName = "Value";
             this.treeListColumn2.Name = "treeListColumn2";
-            this.treeListColumn2.UnboundType = DevExpress.XtraTreeList.Data.UnboundColumnType.String;
+            this.treeListColumn2.UnboundType = DevExpress.XtraTreeList.Data.UnboundColumnType.Integer;
             this.treeListColumn2.Visible = true;
             this.treeListColumn2.VisibleIndex = 1;
             // 
@@ -108,6 +115,29 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // treeListColumn3
+            // 
+            this.treeListColumn3.Caption = "Scale";
+            this.treeListColumn3.ColumnEdit = this.repositoryItemTextEdit1;
+            this.treeListColumn3.FieldName = "Scale";
+            this.treeListColumn3.Name = "treeListColumn3";
+            this.treeListColumn3.UnboundType = DevExpress.XtraTreeList.Data.UnboundColumnType.String;
+            this.treeListColumn3.Visible = true;
+            this.treeListColumn3.VisibleIndex = 2;
+            // 
+            // treeListColumn4
+            // 
+            this.treeListColumn4.Caption = "Unit";
+            this.treeListColumn4.FieldName = "Unit";
+            this.treeListColumn4.Name = "treeListColumn4";
+            this.treeListColumn4.Visible = true;
+            this.treeListColumn4.VisibleIndex = 3;
+            // 
+            // repositoryItemCheckEdit2
+            // 
+            this.repositoryItemCheckEdit2.AutoHeight = false;
+            this.repositoryItemCheckEdit2.Name = "repositoryItemCheckEdit2";
+            // 
             // ListTree
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -123,6 +153,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -136,5 +167,8 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
         private System.Windows.Forms.Button button1;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn3;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn4;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit2;
     }
 }

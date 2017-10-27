@@ -41,6 +41,7 @@
             this.IDName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.Signal = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.showCanInfobutton = new System.Windows.Forms.Button();
+            this.showwavebutton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.circularGauge1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.arcScaleBackgroundLayerComponent1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.arcScaleComponent1)).BeginInit();
@@ -155,10 +156,10 @@
             this.treeList1.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
             this.IDName,
             this.Signal});
-            this.treeList1.Location = new System.Drawing.Point(539, 13);
+            this.treeList1.Location = new System.Drawing.Point(905, 13);
             this.treeList1.Name = "treeList1";
             this.treeList1.OptionsView.ShowCheckBoxes = true;
-            this.treeList1.Size = new System.Drawing.Size(644, 382);
+            this.treeList1.Size = new System.Drawing.Size(278, 382);
             this.treeList1.TabIndex = 4;
             // 
             // IDName
@@ -169,6 +170,7 @@
             this.IDName.Name = "IDName";
             this.IDName.Visible = true;
             this.IDName.VisibleIndex = 0;
+            this.IDName.Width = 592;
             // 
             // Signal
             // 
@@ -177,6 +179,7 @@
             this.Signal.Name = "Signal";
             this.Signal.Visible = true;
             this.Signal.VisibleIndex = 1;
+            this.Signal.Width = 34;
             // 
             // showCanInfobutton
             // 
@@ -188,11 +191,22 @@
             this.showCanInfobutton.UseVisualStyleBackColor = true;
             this.showCanInfobutton.Click += new System.EventHandler(this.showCanInfobutton_Click);
             // 
+            // showwavebutton
+            // 
+            this.showwavebutton.Location = new System.Drawing.Point(429, 106);
+            this.showwavebutton.Name = "showwavebutton";
+            this.showwavebutton.Size = new System.Drawing.Size(102, 23);
+            this.showwavebutton.TabIndex = 6;
+            this.showwavebutton.Text = "显示波形图";
+            this.showwavebutton.UseVisualStyleBackColor = true;
+            this.showwavebutton.Click += new System.EventHandler(this.showwavebutton_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1235, 537);
+            this.Controls.Add(this.showwavebutton);
             this.Controls.Add(this.showCanInfobutton);
             this.Controls.Add(this.treeList1);
             this.Controls.Add(this.gaugeControl2);
@@ -226,5 +240,6 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn IDName;
         private DevExpress.XtraTreeList.Columns.TreeListColumn Signal;
         private System.Windows.Forms.Button showCanInfobutton;
+        private System.Windows.Forms.Button showwavebutton;
     }
 }

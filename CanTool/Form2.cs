@@ -374,6 +374,51 @@ namespace CanTool
         {
 
         }
+
+        private void treeshow_Click(object sender, EventArgs e)
+        {
+            //点击按钮，调出控件
+            //读取数据库，用户输入相关值
+            //打包解析为can信号
+            //发送给comport，结束。该部分放入发送区
+            if (this.m_setVisible != null)
+            {
+                this.m_setVisible();
+            }
+            //CanMessageReceiveTextBox = "**********";
+
+            //获取用户选择的ID号
+            Analysis ay = new Analysis();
+            List<string> CanIDselect = new List<string>();
+            ArrayList pList = new ArrayList();
+            /*CanIDselect = CanIDselected();
+            foreach (string CanID in CanIDselect)
+            {
+                List<string> CanInfos = ay.getCaninfoFromDatabase(CanID);
+
+                foreach (string Caninfo in CanInfos)
+                {
+                    string[] canblock = Caninfo.Split(' ');
+                    ListTree2 p = new ListTree2();
+                    p.ID ="1";
+                    p.Name = "1";
+                    p.DLC = "1";
+                    p.Data = "1";
+                    pList.Add(p);
+                }
+            }*/
+            ListTree2 p = new ListTree2();
+            p.GetID = "1";
+            p.GetName = "1";
+            p.DLC = "1";
+            p.GetData = "1";
+            pList.Add(p);
+
+            //通过ID获取元件
+
+            treeList2.DataSource = pList;
+            treeList2.RefreshDataSource();
+        }
     }
 
     public class ListTree
@@ -414,6 +459,62 @@ namespace CanTool
             set
             {
                 m_Range = value;
+            }
+        }
+
+
+    }
+
+    public class ListTree2
+    {
+        private string m_ID = string.Empty;
+        private string m_Name = string.Empty;
+        private string m_DLC = string.Empty;
+        private string m_Data= string.Empty;
+
+        public string GetID
+        {
+            get
+            {
+                return m_ID;
+            }
+            set
+            {
+                m_ID = value;
+            }
+        }
+
+        public string GetName
+        {
+            get
+            {
+                return m_Name;
+            }
+            set
+            {
+                m_Name = value;
+            }
+        }
+        public string DLC
+        {
+            get
+            {
+                return m_DLC;
+            }
+            set
+            {
+                m_DLC = value;
+            }
+        }
+        public string GetData
+        {
+            get
+            {
+                return m_Data;
+            }
+            set
+            {
+                m_Data = value;
             }
         }
 

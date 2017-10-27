@@ -8,18 +8,29 @@ using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace test
+namespace CanTool
 {
     public partial class RealChart : Form
     {
         private Queue<double> dataQueue = new Queue<double>(100);
+        double min = 0;
+        double max = 100;
+
+        public  void changCharMinAndMax(double Min,double Max,double Value)
+        {
+            this.chart1.ChartAreas[0].AxisY.Minimum = Min;
+            this.chart1.ChartAreas[0].AxisY.Maximum = Max;
+            UpdateQueueValue(Value);
+        }
 
         private int curValue = 0;
+
         private int num = 5;//每次删除增加几个点
 
         public RealChart()
         {
             InitializeComponent();
+            //InitChart();
         }
 
         /// <summary>
@@ -59,12 +70,19 @@ namespace test
         /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
-            UpdateQueueValue();
             this.chart1.Series[0].Points.Clear();
             for (int i = 0; i < dataQueue.Count; i++)
             {
-                this.chart1.Series[0].Points.AddXY((i + 1), dataQueue.ElementAt(i));
+                this.chart1.Series[0].Points.AddXY((i+ 1), dataQueue.ElementAt(i));
             }
+
+            //this.chart1.Series[0].Points.AddXY((i + 1), data);
+        }
+
+        private void chartNumChange()
+        {
+            //获取值显示
+            this.chart1.Series[0].Points.AddXY((20),100);
         }
 
         /// <summary>
@@ -105,11 +123,15 @@ namespace test
                 this.chart1.Titles[0].Text = string.Format("CanTool数据 {0} 显示", rb2.Text);
                 this.chart1.Series[0].ChartType = SeriesChartType.Spline;
             }
+           // this.chart1.Titles[0].Text = string.Format("CanTool数据 {0} 显示", rb2.Text);
+           // this.chart1.Series[0].ChartType = SeriesChartType.Spline;
+
+
             this.chart1.Series[0].Points.Clear();
         }
 
         //更新队列中的值
-        private void UpdateQueueValue()
+        private void UpdateQueueValue(double  Value)
         {
 
             if (dataQueue.Count > 100)
@@ -122,12 +144,10 @@ namespace test
             }
             if (rb1.Checked)
             {
-                //Random r = new Random();
-                double r = 10;
+                Random r = new Random();
                 for (int i = 0; i < num; i++)
                 {
-                    //dataQueue.Enqueue(r.Next(0, 100));
-                    dataQueue.Enqueue(r);
+                    dataQueue.Enqueue(r.Next(0, 100));
                 }
             }
             if (rb2.Checked)
@@ -135,14 +155,19 @@ namespace test
                 for (int i = 0; i < num; i++)
                 {
                     //对curValue只取[0,360]之间的值
-                    // curValue = curValue % 360;
-                    curValue = 2;
+                    //curValue = curValue % 360;
                     //对得到的正玄值，放大50倍，并上移50
-                    //  dataQueue.Enqueue((50 * Math.Sin(curValue * Math.PI / 180)) + 50);
-                    dataQueue.Enqueue((50 * Math.Sin(curValue * Math.PI / 180)) );
-                    //  curValue = curValue + 10;
+                    //dataQueue.Enqueue((50 * Math.Sin(curValue * Math.PI / 180)) + 50);
+                    //curValue = curValue + 10;
+                    dataQueue.Enqueue(Value);
                 }
             }
+        }
+        
+
+        private void RealChart_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
