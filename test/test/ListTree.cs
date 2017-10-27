@@ -21,6 +21,8 @@ namespace test
         //名称字段变量
         private string m_sName = string.Empty;
         private string m_sValue = string.Empty;
+        private string m_Scale = string.Empty;
+        private string m_Unit = string.Empty;
         //选择字段变量
         //private bool m_bIsChecked = false;
         //子Node节点ID变量
@@ -28,7 +30,6 @@ namespace test
         //父Node节点ID变量
         private int m_iParentID = -1;
 
-        
         public int ID
         {
             get
@@ -62,17 +63,6 @@ namespace test
                 m_sName = value;
             }
         }
-        //public bool IsChecked
-        //{
-        //    get
-        //    {
-        //        return m_bIsChecked;
-        //    }
-        //    set
-        //    {
-        //        m_bIsChecked = value;
-        //    }
-        //}
         public string Value
         {
             get
@@ -84,31 +74,52 @@ namespace test
                 m_sValue = value;
             }
         }
+        public string Scale
+        {
+            get
+            {
+                return m_Scale;
+            }
+            set
+            {
+                m_Scale = value;
+            }
+        }
+        public string Unit
+        {
+            get
+            {
+                return m_Unit;
+            }
+            set
+            {
+                m_Unit = value;
+            }
+        }
         private void ListTree_Load(object sender, EventArgs e)
         {            
             ArrayList pList = new ArrayList();
             ListTree p = new ListTree();        
             p.Name = "测试1";
-            //p.Value = "asdasd";
-            //p.IsChecked = true;
             p.ID = 1;
+            p.Unit = "asdsad";
             pList.Add(p);
+
             ListTree q = new ListTree();
             q.Name = "测试2";
-            //q.IsChecked = false;
             q.ParentID = 1;
             q.ID = 2;
             pList.Add(q);
+
             ListTree m = new ListTree();
             m.Name = "测试3";
             m.ID = 3;
-         // m.ParentID = 1;
             pList.Add(m);
-            ListTree l = new ListTree();
-            l.Name = "测试4";
-            l.ID = 4;
-            l.ParentID = 3;
-            pList.Add(l);
+            //ListTree l = new ListTree();
+            //l.Name = "测试4";
+            //l.ID = 4;
+            //l.ParentID = 3;
+            //pList.Add(l);
             //for(int i = 5; i < 50; i++)
             //{
             //    ListTree a= new ListTree();
