@@ -17,6 +17,8 @@ namespace CanTool
 
         private Form1.SetVisiableHandler m_setVisible;
 
+        Hashtable hshTable = new Hashtable();
+
         public Form2(Form1.SetVisiableHandler setvisible)
         {
             InitializeComponent();
@@ -57,8 +59,6 @@ namespace CanTool
             //CanMesslistView.Items.Clear();
 
             //string Canget = "t8561122334455667788\r";
-
-
             /*foreach (string Canget in Cangets) //此处疑似有重复
             {
                 ListViewItem listv = new ListViewItem();
@@ -66,12 +66,21 @@ namespace CanTool
                 CanMesslistView.Items.Add(listv);
             }*/
             #endregion
+            
                 Analysis ay = new Analysis();
                 foreach (string Canget in Cangets)
                 {
                     if (string.Equals("t", Canget.Substring(0, 1)) || string.Equals("T", Canget.Substring(0, 1)))
                     {
-                        foreach (string CanData in ay.canReceiptAnalysis(Canget))
+                    //ArrayList pList = new ArrayList();
+                    //string idnumber= ay.get16IDNumber(Canget); 
+                    TreeCanInfo Tcinfo = new TreeCanInfo();
+                    string thisid = ay.get16IDNumber(Canget);
+                    Tcinfo.ID = thisid;
+                    Tcinfo.DLC= ay.getDLC(Canget);
+                    Tcinfo.Data= ay.getData(Canget);
+                   
+                    foreach (string CanData in ay.canReceiptAnalysis(Canget))
                         {
                             string[] Data = CanData.Split(',');
                             //Console.WriteLine(Data[0] + "----------" + Data[1]);
@@ -79,9 +88,66 @@ namespace CanTool
                             listv.Text = Data[0]; //第一列
                             listv.SubItems.Add(Data[1]); //没有报错提示
                             CanMesslistView.Items.Add(listv);
+                            Tcinfo.block.Add(Data[0]+ Data[1]);
+                        #region
+                        //增加ID Name Dir DLC Data
+
+                        
+                        /*ListTree2 rottree1 = new ListTree2();
+                        rottree1.ParentID = idnumber;
+                        rottree1.GetID = ay.get16IDNumber(Canget);
+                        rottree1.GetName = "stand";
+                        rottree1.DLC = ay.getDLC(Canget);
+                        rottree1.GetData = ay.getData(Canget);
+                        pList.Add(rottree1);*/
+
+                        /*int i = 0, t = 0;
+                        ArrayList pList = new ArrayList();
+                        List<string> CanAllInfos = ay.getCanAllInfoFromDatabase();
+                        foreach (string CanAllInfo in CanAllInfos)
+                        {
+                            string[] canblock = CanAllInfo.Split(' ');
+                            ListTree2 p = new ListTree2();
+                            p.GetID = i;
+                            t = i;
+                            i++;
+                            p.GetName = canblock[0] + canblock[1];
+                            pList.Add(p);
+                            for (int j = 2; j < canblock.Length; j++)
+                            {
+                                ListTree2 q = new ListTree2();
+                                q.ParentID = t;
+                                q.GetID = i;
+                                i++;
+                                q.GetName = canblock[j];
+                                pList.Add(q);
+                            }
                         }
+                        this.treeList1.DataSource = pList;
+                        this.treeList1.RefreshDataSource();
+                        */
+                        #endregion
                     }
-                    else
+                    #region
+
+                    //ArrayList pList = new ArrayList();
+                    /*ListTree2 rottree = new ListTree2();
+                    rottree.GetID = ay.get16IDNumber(Canget);
+                    rottree.GetName = "stand";
+                    rottree.DLC = ay.getDLC(Canget);
+                    rottree.GetData = ay.getData(Canget);
+                    pList.Add(rottree);
+                    this.treeList2.DataSource = pList;
+                    this.treeList2.RefreshDataSource();
+                    pList.Clear();*/
+                    #endregion
+                    if(hshTable.Contains(thisid))
+                    {
+                        hshTable.Remove(thisid);
+                    }
+                    hshTable.Add(thisid, Tcinfo);//在hashtable中放入ID　DLC Data 器件name phy
+                }
+                else
                     {
                         ListViewItem listv = new ListViewItem();
                         listv.Text = Canget;
@@ -302,14 +368,15 @@ namespace CanTool
             List<string> CanSignals =new List<string>();
             CanIDselect = CanIDselected();
             string all = "";
+            ss = "";
             foreach (string CanID in CanIDselect)
             {
                 ss = CanID;
                 for(i=0;i<Convert.ToInt32(ay.getLongFromDatabase(CanID));i++)
                 {
-                    ss+=" "+treeList1.Nodes[i+lennode].GetValue(1);
+                    ss+=(" "+treeList1.Nodes[i+lennode].GetValue(0));
                 }
-                lennode += i;
+                lennode += (i); //i此时已经加到下一个，注意
                 //ss += " ";
                 CanSignals.Add(ss);
                 all += ss;
@@ -377,47 +444,112 @@ namespace CanTool
 
         private void treeshow_Click(object sender, EventArgs e)
         {
-            //点击按钮，调出控件
-            //读取数据库，用户输入相关值
-            //打包解析为can信号
-            //发送给comport，结束。该部分放入发送区
-            if (this.m_setVisible != null)
-            {
-                this.m_setVisible();
-            }
-            //CanMessageReceiveTextBox = "**********";
+            this.timer1.Start();
+        }
 
-            //获取用户选择的ID号
-            Analysis ay = new Analysis();
-            List<string> CanIDselect = new List<string>();
-            ArrayList pList = new ArrayList();
-            /*CanIDselect = CanIDselected();
-            foreach (string CanID in CanIDselect)
-            {
-                List<string> CanInfos = ay.getCaninfoFromDatabase(CanID);
 
-                foreach (string Caninfo in CanInfos)
+
+        private void treeList2_FocusedNodeChanged(object sender, DevExpress.XtraTreeList.FocusedNodeChangedEventArgs e)
+        {
+
+        }
+
+        bool test1 = true;
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //根据选择的ID刷新树状图
+
+            /*if (test1)
+            {
+                ArrayList pList = new ArrayList();
+                //传入一个有所有内容的对象
+                //读取该对象值
+
+                int i = 0, t = 0;
+                foreach (string key in hshTable.Keys)
                 {
-                    string[] canblock = Caninfo.Split(' ');
-                    ListTree2 p = new ListTree2();
-                    p.ID ="1";
-                    p.Name = "1";
-                    p.DLC = "1";
-                    p.Data = "1";
-                    pList.Add(p);
+                    TreeCanInfo tcinfo = (TreeCanInfo)hshTable[key];
+                    ListTree2 rottree = new ListTree2();
+                    rottree.ID = i;
+                    t = i;
+                    i++;
+                    rottree.GetID = tcinfo.ID;
+                    rottree.GetName = "defult";
+                    rottree.GetData = tcinfo.Data;
+                    pList.Add(rottree);
+                    foreach (string block in tcinfo.block)
+                    {
+                        ListTree2 rottree1 = new ListTree2();
+                        rottree1.ParentID = t;
+                        rottree1.ID = i;
+                        i++;
+                        rottree1.GetName = block;
+                        pList.Add(rottree1);
+                    }
                 }
+                this.treeList2.DataSource = pList;
+                this.treeList2.RefreshDataSource();
+                test1= false;
             }*/
-            ListTree2 p = new ListTree2();
-            p.GetID = "1";
-            p.GetName = "1";
-            p.DLC = "1";
-            p.GetData = "1";
-            pList.Add(p);
 
-            //通过ID获取元件
+            ArrayList pList = new ArrayList();
+            //传入一个有所有内容的对象
+            //读取该对象值
 
-            treeList2.DataSource = pList;
-            treeList2.RefreshDataSource();
+            int i = 0, t = 0;
+            foreach (string key in hshTable.Keys)
+            {
+                TreeCanInfo tcinfo = (TreeCanInfo)hshTable[key];
+                ListTree2 rottree = new ListTree2();
+                rottree.ID = i;
+                t = i;
+                i++;
+                rottree.GetID = tcinfo.ID;
+                rottree.GetName = "defult";
+                rottree.GetData = tcinfo.Data;
+                pList.Add(rottree);
+                foreach (string block in tcinfo.block)
+                {
+                    ListTree2 rottree1 = new ListTree2();
+                    rottree1.ParentID = t;
+                    rottree1.ID = i;
+                    i++;
+                    rottree1.GetName = block;
+                    pList.Add(rottree1);
+                }
+            }
+            this.treeList2.DataSource = pList;
+            this.treeList2.RefreshDataSource();
+
+
+
+
+            //ArrayList pList = new ArrayList();
+            //传入一个有所有内容的对象
+            //读取该对象值
+
+            /*ListTree2 rottree = new ListTree2();
+            rottree.GetID = ay.get16IDNumber(Canget);
+            rottree.GetName = "stand";
+            rottree.DLC = ay.getDLC(Canget);
+            rottree.GetData = ay.getData(Canget);
+            pList.Add(rottree);
+            
+            pList.Clear();
+
+            for(int i=0;i<10;i++)
+            {
+                //add
+            }
+            this.treeList2.DataSource = pList;
+            this.treeList2.RefreshDataSource();*/
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.timer1.Stop();
         }
     }
 
@@ -471,6 +603,33 @@ namespace CanTool
         private string m_Name = string.Empty;
         private string m_DLC = string.Empty;
         private string m_Data= string.Empty;
+        private int m_iID = -1;
+        //父Node节点ID变量
+        private int m_iParentID = -1;
+
+        public int ID
+        {
+            get
+            {
+                return m_iID;
+            }
+            set
+            {
+                m_iID = value;
+            }
+        }
+
+        public int ParentID
+        {
+            get
+            {
+                return m_iParentID;
+            }
+            set
+            {
+                m_iParentID = value;
+            }
+        }
 
         public string GetID
         {
@@ -519,5 +678,13 @@ namespace CanTool
         }
 
 
+    }
+
+    public class TreeCanInfo
+    {
+        public string ID;
+        public string DLC;
+        public string Data;
+        public List<string> block = new List<string>();
     }
 }

@@ -18,9 +18,9 @@ namespace CanTool
 
         public  void changCharMinAndMax(double Min,double Max,double Value)
         {
-            this.chart1.ChartAreas[0].AxisY.Minimum = Min;
-            this.chart1.ChartAreas[0].AxisY.Maximum = Max;
-            UpdateQueueValue(Value);
+                this.chart1.ChartAreas[0].AxisY.Minimum = Min;
+                this.chart1.ChartAreas[0].AxisY.Maximum = Max;
+                UpdateQueueValue(Value);
         }
 
         private int curValue = 0;
@@ -30,7 +30,7 @@ namespace CanTool
         public RealChart()
         {
             InitializeComponent();
-            //InitChart();
+            InitChart();
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace CanTool
             this.chart1.Titles[0].Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             //设置图表显示样式
             this.chart1.Series[0].Color = Color.Red;
-            if (rb1.Checked)
+            /*if (rb1.Checked)
             {
                 this.chart1.Titles[0].Text = string.Format("CanTool数据 {0} 显示", rb1.Text);
                 this.chart1.Series[0].ChartType = SeriesChartType.Line;
@@ -122,9 +122,9 @@ namespace CanTool
             {
                 this.chart1.Titles[0].Text = string.Format("CanTool数据 {0} 显示", rb2.Text);
                 this.chart1.Series[0].ChartType = SeriesChartType.Spline;
-            }
-           // this.chart1.Titles[0].Text = string.Format("CanTool数据 {0} 显示", rb2.Text);
-           // this.chart1.Series[0].ChartType = SeriesChartType.Spline;
+            }*/
+            this.chart1.Titles[0].Text = string.Format("CanTool数据 {0} 显示", rb2.Text);
+            this.chart1.Series[0].ChartType = SeriesChartType.Spline;
 
 
             this.chart1.Series[0].Points.Clear();
@@ -142,6 +142,8 @@ namespace CanTool
                     dataQueue.Dequeue();
                 }
             }
+            /*
+            #region
             if (rb1.Checked)
             {
                 Random r = new Random();
@@ -162,8 +164,15 @@ namespace CanTool
                     dataQueue.Enqueue(Value);
                 }
             }
+            #endregion
+            */
+
+
+                dataQueue.Enqueue(Value);
+            
+
         }
-        
+
 
         private void RealChart_Load(object sender, EventArgs e)
         {
