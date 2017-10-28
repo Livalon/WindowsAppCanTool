@@ -317,7 +317,7 @@ namespace CanTool
                         //Console.WriteLine("x的值"+x); //显示x的数值
                         double Phy = phyCalculate(x, Convert.ToDouble(arr1[4]), Convert.ToDouble(arr1[5])); //计算用户能看懂的物理值
                                                                                                             //Console.WriteLine(arr1[0]+":"+Phy); //顺序显示CanMessage数值！！！
-                        CanDatas.Add(arr1[0] + ',' + Phy+','+arr1[6]+','+arr1[7]);
+                        CanDatas.Add(arr1[0] + ',' + Phy+','+arr1[6]+','+arr1[7]); //器件名 物理值 最小值 最大值
                     }
                     foreach (string CanData in CanDatas)
                     {
@@ -330,6 +330,65 @@ namespace CanTool
             }
 
             return CanDatas;
+        }
+
+        public string get16IDNumber(string CanString) //获取CanString 16位ID号
+        {
+            string IDNumber = "";
+            if (isstandorextend(CanString))
+            {
+                IDNumber = CanString.Substring(1,3);
+
+            }
+            else
+            {
+                IDNumber = CanString.Substring(1, 3);
+            }
+                    return IDNumber;
+        }
+
+        public string getDLC(string CanString)
+        {
+            string DLC="8";
+            if(isstandorextend(CanString))
+            {
+                DLC = CanString.Substring(4,1);
+            }
+            else
+            {
+                DLC = CanString.Substring(9, 1);
+            }
+            get16IDNumber(CanString);
+
+            return DLC;
+        }
+
+        public string getData(string CanString)//获取CanString Data部分
+        {
+            string Data="";
+            if (isstandorextend(CanString))
+            {
+                Data = CanString.Substring(5, 2*Convert.ToInt32(getDLC(CanString)));
+            }
+            else
+            {
+                Data = CanString.Substring(10, 2 * Convert.ToInt32(getDLC(CanString)));
+            }
+            return Data;
+        }
+
+        public bool isstandorextend(string CanString) //判断CanString是标准帧还是扩展帧
+        {
+            bool stand = true;
+            if (string.Equals("t", CanString.Substring(0, 1)))
+            {
+                stand = true;
+            }
+            else if (string.Equals("T", CanString.Substring(0, 1)))
+            {
+                stand = false;
+            }
+            return stand;
         }
 
         public double phyCalculate(int x, double A, double B) //计算Phy值
@@ -399,6 +458,18 @@ namespace CanTool
             return CanData16;
         }
 
+        public string convertTo16(string tennum)//输入10进制字符串，输出16进制字符串
+        {
+            string to16num = ""; ;
+            int a = Convert.ToInt32(tennum);
+            String strA = a.ToString("x8");
+
+            string CanID16 = Convert.ToString(Convert.ToInt32("358", 16));//16进制的CanID
+            //Console.WriteLine(Convert.ToInt32(strA));
+
+            return to16num; 
+        }
+
         public string canSendAnalysis(string CanSignal)//把用户输入的内容转化为Can信息 string格式为ID+数据 最后
         {
 
@@ -416,8 +487,10 @@ namespace CanTool
             string extendbinaryCanID_Data = "0000000080000000000000000";//扩展帧的CanID和Data
 
             //ID放入binaryCanID_Data
-            string CanID16 = Convert.ToString(Convert.ToInt32(candatablock[0]), 16);//16进制的CanID
-            if(CanID16.Length<3)
+            //string CanID16 = Convert.ToString(Convert.ToInt32(candatablock[0]), 16);//16进制的CanID
+            string CanID16 = convertTo16(candatablock[0]);
+
+            if (CanID16.Length<3)
             {
                 binaryCanID_Data = binaryCanID_Data.Remove(3 - CanID16.Length, CanID16.Length);
                 binaryCanID_Data = binaryCanID_Data.Insert(3 - CanID16.Length, CanID16);

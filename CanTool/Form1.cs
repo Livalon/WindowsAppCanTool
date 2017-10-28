@@ -35,6 +35,8 @@ namespace CanTool
 
         int flushtype = 0;
 
+        public bool opened = false;
+
         //暂时不让用户选择奇偶校验以及停止位
 
         public delegate void SetVisiableHandler();
@@ -134,14 +136,18 @@ namespace CanTool
                         buffread = "";
                         //f2.filterCanID(Caninfos, 3);
                         //f2.flushMesslist(f2.filterCanID(Caninfos, 3), flushtype);
-                        if(flushtype==0)
+                        if (opened)
                         {
-                            //f3.changeLED("10,000");
-                            f2.flushMesslist(f2.filterCanID(Caninfos, 3), flushtype);
-                        }
-                        else if (flushtype == 1)
-                        {
-                            f2.flushf3test(f2.filterCanID(Caninfos, 3), flushtype,f3);
+
+                            if (flushtype == 0)
+                            {
+                                //f3.changeLED("10,000");
+                                f2.flushMesslist(f2.filterCanID(Caninfos, 3), flushtype);
+                            }
+                            else if (flushtype == 1)
+                            {
+                                f2.flushf3test(f2.filterCanID(Caninfos, 3), flushtype, f3);
+                            }
                         }
 
                         //设置后，刷新的时候返回具体的值
@@ -234,6 +240,7 @@ namespace CanTool
             f2 = new Form2(new SetVisiableHandler(SetVisiable));
             f2.Show();
             //this.Hide(); //后期看是否需要隐藏之前的窗口
+            opened = true;
         }
 
         private void getversionbutton_Click(object sender, EventArgs e)

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.CanMesslistView = new System.Windows.Forms.ListView();
             this.CanIDcolumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CanMessValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -38,14 +39,14 @@
             this.selectbuttoninput = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.treeList1 = new DevExpress.XtraTreeList.TreeList();
-            this.ID = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
-            this.Data = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.Range = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.CanMessInputbutton = new System.Windows.Forms.Button();
             this.getDatabasebutton = new System.Windows.Forms.Button();
+            this.treeList2 = new DevExpress.XtraTreeList.TreeList();
+            this.treeshow = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.treeList2)).BeginInit();
             this.SuspendLayout();
             // 
             // CanMesslistView
@@ -63,7 +64,7 @@
             // CanIDcolumn
             // 
             this.CanIDcolumn.Text = "Caninfo";
-            this.CanIDcolumn.Width = 94;
+            this.CanIDcolumn.Width = 131;
             // 
             // CanMessValue
             // 
@@ -129,58 +130,16 @@
             // 
             // treeList1
             // 
-            this.treeList1.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
-            this.Data,
-            this.Range,
-            this.ID});
             this.treeList1.Location = new System.Drawing.Point(652, 12);
             this.treeList1.Name = "treeList1";
             this.treeList1.OptionsView.ShowCheckBoxes = true;
-            this.treeList1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemTextEdit1});
-            this.treeList1.Size = new System.Drawing.Size(530, 412);
+            this.treeList1.Size = new System.Drawing.Size(413, 412);
             this.treeList1.TabIndex = 7;
             this.treeList1.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.treeList1_FocusedNodeChanged);
             // 
-            // ID
-            // 
-            this.ID.Caption = "ID";
-            this.ID.FieldName = "ID";
-            this.ID.MinWidth = 32;
-            this.ID.Name = "ID";
-            this.ID.UnboundType = DevExpress.XtraTreeList.Data.UnboundColumnType.String;
-            this.ID.Visible = true;
-            this.ID.VisibleIndex = 0;
-            this.ID.Width = 309;
-            // 
-            // repositoryItemTextEdit1
-            // 
-            this.repositoryItemTextEdit1.AutoHeight = false;
-            this.repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
-            // 
-            // Data
-            // 
-            this.Data.Caption = "Data";
-            this.Data.FieldName = "Data";
-            this.Data.Name = "Data";
-            this.Data.UnboundType = DevExpress.XtraTreeList.Data.UnboundColumnType.String;
-            this.Data.Visible = true;
-            this.Data.VisibleIndex = 1;
-            this.Data.Width = 87;
-            // 
-            // Range
-            // 
-            this.Range.Caption = "Range";
-            this.Range.FieldName = "Range";
-            this.Range.Name = "Range";
-            this.Range.UnboundType = DevExpress.XtraTreeList.Data.UnboundColumnType.String;
-            this.Range.Visible = true;
-            this.Range.VisibleIndex = 2;
-            this.Range.Width = 116;
-            // 
             // CanMessInputbutton
             // 
-            this.CanMessInputbutton.Location = new System.Drawing.Point(1107, 468);
+            this.CanMessInputbutton.Location = new System.Drawing.Point(1019, 441);
             this.CanMessInputbutton.Name = "CanMessInputbutton";
             this.CanMessInputbutton.Size = new System.Drawing.Size(75, 23);
             this.CanMessInputbutton.TabIndex = 8;
@@ -198,11 +157,47 @@
             this.getDatabasebutton.UseVisualStyleBackColor = true;
             this.getDatabasebutton.Click += new System.EventHandler(this.getDatabasebutton_Click);
             // 
+            // treeList2
+            // 
+            this.treeList2.Location = new System.Drawing.Point(1071, 13);
+            this.treeList2.Name = "treeList2";
+            this.treeList2.Size = new System.Drawing.Size(453, 411);
+            this.treeList2.TabIndex = 10;
+            this.treeList2.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.treeList2_FocusedNodeChanged);
+            // 
+            // treeshow
+            // 
+            this.treeshow.Location = new System.Drawing.Point(1433, 455);
+            this.treeshow.Name = "treeshow";
+            this.treeshow.Size = new System.Drawing.Size(91, 23);
+            this.treeshow.TabIndex = 11;
+            this.treeshow.Text = "树状图显示";
+            this.treeshow.UseVisualStyleBackColor = true;
+            this.treeshow.Click += new System.EventHandler(this.treeshow_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1333, 455);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "停止";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1232, 500);
+            this.ClientSize = new System.Drawing.Size(1548, 562);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.treeshow);
+            this.Controls.Add(this.treeList2);
             this.Controls.Add(this.getDatabasebutton);
             this.Controls.Add(this.CanMessInputbutton);
             this.Controls.Add(this.treeList1);
@@ -216,7 +211,7 @@
             this.Name = "Form2";
             this.Text = "Form2";
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.treeList2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,11 +229,11 @@
         private System.Windows.Forms.Button selectbuttoninput;
         private System.Windows.Forms.TextBox textBox1;
         private DevExpress.XtraTreeList.TreeList treeList1;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn ID;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn Data;
         private System.Windows.Forms.Button CanMessInputbutton;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn Range;
         private System.Windows.Forms.Button getDatabasebutton;
-        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
+        private DevExpress.XtraTreeList.TreeList treeList2;
+        private System.Windows.Forms.Button treeshow;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button button1;
     }
 }

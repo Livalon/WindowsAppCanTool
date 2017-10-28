@@ -14,6 +14,7 @@ namespace CanTool
     public partial class Form3 : Form
     {
         private Form1.SetVisiableHandler m_setVisible;
+        RealChart f4 = new RealChart();
         public Form3(Form1.SetVisiableHandler setvisible)
         {
             InitializeComponent();
@@ -22,14 +23,18 @@ namespace CanTool
             this.arcScaleComponent1.MinValue = 0F;
             this.arcScaleComponent1.MaxValue = 100F;
             this.m_setVisible = setvisible;
+            
         }
         public string Sn;
+
+        
 
         public List<string> retCanIDandlocal = new List<string>();
 
         public void changeLED(string  ledvalue)
         {
             this.digitalGauge1.Text = ledvalue;
+            
         }
 
         public void changearcScale(float min,float Max,float Value)
@@ -37,6 +42,7 @@ namespace CanTool
             this.arcScaleComponent1.Value = Value;
             this.arcScaleComponent1.MinValue = min;
             this.arcScaleComponent1.MaxValue = Max;
+            f4.changCharMinAndMax(min, Max, Value);
         }
 
         /*private string[] Sns = { "S0", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", };
@@ -136,6 +142,12 @@ namespace CanTool
             }
             this.treeList1.DataSource = pList;
             this.treeList1.RefreshDataSource();
+        }
+
+        private void showwavebutton_Click(object sender, EventArgs e)
+        {
+            f4.Show();
+            
         }
     }
 
