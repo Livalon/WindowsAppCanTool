@@ -123,11 +123,24 @@ namespace test
                 p.BackColor = c;
             }
         }
-        
+        public void changeBackColor2(string s, Color c)
+        {
+            string sub = "";
+            for(int i = 0; i < s.Length; i++)
+            {
+                sub = s.Substring(i, 1);
+                string id = i + "";
+                if (sub.Equals("1"))
+                {
+                    Panel p = (Panel)panel1.Controls.Find(id, false)[0];
+                    p.BackColor = c;
+                }
+            }
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             draw();
-            changeBackColor1(7, 7, 10, Color.Black);
+            changeBackColor2("01000110001",Color.Blue);
         }
     }
 }
