@@ -44,6 +44,7 @@
             this.BaudRatecomobox = new System.Windows.Forms.ComboBox();
             this.ComComobox = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.showconwindbutton = new System.Windows.Forms.Button();
             this.setSncomboBox = new System.Windows.Forms.ComboBox();
             this.closeCanToolbutton = new System.Windows.Forms.Button();
             this.setSnbutton = new System.Windows.Forms.Button();
@@ -55,14 +56,12 @@
             this.CanMessageReceiveTextBox = new System.Windows.Forms.TextBox();
             this.CanMessageSendTextBox = new System.Windows.Forms.TextBox();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.showconwindbutton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.Canform);
             this.groupBox1.Controls.Add(this.closeButton);
             this.groupBox1.Controls.Add(this.openButton);
             this.groupBox1.Controls.Add(this.label5);
@@ -77,26 +76,26 @@
             this.groupBox1.Controls.Add(this.ComComobox);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(234, 341);
+            this.groupBox1.Size = new System.Drawing.Size(234, 389);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "选项";
             // 
             // Canform
             // 
-            this.Canform.Location = new System.Drawing.Point(65, 312);
+            this.Canform.Location = new System.Drawing.Point(252, 353);
             this.Canform.Name = "Canform";
-            this.Canform.Size = new System.Drawing.Size(110, 23);
+            this.Canform.Size = new System.Drawing.Size(143, 30);
             this.Canform.TabIndex = 12;
-            this.Canform.Text = "CanMessage";
+            this.Canform.Text = "显示CanMess";
             this.Canform.UseVisualStyleBackColor = true;
             this.Canform.Click += new System.EventHandler(this.Canform_Click);
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(142, 281);
+            this.closeButton.Location = new System.Drawing.Point(130, 353);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 23);
+            this.closeButton.Size = new System.Drawing.Size(98, 30);
             this.closeButton.TabIndex = 11;
             this.closeButton.Text = "close";
             this.closeButton.UseVisualStyleBackColor = true;
@@ -104,9 +103,9 @@
             // 
             // openButton
             // 
-            this.openButton.Location = new System.Drawing.Point(20, 281);
+            this.openButton.Location = new System.Drawing.Point(20, 353);
             this.openButton.Name = "openButton";
-            this.openButton.Size = new System.Drawing.Size(75, 23);
+            this.openButton.Size = new System.Drawing.Size(93, 30);
             this.openButton.TabIndex = 10;
             this.openButton.Text = "open";
             this.openButton.UseVisualStyleBackColor = true;
@@ -194,7 +193,7 @@
             "14400",
             "28800",
             "36000",
-            "115000"});
+            "115200"});
             this.BaudRatecomobox.Location = new System.Drawing.Point(96, 73);
             this.BaudRatecomobox.Name = "BaudRatecomobox";
             this.BaudRatecomobox.Size = new System.Drawing.Size(121, 23);
@@ -210,6 +209,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.Canform);
             this.groupBox2.Controls.Add(this.showconwindbutton);
             this.groupBox2.Controls.Add(this.setSncomboBox);
             this.groupBox2.Controls.Add(this.closeCanToolbutton);
@@ -223,15 +223,25 @@
             this.groupBox2.Controls.Add(this.CanMessageSendTextBox);
             this.groupBox2.Location = new System.Drawing.Point(265, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(401, 341);
+            this.groupBox2.Size = new System.Drawing.Size(401, 389);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "CanMessage";
+            this.groupBox2.Text = "s";
+            // 
+            // showconwindbutton
+            // 
+            this.showconwindbutton.Location = new System.Drawing.Point(252, 317);
+            this.showconwindbutton.Name = "showconwindbutton";
+            this.showconwindbutton.Size = new System.Drawing.Size(143, 30);
+            this.showconwindbutton.TabIndex = 17;
+            this.showconwindbutton.Text = "显示控件";
+            this.showconwindbutton.UseVisualStyleBackColor = true;
+            this.showconwindbutton.Click += new System.EventHandler(this.showconwindbutton_Click);
             // 
             // setSncomboBox
             // 
             this.setSncomboBox.FormattingEnabled = true;
-            this.setSncomboBox.Location = new System.Drawing.Point(16, 281);
+            this.setSncomboBox.Location = new System.Drawing.Point(119, 288);
             this.setSncomboBox.Name = "setSncomboBox";
             this.setSncomboBox.Size = new System.Drawing.Size(121, 23);
             this.setSncomboBox.TabIndex = 16;
@@ -239,9 +249,9 @@
             // 
             // closeCanToolbutton
             // 
-            this.closeCanToolbutton.Location = new System.Drawing.Point(305, 318);
+            this.closeCanToolbutton.Location = new System.Drawing.Point(16, 353);
             this.closeCanToolbutton.Name = "closeCanToolbutton";
-            this.closeCanToolbutton.Size = new System.Drawing.Size(75, 23);
+            this.closeCanToolbutton.Size = new System.Drawing.Size(88, 30);
             this.closeCanToolbutton.TabIndex = 15;
             this.closeCanToolbutton.Text = "关闭装置";
             this.closeCanToolbutton.UseVisualStyleBackColor = true;
@@ -249,9 +259,9 @@
             // 
             // setSnbutton
             // 
-            this.setSnbutton.Location = new System.Drawing.Point(143, 281);
+            this.setSnbutton.Location = new System.Drawing.Point(16, 281);
             this.setSnbutton.Name = "setSnbutton";
-            this.setSnbutton.Size = new System.Drawing.Size(75, 23);
+            this.setSnbutton.Size = new System.Drawing.Size(88, 30);
             this.setSnbutton.TabIndex = 14;
             this.setSnbutton.Text = "设置速率";
             this.setSnbutton.UseVisualStyleBackColor = true;
@@ -259,9 +269,9 @@
             // 
             // openCanToolbutton
             // 
-            this.openCanToolbutton.Location = new System.Drawing.Point(305, 290);
+            this.openCanToolbutton.Location = new System.Drawing.Point(16, 317);
             this.openCanToolbutton.Name = "openCanToolbutton";
-            this.openCanToolbutton.Size = new System.Drawing.Size(75, 23);
+            this.openCanToolbutton.Size = new System.Drawing.Size(88, 30);
             this.openCanToolbutton.TabIndex = 13;
             this.openCanToolbutton.Text = "打开装置";
             this.openCanToolbutton.UseVisualStyleBackColor = true;
@@ -269,9 +279,9 @@
             // 
             // getversionbutton
             // 
-            this.getversionbutton.Location = new System.Drawing.Point(305, 261);
+            this.getversionbutton.Location = new System.Drawing.Point(16, 240);
             this.getversionbutton.Name = "getversionbutton";
-            this.getversionbutton.Size = new System.Drawing.Size(75, 23);
+            this.getversionbutton.Size = new System.Drawing.Size(88, 30);
             this.getversionbutton.TabIndex = 12;
             this.getversionbutton.Text = "获取版本";
             this.getversionbutton.UseVisualStyleBackColor = true;
@@ -310,7 +320,7 @@
             this.CanMessageReceiveTextBox.Location = new System.Drawing.Point(16, 151);
             this.CanMessageReceiveTextBox.Multiline = true;
             this.CanMessageReceiveTextBox.Name = "CanMessageReceiveTextBox";
-            this.CanMessageReceiveTextBox.Size = new System.Drawing.Size(364, 104);
+            this.CanMessageReceiveTextBox.Size = new System.Drawing.Size(364, 83);
             this.CanMessageReceiveTextBox.TabIndex = 1;
             // 
             // CanMessageSendTextBox
@@ -321,21 +331,11 @@
             this.CanMessageSendTextBox.Size = new System.Drawing.Size(364, 54);
             this.CanMessageSendTextBox.TabIndex = 0;
             // 
-            // showconwindbutton
-            // 
-            this.showconwindbutton.Location = new System.Drawing.Point(16, 317);
-            this.showconwindbutton.Name = "showconwindbutton";
-            this.showconwindbutton.Size = new System.Drawing.Size(75, 23);
-            this.showconwindbutton.TabIndex = 17;
-            this.showconwindbutton.Text = "显示控件";
-            this.showconwindbutton.UseVisualStyleBackColor = true;
-            this.showconwindbutton.Click += new System.EventHandler(this.showconwindbutton_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(678, 365);
+            this.ClientSize = new System.Drawing.Size(677, 413);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";

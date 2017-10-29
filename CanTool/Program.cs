@@ -16,7 +16,7 @@ namespace CanTool
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new RealChart());
+            //Application.Run(new BlackWhite());
             Application.Run(new Form1());
 
         }

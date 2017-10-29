@@ -53,9 +53,9 @@
             // 
             // setOKbutton
             // 
-            this.setOKbutton.Location = new System.Drawing.Point(1108, 410);
+            this.setOKbutton.Location = new System.Drawing.Point(97, 508);
             this.setOKbutton.Name = "setOKbutton";
-            this.setOKbutton.Size = new System.Drawing.Size(75, 23);
+            this.setOKbutton.Size = new System.Drawing.Size(75, 29);
             this.setOKbutton.TabIndex = 1;
             this.setOKbutton.Text = "确定";
             this.setOKbutton.UseVisualStyleBackColor = true;
@@ -66,7 +66,7 @@
             this.gaugeControl1.AutoLayout = false;
             this.gaugeControl1.Gauges.AddRange(new DevExpress.XtraGauges.Base.IGauge[] {
             this.circularGauge1});
-            this.gaugeControl1.Location = new System.Drawing.Point(12, 12);
+            this.gaugeControl1.Location = new System.Drawing.Point(499, 3);
             this.gaugeControl1.Name = "gaugeControl1";
             this.gaugeControl1.Size = new System.Drawing.Size(374, 260);
             this.gaugeControl1.TabIndex = 2;
@@ -127,9 +127,9 @@
             this.gaugeControl2.AutoLayout = false;
             this.gaugeControl2.Gauges.AddRange(new DevExpress.XtraGauges.Base.IGauge[] {
             this.digitalGauge1});
-            this.gaugeControl2.Location = new System.Drawing.Point(12, 278);
+            this.gaugeControl2.Location = new System.Drawing.Point(501, 269);
             this.gaugeControl2.Name = "gaugeControl2";
-            this.gaugeControl2.Size = new System.Drawing.Size(374, 250);
+            this.gaugeControl2.Size = new System.Drawing.Size(374, 265);
             this.gaugeControl2.TabIndex = 3;
             // 
             // digitalGauge1
@@ -156,10 +156,10 @@
             this.treeList1.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
             this.IDName,
             this.Signal});
-            this.treeList1.Location = new System.Drawing.Point(905, 13);
+            this.treeList1.Location = new System.Drawing.Point(-1, 3);
             this.treeList1.Name = "treeList1";
             this.treeList1.OptionsView.ShowCheckBoxes = true;
-            this.treeList1.Size = new System.Drawing.Size(278, 382);
+            this.treeList1.Size = new System.Drawing.Size(494, 499);
             this.treeList1.TabIndex = 4;
             // 
             // IDName
@@ -170,7 +170,7 @@
             this.IDName.Name = "IDName";
             this.IDName.Visible = true;
             this.IDName.VisibleIndex = 0;
-            this.IDName.Width = 592;
+            this.IDName.Width = 529;
             // 
             // Signal
             // 
@@ -179,23 +179,23 @@
             this.Signal.Name = "Signal";
             this.Signal.Visible = true;
             this.Signal.VisibleIndex = 1;
-            this.Signal.Width = 34;
+            this.Signal.Width = 20;
             // 
             // showCanInfobutton
             // 
-            this.showCanInfobutton.Location = new System.Drawing.Point(429, 13);
+            this.showCanInfobutton.Location = new System.Drawing.Point(-1, 507);
             this.showCanInfobutton.Name = "showCanInfobutton";
-            this.showCanInfobutton.Size = new System.Drawing.Size(92, 23);
+            this.showCanInfobutton.Size = new System.Drawing.Size(92, 30);
             this.showCanInfobutton.TabIndex = 5;
-            this.showCanInfobutton.Text = "显示数据库";
+            this.showCanInfobutton.Text = "选择数据";
             this.showCanInfobutton.UseVisualStyleBackColor = true;
             this.showCanInfobutton.Click += new System.EventHandler(this.showCanInfobutton_Click);
             // 
             // showwavebutton
             // 
-            this.showwavebutton.Location = new System.Drawing.Point(429, 106);
+            this.showwavebutton.Location = new System.Drawing.Point(391, 508);
             this.showwavebutton.Name = "showwavebutton";
-            this.showwavebutton.Size = new System.Drawing.Size(102, 23);
+            this.showwavebutton.Size = new System.Drawing.Size(102, 29);
             this.showwavebutton.TabIndex = 6;
             this.showwavebutton.Text = "显示波形图";
             this.showwavebutton.UseVisualStyleBackColor = true;
@@ -205,7 +205,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1235, 537);
+            this.ClientSize = new System.Drawing.Size(887, 537);
             this.Controls.Add(this.showwavebutton);
             this.Controls.Add(this.showCanInfobutton);
             this.Controls.Add(this.treeList1);
@@ -214,6 +214,7 @@
             this.Controls.Add(this.setOKbutton);
             this.Name = "Form3";
             this.Text = "Form3";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form3_FormClosed);
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.circularGauge1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.arcScaleBackgroundLayerComponent1)).EndInit();

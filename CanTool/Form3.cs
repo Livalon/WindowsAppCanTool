@@ -14,16 +14,19 @@ namespace CanTool
     public partial class Form3 : Form
     {
         private Form1.SetVisiableHandler m_setVisible;
-        RealChart f4 = new RealChart();
-        public Form3(Form1.SetVisiableHandler setvisible)
+        private Form1.SetVisiableHandler m_setVisible0;
+        public RealChart f4 = new RealChart();
+        public BlackWhite blackwhite= new BlackWhite();
+        public Form3(Form1.SetVisiableHandler setvisible, Form1.SetVisiableHandler setvisible0)
         {
             InitializeComponent();
             this.arcScaleComponent1.Value = 30F;
-            this.digitalGauge1.Text = "00,000";
+            this.digitalGauge1.Text = "0000.0";
             this.arcScaleComponent1.MinValue = 0F;
             this.arcScaleComponent1.MaxValue = 100F;
             this.m_setVisible = setvisible;
-            
+            this.m_setVisible0 = setvisible0;
+
         }
         public string Sn;
 
@@ -42,7 +45,10 @@ namespace CanTool
             this.arcScaleComponent1.Value = Value;
             this.arcScaleComponent1.MinValue = min;
             this.arcScaleComponent1.MaxValue = Max;
-            f4.changCharMinAndMax(min, Max, Value);
+            if(!f4.IsDisposed)
+            {
+                f4.changCharMinAndMax(min, Max, Value);
+            }
         }
 
         /*private string[] Sns = { "S0", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", };
@@ -112,7 +118,7 @@ namespace CanTool
 
         private void Form3_Load(object sender, EventArgs e)
         {
-
+           
         }
 
         private void showCanInfobutton_Click(object sender, EventArgs e)
@@ -146,8 +152,25 @@ namespace CanTool
 
         private void showwavebutton_Click(object sender, EventArgs e)
         {
+            f4 = new RealChart();
             f4.Show();
+            //f4.Close();
             
+        }
+
+        /*private void show64chartbutton_Click(object sender, EventArgs e)
+        {
+            blackwhite = new BlackWhite();
+            blackwhite.Show();
+            blackwhite.changeBackColor2("00001111",Color.Blue);
+        }*/
+
+        private void Form3_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (this.m_setVisible != null)
+            {
+                this.m_setVisible0();
+            }
         }
     }
 

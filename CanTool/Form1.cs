@@ -37,6 +37,9 @@ namespace CanTool
 
         public bool opened = false;
 
+        string origindatabase = "data.txt";
+        string useddatabase = "usedata.txt";
+
         //暂时不让用户选择奇偶校验以及停止位
 
         public delegate void SetVisiableHandler();
@@ -101,6 +104,7 @@ namespace CanTool
             {
                 string[] strlist = buffread.Split("\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries); //遇到/r就取出来
                 string outp = "";
+                SaveCanMessage savemes = new SaveCanMessage();
                 List<string> Caninfos = new List<string>();
                 if (buffread.Length != strlist[0].Length) //ifbuffread的长度不等于strlist第0项目的长度，说明有\r
                 {
@@ -121,6 +125,8 @@ namespace CanTool
                             {
                                 outp += strlist[strlist.Length - 1];
                                 Caninfos.Add(strlist[strlist.Length - 1]);
+                                //保存发送的数据
+                                //savemes.Write(strlist[strlist.Length - 1]);
                             }
                             Control.CheckForIllegalCrossThreadCalls = false;
                             CanMessageReceiveTextBox.Text = outp;
@@ -209,7 +215,10 @@ namespace CanTool
                 if (serialPort1.IsOpen)
                 {
                     //serialPort1.WriteLine(CanMessageSendTextBox.Text);
-                    serialPort1.WriteLine("t35881122334455667788\rt32081122334455667788\rt36081122334455667788\rt32181122334455667788\r");
+                    //serialPort1.Write("t35881122334455667788\rt32081122334455667788\rt36081122334455667788\rt32181122334455667788\r");
+                    //serialPort1.Write("t0648A802B70000000000\r");
+                    serialPort1.Write("t0648E812270000000000\r");
+                   
                     /*byte[] bsTest = new byte[1];
                     bsTest[0] = 0x07;
                     string t = System.Text.Encoding.Default.GetString(bsTest);
@@ -233,6 +242,11 @@ namespace CanTool
         private void SetVisiable1()
         {
             flushtype = 1;
+        }
+
+        private void SetVisiable0()
+        {
+            flushtype = 0;
         }
 
         private void Canform_Click(object sender, EventArgs e)
@@ -323,7 +337,7 @@ namespace CanTool
 
         private void showconwindbutton_Click(object sender, EventArgs e)
         {
-            f3 = new Form3(new SetVisiableHandler(SetVisiable1));
+            f3 = new Form3(new SetVisiableHandler(SetVisiable1), new SetVisiableHandler(SetVisiable0));
             f3.Show();
         }
 
@@ -374,6 +388,18 @@ namespace CanTool
             {
                 setSncomboBox.Items.Add(Convert.ToString(Sns[i]));
             }
+
+            //增加文件读取功能
+            FileStream fsSource = new FileStream(origindatabase, FileMode.Open);
+            FileStream fsTarget = new FileStream(useddatabase, FileMode.OpenOrCreate);
+            fsTarget.Seek(0, SeekOrigin.Begin);
+            fsTarget.SetLength(0);
+            byte[] sourceArr = new byte[fsSource.Length];
+            fsSource.Read(sourceArr, 0, sourceArr.Length);
+            fsTarget.Position = fsTarget.Length;
+            fsTarget.Write(sourceArr, 0, sourceArr.Length);
+            fsSource.Close();
+            fsTarget.Close();
 
         }
 

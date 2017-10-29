@@ -54,6 +54,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analysis.cs" />
+    <Compile Include="BlackWhite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BlackWhite.Designer.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +82,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="RealChart.Designer.cs" />
+    <Compile Include="Rect.cs" />
+    <Compile Include="SaveCanMessage.cs" />
+    <EmbeddedResource Include="BlackWhite.resx" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

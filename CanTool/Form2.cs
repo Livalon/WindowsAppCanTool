@@ -19,38 +19,40 @@ namespace CanTool
 
         Hashtable hshTable = new Hashtable();
 
+        string form2useddatabase = "usedata.txt";
+
         public Form2(Form1.SetVisiableHandler setvisible)
         {
             InitializeComponent();
             this.m_setVisible = setvisible;
         }
 
-        private void ShowMessbutton_Click(object sender, EventArgs e)
-        {
-            #region
-            /*for (int i = 0; i < 10; i++)   //添加10行数据
-            {
-                ListViewItem lvi = new ListViewItem();
+        //private void ShowMessbutton_Click(object sender, EventArgs e)
+        //{
+        //    #region
+        //    /*for (int i = 0; i < 10; i++)   //添加10行数据
+        //    {
+        //        ListViewItem lvi = new ListViewItem();
 
-                //lvi.ImageIndex = i;     //通过与imageList绑定，显示imageList中第i项图标
+        //        //lvi.ImageIndex = i;     //通过与imageList绑定，显示imageList中第i项图标
 
-                lvi.Text = "subitem" + i; //第一列
+        //        lvi.Text = "subitem" + i; //第一列
 
-                lvi.SubItems.Add("第2列,第" + i + "行");
+        //        lvi.SubItems.Add("第2列,第" + i + "行");
 
-                lvi.SubItems.Add("第3列,第" + i + "行");
+        //        lvi.SubItems.Add("第3列,第" + i + "行");
 
-                CanMesslistView.Items.Add(lvi);
-            }*/
-            #endregion
+        //        CanMesslistView.Items.Add(lvi);
+        //    }*/
+        //    #endregion
 
-            Analysis ay = new Analysis();
-            List<string> Cangets = new List<string>();
-            Cangets.Add("t8561122334455667788");
+        //    Analysis ay = new Analysis();
+        //    List<string> Cangets = new List<string>();
+        //    Cangets.Add("t8561122334455667788");
 
-            flushMesslist(Cangets,0);
-            textBox1.Text = "tttttttt";
-        }
+        //    flushMesslist(Cangets,0);
+        //    textBox1.Text = "tttttttt";
+        //}
 
         public void flushMesslist(List<string> Cangets,int flushtype)
         {
@@ -89,10 +91,11 @@ namespace CanTool
                             listv.SubItems.Add(Data[1]); //没有报错提示
                             CanMesslistView.Items.Add(listv);
                             Tcinfo.block.Add(Data[0]+ Data[1]);
+                        //textBox1.Text = Data[0];
                         #region
                         //增加ID Name Dir DLC Data
 
-                        
+
                         /*ListTree2 rottree1 = new ListTree2();
                         rottree1.ParentID = idnumber;
                         rottree1.GetID = ay.get16IDNumber(Canget);
@@ -156,7 +159,7 @@ namespace CanTool
 
                 }
 
-                textBox1.Text = "***************";
+                //textBox1.Text = "***************";
             
            
         }
@@ -194,38 +197,50 @@ namespace CanTool
                         //ay.getCanAllInfoFromDatabase();
                         //f3.changeLED("10,000");
                     }
-                    List<string> retCanIDandlocal = f3.retCanIDandlocal;
 
-                    string anaresultID = Canget;
+                    if(f3!=null)
+                    {
+                        List<string> retCanIDandlocal = f3.retCanIDandlocal;
 
-                    int IDlen = 3;
-                    if (string.Equals(anaresultID.Substring(0, 1), "t")) //标准帧
-                    {
-                        IDlen = 3;
-                    }
-                    else if (string.Equals(anaresultID.Substring(0, 1), "T")) //扩展帧
-                    {
-                        IDlen = 8;
-                    }
-                    anaresultID = Canget.Substring(1, IDlen);
-                    anaresultID = (Int32.Parse(anaresultID, System.Globalization.NumberStyles.HexNumber)).ToString(); //16转10进制
-                                                                                                                      //判断是否在选中的ID中
-                    foreach (string Canselected in retCanIDandlocal)
-                    {
-                        string[] Canblock = Canselected.Split(' ');
-                        if (string.Equals(Canblock[0], anaresultID.ToString()))
+                        string anaresultID = Canget;
+
+                        int IDlen = 3;
+                        if (string.Equals(anaresultID.Substring(0, 1), "t")) //标准帧
                         {
-                            //Data[1];
-                            string[] select=Canselected.Split(' ');
-                            int num=Convert.ToInt32(select[1]);
-                            string[] LED = AnalysisOK[num].Split(',');
-                            string Canvalue = string.Format("{0:00.000}", Convert.ToDouble(LED[1]));
-                            f3.changearcScale(Convert.ToSingle(LED[2]), Convert.ToSingle(LED[3]), Convert.ToSingle(LED[1])); 
-                            //f3.changearcScale(0F,100F,50F);
-                            f3.changeLED(Canvalue);
+                            IDlen = 3;
                         }
+                        else if (string.Equals(anaresultID.Substring(0, 1), "T")) //扩展帧
+                        {
+                            IDlen = 8;
+                        }
+                        anaresultID = Canget.Substring(1, IDlen);
+                        anaresultID = (Int32.Parse(anaresultID, System.Globalization.NumberStyles.HexNumber)).ToString(); //16转10进制
+                                                                                                                          //判断是否在选中的ID中
+                        foreach (string Canselected in retCanIDandlocal)
+                        {
+                            string[] Canblock = Canselected.Split(' ');
+                            if (string.Equals(Canblock[0], anaresultID.ToString()))
+                            {
+                                //Data[1];
+                                string[] select = Canselected.Split(' ');
+                                int num = Convert.ToInt32(select[1]);
+                                string[] LED = AnalysisOK[num].Split(',');
+                                //string Canvalue = string.Format("{0:0000.0}", Convert.ToDouble(LED[1]));
+                                //string Canvalue = string.Format("{0:0000.0}", Convert.ToDouble("-1"));
+                                //string Canvalue = "12.2";
+                                //加入判断,如果有
+                                string Canvalue = LED[1];
 
+
+                                f3.changearcScale(Convert.ToSingle(LED[2]), Convert.ToSingle(LED[3]), Convert.ToSingle(LED[1]));
+                                    //f3.changearcScale(0F,100F,50F);
+                                    f3.changeLED(Canvalue);
+                                
+                            }
+
+                        }
                     }
+                    
                 }
                 else
                 {
@@ -340,7 +355,17 @@ namespace CanTool
                 }
             }
 
-             //通过ID获取元件
+            //显示Can信息布局
+            /* binarystring = ay.getCanChartString(CanIDselect[0]);
+            BlackWhite blackwhite = new BlackWhite();
+            blackwhite.Show();
+            //blackwhite.changeBackColor2("00001111", Color.Blue);
+            blackwhite.changeBackColor2(binarystring, Color.Blue);*/
+
+
+
+
+            //通过ID获取元件
 
             treeList1.DataSource = pList;
             treeList1.RefreshDataSource();
@@ -421,7 +446,7 @@ namespace CanTool
                 {
                     MessageBox.Show("已选择文件:" + file, "选择文件提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     FileStream fsSource = new FileStream(file, FileMode.Open);
-                    FileStream fsTarget = new FileStream("2.txt", FileMode.OpenOrCreate);
+                    FileStream fsTarget = new FileStream(form2useddatabase, FileMode.OpenOrCreate);
                     byte[] sourceArr = new byte[fsSource.Length];
                     fsSource.Read(sourceArr, 0, sourceArr.Length);
                     fsTarget.Position = fsTarget.Length;
@@ -432,9 +457,9 @@ namespace CanTool
                     fsSource.Close();
                     fsTarget.Close();
                 }
-
+                textBox1.Text = System.IO.Path.GetDirectoryName(fileDialog.FileName);
             }
-            textBox1.Text= System.IO.Path.GetDirectoryName(fileDialog.FileName);
+            
         }
 
         private void treeList1_FocusedNodeChanged(object sender, DevExpress.XtraTreeList.FocusedNodeChangedEventArgs e)
@@ -459,7 +484,7 @@ namespace CanTool
         private void timer1_Tick(object sender, EventArgs e)
         {
             //根据选择的ID刷新树状图
-
+            #region
             /*if (test1)
             {
                 ArrayList pList = new ArrayList();
@@ -492,6 +517,7 @@ namespace CanTool
                 this.treeList2.RefreshDataSource();
                 test1= false;
             }*/
+            #endregion
 
             ArrayList pList = new ArrayList();
             //传入一个有所有内容的对象
@@ -507,6 +533,7 @@ namespace CanTool
                 i++;
                 rottree.GetID = tcinfo.ID;
                 rottree.GetName = "defult";
+                rottree.DLC = "8";
                 rottree.GetData = tcinfo.Data;
                 pList.Add(rottree);
                 foreach (string block in tcinfo.block)
@@ -550,6 +577,25 @@ namespace CanTool
         private void button1_Click(object sender, EventArgs e)
         {
             this.timer1.Stop();
+        }
+
+        private void showcanchartbutton_Click(object sender, EventArgs e)
+        {
+            Analysis ay = new Analysis();
+            List<string> CanIDselect = new List<string>();
+            CanIDselect = CanIDselected();
+
+            //显示Can信息布局
+            string binarystring = ay.getCanChartString(CanIDselect[0]);
+            BlackWhite blackwhite = new BlackWhite();
+            blackwhite.Show();
+            //blackwhite.changeBackColor2("00001111", Color.Blue);
+            blackwhite.changeBackColor2(binarystring, Color.Blue);
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

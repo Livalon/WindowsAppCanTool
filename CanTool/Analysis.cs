@@ -14,6 +14,7 @@ namespace CanTool
         public int m_open = 0;
         public int m_Sn = 0;
         public int m_Close = 1;
+        public string dbc = "usedata.txt";
 
         public string canReceipt(string CantoolMessage,int version, int open, int Sn, int Close) //接收CanTool装置的信息
         {
@@ -96,7 +97,7 @@ namespace CanTool
         public List<string> getCanIDFromDatabase()
         {
             List<string> CanIDs = new List<string>();
-            FileStream fs = new FileStream("data.txt", FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(dbc, FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
             string s;
 
@@ -109,6 +110,7 @@ namespace CanTool
                     CanIDs.Add(arr[0] + arr[1]);
                 }
             }
+            fs.Close();
             return CanIDs;
         }
 
@@ -116,7 +118,7 @@ namespace CanTool
         {
 
             List<string> CanAllInfos = new List<string>();
-            FileStream fs = new FileStream("data.txt", FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(dbc, FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
             string s;
 
@@ -145,7 +147,7 @@ namespace CanTool
                 }
 
             }
-
+            //fs.Close();
             return CanAllInfos;
         }
 
@@ -153,7 +155,7 @@ namespace CanTool
         {
             int i;
             List<string> CanInfos = new List<string>();
-            FileStream fs = new FileStream("data.txt", FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(dbc, FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
             string s;
                 while ((s = sr.ReadLine()) != null)
@@ -253,7 +255,7 @@ namespace CanTool
             anaresult = CanSignal.Substring(1, IDlen);
             anaresult = (Int32.Parse(anaresult, System.Globalization.NumberStyles.HexNumber)).ToString(); //16转10进制
 
-            FileStream fs = new FileStream("data.txt", FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(dbc, FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
 
             string s;
@@ -282,28 +284,33 @@ namespace CanTool
 
 
                         int substart;
-                        string caninfo;
+                        string caninfo="";
                         //加入格式判断
                         if (string.Equals(arr1[3], "0"))
                         {
                             substart = start / 8 * 8 - start % 8 + 7;
                             caninfo = binarycandata.Substring(substart, len);
                         }
-                        else
+                        if (string.Equals(arr1[3], "1"))
                         {
                             substart = start;
                             string inteltype = "";
                             string intelout="";
-                            for(i=0;i<8;i++)
+                            for(int t=0;t<8;t++)
                             {
-                                inteltype = binarycandata.Substring(i * 8, 8);
+                                inteltype = binarycandata.Substring(t* 8, 8);
                                 char[] strChar = inteltype.ToCharArray();
                                 Array.Reverse(strChar);
                                 intelout+=new string(strChar);
+                                
                             }
                             //经过一次reverse
-
-                            caninfo = binarycandata.Substring(substart, len);
+                            
+                            caninfo = intelout.Substring(substart, len);
+                            char[] strChar1 = caninfo.ToCharArray();
+                            Array.Reverse(strChar1);
+                            caninfo = new string(strChar1);
+                            //caninfo = "0";
                         }
 
 
@@ -319,6 +326,7 @@ namespace CanTool
                                                                                                             //Console.WriteLine(arr1[0]+":"+Phy); //顺序显示CanMessage数值！！！
                         CanDatas.Add(arr1[0] + ',' + Phy+','+arr1[6]+','+arr1[7]); //器件名 物理值 最小值 最大值
                     }
+                    //CanDatas.Add("hhhh"+ ',' + 1 + ',' + "we"+ ',' + "to"); //器件名 物理值 最小值 最大值
                     foreach (string CanData in CanDatas)
                     {
                         string[] Data = CanData.Split(',');
@@ -507,7 +515,7 @@ namespace CanTool
 
 
 
-            FileStream fs = new FileStream("data.txt", FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(dbc, FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
             string s;
             while ((s = sr.ReadLine()) != null)
@@ -575,7 +583,7 @@ namespace CanTool
         public string getLongFromDatabase(string CanID)
         {
             string lenth;
-            FileStream fs = new FileStream("data.txt", FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(dbc, FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
             string s;
             while ((s = sr.ReadLine()) != null)
@@ -603,6 +611,76 @@ namespace CanTool
             }
             return anaresult;
         }
+
+        public string getCanChartString(string CanID_10) //根据CanId获取信息
+        {
+            string CanChartString="";
+            int i;
+            List<string> CanInfos = new List<string>();
+            string binarystring = new string('0', 64);
+            string Canintelstring = new string('0', 64);
+            string caninfo = binarystring;
+            FileStream fs = new FileStream(dbc, FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs);
+            string s;
+            bool isintel = false;
+            while ((s = sr.ReadLine()) != null)
+            {
+                string[] arr = s.Split(' ');
+                if (s.Length > 5 && string.Equals(arr[1], CanID_10))
+                {
+                    s = sr.ReadLine();
+                    int Canline = Convert.ToInt32(s);
+                    s = sr.ReadLine(); //跳过空行
+                    for (i = 0; i < Canline; i++)
+                    {
+                        s = sr.ReadLine(); //跳到有效行
+                        string[] arr1 = s.Split(' ');
+                        CanInfos.Add(arr1[1] + " " + arr[2]);
+                        //根据起始位置和长度填充
+                        int start, len;
+                        start = Convert.ToInt32(arr1[1]);
+                        len = Convert.ToInt32(arr1[2]);
+
+                        int substart;
+                       
+                        if (string.Equals(arr1[3], "0"))
+                        {
+                            substart = start / 8 * 8 - start % 8 + 7;
+                            binarystring = binarystring.Remove(substart, len);
+                            string fillone = new string('1', len);
+                            binarystring = binarystring.Insert(substart, fillone);
+                        }
+                        if (string.Equals(arr1[3], "1"))
+                        {
+                            substart = start;
+                            Canintelstring = Canintelstring.Remove(substart, len);
+                            string fillone = new string('1', len);
+                            Canintelstring = Canintelstring.Insert(substart, fillone);
+                            
+                        }
+
+                    }
+                    string[] arr2 = s.Split(' ');
+                    if (string.Equals(arr2[3], "1"))
+                    {
+                        string inteltype = "";
+                        string intelout = "";
+                        for (int t = 0; t < 8; t++)
+                        {
+                            inteltype = Canintelstring.Substring(t * 8, 8); //每8位反转
+                            char[] strChar = inteltype.ToCharArray();
+                            Array.Reverse(strChar);
+                            intelout += new string(strChar);
+                        }
+                        binarystring = intelout;
+                    }
+                }
+            }
+            CanChartString = binarystring;
+            return CanChartString;
+        }
+
         public void test()
         {
             Console.WriteLine("*****");
