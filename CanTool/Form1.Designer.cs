@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.Canform = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.openButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -43,6 +42,7 @@
             this.Paritycomobox = new System.Windows.Forms.ComboBox();
             this.BaudRatecomobox = new System.Windows.Forms.ComboBox();
             this.ComComobox = new System.Windows.Forms.ComboBox();
+            this.Canform = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.showconwindbutton = new System.Windows.Forms.Button();
             this.setSncomboBox = new System.Windows.Forms.ComboBox();
@@ -80,16 +80,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "选项";
-            // 
-            // Canform
-            // 
-            this.Canform.Location = new System.Drawing.Point(252, 353);
-            this.Canform.Name = "Canform";
-            this.Canform.Size = new System.Drawing.Size(143, 30);
-            this.Canform.TabIndex = 12;
-            this.Canform.Text = "显示CanMess";
-            this.Canform.UseVisualStyleBackColor = true;
-            this.Canform.Click += new System.EventHandler(this.Canform_Click);
             // 
             // closeButton
             // 
@@ -207,6 +197,16 @@
             this.ComComobox.Size = new System.Drawing.Size(121, 23);
             this.ComComobox.TabIndex = 0;
             // 
+            // Canform
+            // 
+            this.Canform.Location = new System.Drawing.Point(252, 353);
+            this.Canform.Name = "Canform";
+            this.Canform.Size = new System.Drawing.Size(143, 30);
+            this.Canform.TabIndex = 12;
+            this.Canform.Text = "显示CanMess";
+            this.Canform.UseVisualStyleBackColor = true;
+            this.Canform.Click += new System.EventHandler(this.Canform_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.Canform);
@@ -226,7 +226,7 @@
             this.groupBox2.Size = new System.Drawing.Size(401, 389);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "s";
+            this.groupBox2.Text = "CanMessage";
             // 
             // showconwindbutton
             // 

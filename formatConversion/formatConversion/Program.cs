@@ -11,8 +11,16 @@ namespace formatConversion
     {
         static void Main(string[] args)
         {
+            string path = "canmsg-sample.dbc";
          ConversionFormat c = new ConversionFormat();
-         c.dbcPreprocess("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.dbc");
+         c.dbcPreprocess(path);
+            c.conversionToJson;
+                c.conversionToXml;
+            c.reconversionToJson;
+                c.reconversionToXml;
+
+
+
          System.Console.ReadKey();
         // Application.EnableVisualStyles();
         // Application.SetCompatibleTextRenderingDefault(false);

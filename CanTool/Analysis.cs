@@ -470,12 +470,8 @@ namespace CanTool
         {
             string to16num = ""; ;
             int a = Convert.ToInt32(tennum);
-            String strA = a.ToString("x8");
-
-            string CanID16 = Convert.ToString(Convert.ToInt32("358", 16));//16进制的CanID
-            //Console.WriteLine(Convert.ToInt32(strA));
-
-            return to16num; 
+            to16num = string.Format("{0:X}", a);
+            return to16num;
         }
 
         public string canSendAnalysis(string CanSignal)//把用户输入的内容转化为Can信息 string格式为ID+数据 最后
@@ -498,23 +494,19 @@ namespace CanTool
             //string CanID16 = Convert.ToString(Convert.ToInt32(candatablock[0]), 16);//16进制的CanID
             string CanID16 = convertTo16(candatablock[0]);
 
-            if (CanID16.Length<3)
+            if (CanID16.Length <= 3)
             {
                 binaryCanID_Data = binaryCanID_Data.Remove(3 - CanID16.Length, CanID16.Length);
                 binaryCanID_Data = binaryCanID_Data.Insert(3 - CanID16.Length, CanID16);
             }
             else
             {
-                extendbinaryCanID_Data= extendbinaryCanID_Data.Remove(8 - CanID16.Length, CanID16.Length);
+                extendbinaryCanID_Data = extendbinaryCanID_Data.Remove(8 - CanID16.Length, CanID16.Length);
                 extendbinaryCanID_Data = extendbinaryCanID_Data.Insert(8 - CanID16.Length, CanID16);
             }
-            //Console.WriteLine(binaryCanID_Data);
+            //Console.WriteLine("123");
             //现在扩展帧，标准帧分别默认为3位和8位十进制数，后期按相应16进制进行解析
             //暂时不写扩展帧的解析
-
-
-
-
             FileStream fs = new FileStream(dbc, FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
             string s;
@@ -545,14 +537,57 @@ namespace CanTool
 
                         start = Convert.ToInt32(arr1[1]);
                         len = Convert.ToInt32(arr1[2]);
-                        int substart = start / 8 * 8 - start % 8 + 7;
-                        int sublen = len - binaryx_value.Length;
+                        int substart = 0;
+                        int sublen = 0;
+                        if (string.Equals(arr1[3], "0"))
+                        {
+                            substart = start / 8 * 8 - start % 8 + 7;
+                            sublen = len - binaryx_value.Length;
 
-                        binarycandata = binarycandata.Remove(substart + sublen, binaryx_value.Length); //
-                        binarycandata = binarycandata.Insert(substart + sublen, binaryx_value);
+                            binarycandata = binarycandata.Remove(substart + sublen, binaryx_value.Length);
+                            binarycandata = binarycandata.Insert(substart + sublen, binaryx_value);
+                        }
+                        //加入intel格式转换
+                        //1转化为2进制
+                        if (string.Equals(arr1[3], "1"))
+                        {
+                            substart = start;
+                            sublen = len;
+
+                            //反转2进制
+                            char[] strChar1 = binaryx_value.ToCharArray();
+                            Array.Reverse(strChar1);
+                            binaryx_value = new string(strChar1);
+
+                            binarycandata = binarycandata.Remove(substart, binaryx_value.Length);
+                            binarycandata = binarycandata.Insert(substart, binaryx_value);
+                        }
+                        //2反转
+                        //3填充
+                        //4全部反转
+
                     }
+
+                    string[] arr2 = s.Split(' ');
+                    if (string.Equals(arr2[3], "1"))
+                    {
+                        string inteltype = "";
+                        string intelout = "";
+                        for (int t = 0; t < 8; t++)
+                        {
+                            inteltype = binarycandata.Substring(t * 8, 8); //每8位反转
+                            char[] strChar = inteltype.ToCharArray();
+                            Array.Reverse(strChar);
+                            intelout += new string(strChar);
+                        }
+                        binarycandata = intelout;
+                    }
+
+                    Console.WriteLine(binarycandata);
+
                     anaresult = to16CanData(binarycandata);
-                    if (CanID16.Length < 3)
+                    Console.WriteLine(anaresult);
+                    if (CanID16.Length <= 3)
                     {
                         binaryCanID_Data = binaryCanID_Data.Remove(4, 16);
                         binaryCanID_Data = binaryCanID_Data.Insert(4, anaresult);
@@ -568,15 +603,15 @@ namespace CanTool
             //Console.WriteLine(binaryCanID_Data);
 
             //暂定为标准帧
-            if (CanID16.Length < 3)
+            if (CanID16.Length <= 3)
             {
                 binaryCanID_Data = "t" + binaryCanID_Data;
             }
             else
             {
-                binaryCanID_Data = "T" + binaryCanID_Data;
+                binaryCanID_Data = "T" + extendbinaryCanID_Data;
             }
-            
+
             return binaryCanID_Data;
         }
 

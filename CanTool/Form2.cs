@@ -399,7 +399,7 @@ namespace CanTool
                 ss = CanID;
                 for(i=0;i<Convert.ToInt32(ay.getLongFromDatabase(CanID));i++)
                 {
-                    ss+=(" "+treeList1.Nodes[i+lennode].GetValue(0));
+                    ss+=(" "+treeList1.Nodes[i+lennode].GetValue(1));
                 }
                 lennode += (i); //i此时已经加到下一个，注意
                 //ss += " ";

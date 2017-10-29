@@ -21,9 +21,12 @@ namespace formatConversion
 {
     //以下的ToXml、 CanMessageAndSignal定义除了整体的层次结构
     //XmlRoot表明这个类对应的是XML文件中的根节点
+    
+
     [System.Xml.Serialization.XmlRoot(ElementName = "ToXml")]
     public class ToXml
     {
+        string ConversionPath = "data.txt";
         //XmlElement表明这个字段对应的是XML文件中当前父节点下面的一个子节点
         //ElementName就是XML里面显示的当前节点名称
         //类中的字段名称与对应的XML节点的名称可以不同(比如在这里类Config中的属性ClientDescription对应XML文件中根节点Config下面的子节点Description)
@@ -96,6 +99,12 @@ namespace formatConversion
 
     class ConversionFormat
     {
+        string ConversionPathEnd = "canmsg-sample.xml";
+        string ConversionPath = "canmsg-sample.dbc";
+        string ConversionPathEndConvert = "data.txt";
+        string ConversiontoJsonPath = "canmsg-sample.json";
+        string jsontodbcPath = "canmsg-sampletoxml.dbc";
+        string Conversionxmltodbc = "canmsg-sampletoxml.dbc";
         public void conversionToXml (string fileName)
         { //将dbc文件转换为XML文件
 
@@ -172,10 +181,10 @@ namespace formatConversion
             }
             signalnum[cnt] = snum; // 这个数组从1开始
 
-            if (!File.Exists("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.xml"))
+            if (!File.Exists(ConversionPath))
             {
-                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.xml";
-                FileStream fs1 = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.xml", FileMode.Create, FileAccess.Write);//创建写入文件 
+                string fn = ConversionPath;
+                FileStream fs1 = new FileStream(ConversionPath, FileMode.Create, FileAccess.Write);//创建写入文件 
                 //StreamWriter sw1 = new StreamWriter(fs1);
                 if (tx != null && !string.IsNullOrEmpty(fn))
                 {
@@ -197,8 +206,8 @@ namespace formatConversion
            
             else
             {
-                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.xml";
-                FileStream fs1 = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.xml", FileMode.Create, FileAccess.Write);//创建写入文件 
+                string fn = ConversionPath;
+                FileStream fs1 = new FileStream(ConversionPath, FileMode.Create, FileAccess.Write);//创建写入文件 
                 //StreamWriter sw1 = new StreamWriter(fs1);
                 if (tx != null && !string.IsNullOrEmpty(fn))
                 {
@@ -244,10 +253,10 @@ namespace formatConversion
 
             tx = result as ToXml;
 
-            if (!File.Exists("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample1.dbc"))
+            if (!File.Exists(Conversionxmltodbc))
             {
-                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample1.dbc";
-                FileStream fs = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample1.dbc", FileMode.Create, FileAccess.Write);//创建写入文件 
+                string fn = Conversionxmltodbc;
+                FileStream fs = new FileStream(Conversionxmltodbc, FileMode.Create, FileAccess.Write);//创建写入文件 
                 StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.GetEncoding("GB2312"));
 
                 foreach (CanMessageAndSignal cmas in tx.cmarr)
@@ -274,8 +283,8 @@ namespace formatConversion
 
             else
             {
-                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample1.dbc";
-                FileStream fs = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample1.dbc", FileMode.Create, FileAccess.Write);//创建写入文件 
+                string fn = Conversionxmltodbc;
+                FileStream fs = new FileStream(Conversionxmltodbc, FileMode.Create, FileAccess.Write);//创建写入文件 
                 StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.GetEncoding("GB2312"));
 
                 foreach (CanMessageAndSignal cmas in tx.cmarr)
@@ -379,10 +388,10 @@ namespace formatConversion
 
             }
 
-            if (!File.Exists("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.json"))
+            if (!File.Exists(ConversiontoJsonPath))
             {
-                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.json";
-                FileStream fs1 = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.json", FileMode.Create, FileAccess.Write);//创建写入文件 
+                string fn = ConversiontoJsonPath;
+                FileStream fs1 = new FileStream(ConversiontoJsonPath, FileMode.Create, FileAccess.Write);//创建写入文件 
                 string tmp;
                 StreamWriter sw1 = new StreamWriter(fs1, System.Text.Encoding.GetEncoding("GB2312"));
                 if (tx != null && !string.IsNullOrEmpty(fn))
@@ -400,8 +409,8 @@ namespace formatConversion
 
             else
             {
-                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.json";
-                FileStream fs1 = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample.json", FileMode.Create, FileAccess.Write);//创建写入文件 
+                string fn = ConversiontoJsonPath;
+                FileStream fs1 = new FileStream(ConversiontoJsonPath, FileMode.Create, FileAccess.Write);//创建写入文件 
                 string tmp;
                 StreamWriter sw1 = new StreamWriter(fs1, System.Text.Encoding.GetEncoding("GB2312"));
                 if (tx != null && !string.IsNullOrEmpty(fn))
@@ -474,10 +483,10 @@ namespace formatConversion
                
             }
 
-            if (!File.Exists("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample2.dbc"))
+            if (!File.Exists(jsontodbcPath))
             {
-                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample2.dbc";
-                FileStream fs = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample2.dbc", FileMode.Create, FileAccess.Write);//创建写入文件 
+                string fn = jsontodbcPath;
+                FileStream fs = new FileStream(jsontodbcPath, FileMode.Create, FileAccess.Write);//创建写入文件 
                 StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.GetEncoding("GB2312"));
 
                 foreach (CanMessageAndSignal cmas in tx.cmarr)
@@ -504,8 +513,8 @@ namespace formatConversion
 
             else
             {
-                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample2.dbc";
-                FileStream fs = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\canmsg-sample2.dbc", FileMode.Create, FileAccess.Write);//创建写入文件 
+                string fn = jsontodbcPath;
+                FileStream fs = new FileStream(jsontodbcPath, FileMode.Create, FileAccess.Write);//创建写入文件 
                 StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.GetEncoding("GB2312"));
 
                 foreach (CanMessageAndSignal cmas in tx.cmarr)
@@ -617,10 +626,10 @@ namespace formatConversion
                 }
             }*/
 
-            if (!File.Exists("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\data.txt"))
+            if (!File.Exists(ConversionPathEndConvert))
             {
-                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\data.txt";
-                FileStream fs1 = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\data.txt", FileMode.Create, FileAccess.Write);//创建写入文件 
+                string fn = ConversionPathEndConvert;
+                FileStream fs1 = new FileStream(ConversionPathEndConvert, FileMode.Create, FileAccess.Write);//创建写入文件 
                 StreamWriter sw = new StreamWriter(fs1, System.Text.Encoding.GetEncoding("GB2312"));
                 //StreamWriter sw1 = new StreamWriter(fs1);
                 int pointer = 1;
@@ -664,8 +673,8 @@ namespace formatConversion
 
             else
             {
-                string fn = "D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\data.txt";
-                FileStream fs1 = new FileStream("D:\\gitrepy\\CanTool\\WindowsAppCanTool\\formatConversion\\data.txt", FileMode.Create, FileAccess.Write);//创建写入文件 
+                string fn = ConversionPathEndConvert;
+                FileStream fs1 = new FileStream(ConversionPathEndConvert, FileMode.Create, FileAccess.Write);//创建写入文件 
                 StreamWriter sw = new StreamWriter(fs1, System.Text.Encoding.GetEncoding("GB2312"));
                 //StreamWriter sw1 = new StreamWriter(fs1);
                 int pointer = 1;
