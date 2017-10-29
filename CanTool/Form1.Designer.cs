@@ -199,7 +199,7 @@
             // 
             // Canform
             // 
-            this.Canform.Location = new System.Drawing.Point(252, 353);
+            this.Canform.Location = new System.Drawing.Point(252, 317);
             this.Canform.Name = "Canform";
             this.Canform.Size = new System.Drawing.Size(143, 30);
             this.Canform.TabIndex = 12;
@@ -230,11 +230,11 @@
             // 
             // showconwindbutton
             // 
-            this.showconwindbutton.Location = new System.Drawing.Point(252, 317);
+            this.showconwindbutton.Location = new System.Drawing.Point(252, 353);
             this.showconwindbutton.Name = "showconwindbutton";
             this.showconwindbutton.Size = new System.Drawing.Size(143, 30);
             this.showconwindbutton.TabIndex = 17;
-            this.showconwindbutton.Text = "显示控件";
+            this.showconwindbutton.Text = "控件方式显示";
             this.showconwindbutton.UseVisualStyleBackColor = true;
             this.showconwindbutton.Click += new System.EventHandler(this.showconwindbutton_Click);
             // 

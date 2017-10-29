@@ -177,6 +177,30 @@ namespace CanTool
             return CanInfos;
         }
 
+        public string convert16to10(string str16)//16进制字符串转10进制
+        {
+            return (Int32.Parse(str16, System.Globalization.NumberStyles.HexNumber)).ToString();
+        }
+
+        public string getCanMessName(string CanID)
+        {
+            string CanMessName="";
+            FileStream fs = new FileStream(dbc, FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs);
+            string s;
+            while ((s = sr.ReadLine()) != null)
+            {
+                string[] arr = s.Split(' ');
+                if (arr.Length == 3 && string.Equals(arr[1], CanID))
+                {
+                    CanMessName=arr[0];
+                    break;
+                }
+            }
+            fs.Close();
+            return CanMessName;
+        }
+
         public List<string> canReceiptAnalysis(string CanSignal)//解析接收的Can信号
         {
             int i, j;
@@ -350,7 +374,7 @@ namespace CanTool
             }
             else
             {
-                IDNumber = CanString.Substring(1, 3);
+                IDNumber = CanString.Substring(1, 8);
             }
                     return IDNumber;
         }

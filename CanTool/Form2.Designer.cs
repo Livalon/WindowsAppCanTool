@@ -44,6 +44,10 @@
             this.CanMessInputbutton = new System.Windows.Forms.Button();
             this.getDatabasebutton = new System.Windows.Forms.Button();
             this.treeList2 = new DevExpress.XtraTreeList.TreeList();
+            this.GetID = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.GetName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.DLC = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.GetData = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeshow = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
@@ -52,10 +56,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.GetID = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.GetName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.DLC = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.GetData = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.selectSavebutton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeList2)).BeginInit();
             this.SuspendLayout();
@@ -113,7 +114,7 @@
             // 
             // selectbuttoninput
             // 
-            this.selectbuttoninput.Location = new System.Drawing.Point(1211, 524);
+            this.selectbuttoninput.Location = new System.Drawing.Point(1339, 524);
             this.selectbuttoninput.Name = "selectbuttoninput";
             this.selectbuttoninput.Size = new System.Drawing.Size(112, 28);
             this.selectbuttoninput.TabIndex = 5;
@@ -123,7 +124,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(984, 516);
+            this.textBox1.Location = new System.Drawing.Point(1125, 516);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(208, 36);
@@ -135,10 +136,10 @@
             this.ID,
             this.Data,
             this.Range});
-            this.treeList1.Location = new System.Drawing.Point(984, 32);
+            this.treeList1.Location = new System.Drawing.Point(1119, 32);
             this.treeList1.Name = "treeList1";
             this.treeList1.OptionsView.ShowCheckBoxes = true;
-            this.treeList1.Size = new System.Drawing.Size(413, 480);
+            this.treeList1.Size = new System.Drawing.Size(413, 484);
             this.treeList1.TabIndex = 7;
             this.treeList1.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.treeList1_FocusedNodeChanged);
             // 
@@ -150,7 +151,7 @@
             this.ID.Name = "ID";
             this.ID.Visible = true;
             this.ID.VisibleIndex = 0;
-            this.ID.Width = 213;
+            this.ID.Width = 222;
             // 
             // Data
             // 
@@ -159,7 +160,7 @@
             this.Data.Name = "Data";
             this.Data.Visible = true;
             this.Data.VisibleIndex = 1;
-            this.Data.Width = 91;
+            this.Data.Width = 49;
             // 
             // Range
             // 
@@ -168,11 +169,11 @@
             this.Range.Name = "Range";
             this.Range.Visible = true;
             this.Range.VisibleIndex = 2;
-            this.Range.Width = 91;
+            this.Range.Width = 124;
             // 
             // CanMessInputbutton
             // 
-            this.CanMessInputbutton.Location = new System.Drawing.Point(1329, 524);
+            this.CanMessInputbutton.Location = new System.Drawing.Point(1457, 524);
             this.CanMessInputbutton.Name = "CanMessInputbutton";
             this.CanMessInputbutton.Size = new System.Drawing.Size(75, 28);
             this.CanMessInputbutton.TabIndex = 8;
@@ -199,13 +200,49 @@
             this.GetData});
             this.treeList2.Location = new System.Drawing.Point(525, 32);
             this.treeList2.Name = "treeList2";
-            this.treeList2.Size = new System.Drawing.Size(453, 484);
+            this.treeList2.Size = new System.Drawing.Size(588, 484);
             this.treeList2.TabIndex = 10;
             this.treeList2.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.treeList2_FocusedNodeChanged);
             // 
+            // GetID
+            // 
+            this.GetID.Caption = "GetID";
+            this.GetID.FieldName = "GetID";
+            this.GetID.Name = "GetID";
+            this.GetID.Visible = true;
+            this.GetID.VisibleIndex = 0;
+            this.GetID.Width = 91;
+            // 
+            // GetName
+            // 
+            this.GetName.Caption = "GetName";
+            this.GetName.FieldName = "GetName";
+            this.GetName.Name = "GetName";
+            this.GetName.Visible = true;
+            this.GetName.VisibleIndex = 1;
+            this.GetName.Width = 212;
+            // 
+            // DLC
+            // 
+            this.DLC.Caption = "DLC";
+            this.DLC.FieldName = "DLC";
+            this.DLC.Name = "DLC";
+            this.DLC.Visible = true;
+            this.DLC.VisibleIndex = 2;
+            this.DLC.Width = 77;
+            // 
+            // GetData
+            // 
+            this.GetData.Caption = "GetData";
+            this.GetData.FieldName = "GetData";
+            this.GetData.Name = "GetData";
+            this.GetData.Visible = true;
+            this.GetData.VisibleIndex = 3;
+            this.GetData.Width = 190;
+            // 
             // treeshow
             // 
-            this.treeshow.Location = new System.Drawing.Point(799, 522);
+            this.treeshow.Location = new System.Drawing.Point(934, 522);
             this.treeshow.Name = "treeshow";
             this.treeshow.Size = new System.Drawing.Size(98, 28);
             this.treeshow.TabIndex = 11;
@@ -220,7 +257,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(903, 522);
+            this.button1.Location = new System.Drawing.Point(1038, 522);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 12;
@@ -230,7 +267,7 @@
             // 
             // showcanchartbutton
             // 
-            this.showcanchartbutton.Location = new System.Drawing.Point(404, 522);
+            this.showcanchartbutton.Location = new System.Drawing.Point(525, 522);
             this.showcanchartbutton.Name = "showcanchartbutton";
             this.showcanchartbutton.Size = new System.Drawing.Size(115, 28);
             this.showcanchartbutton.TabIndex = 13;
@@ -275,47 +312,22 @@
             this.label4.TabIndex = 17;
             this.label4.Text = "输入发送数据";
             // 
-            // GetID
+            // selectSavebutton
             // 
-            this.GetID.Caption = "GetID";
-            this.GetID.FieldName = "GetID";
-            this.GetID.Name = "GetID";
-            this.GetID.Visible = true;
-            this.GetID.VisibleIndex = 0;
-            this.GetID.Width = 68;
-            // 
-            // GetName
-            // 
-            this.GetName.Caption = "GetName";
-            this.GetName.FieldName = "GetName";
-            this.GetName.Name = "GetName";
-            this.GetName.Visible = true;
-            this.GetName.VisibleIndex = 1;
-            this.GetName.Width = 182;
-            // 
-            // DLC
-            // 
-            this.DLC.Caption = "DLC";
-            this.DLC.FieldName = "DLC";
-            this.DLC.Name = "DLC";
-            this.DLC.Visible = true;
-            this.DLC.VisibleIndex = 2;
-            this.DLC.Width = 59;
-            // 
-            // GetData
-            // 
-            this.GetData.Caption = "GetData";
-            this.GetData.FieldName = "GetData";
-            this.GetData.Name = "GetData";
-            this.GetData.Visible = true;
-            this.GetData.VisibleIndex = 3;
-            this.GetData.Width = 126;
+            this.selectSavebutton.Location = new System.Drawing.Point(656, 522);
+            this.selectSavebutton.Name = "selectSavebutton";
+            this.selectSavebutton.Size = new System.Drawing.Size(112, 28);
+            this.selectSavebutton.TabIndex = 18;
+            this.selectSavebutton.Text = "另存数据库";
+            this.selectSavebutton.UseVisualStyleBackColor = true;
+            this.selectSavebutton.Click += new System.EventHandler(this.selectSavebutton_Click);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1405, 553);
+            this.ClientSize = new System.Drawing.Size(1533, 553);
+            this.Controls.Add(this.selectSavebutton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -371,5 +383,6 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn GetName;
         private DevExpress.XtraTreeList.Columns.TreeListColumn DLC;
         private DevExpress.XtraTreeList.Columns.TreeListColumn GetData;
+        private System.Windows.Forms.Button selectSavebutton;
     }
 }

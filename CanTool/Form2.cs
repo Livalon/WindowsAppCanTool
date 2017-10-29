@@ -77,8 +77,9 @@ namespace CanTool
                     //ArrayList pList = new ArrayList();
                     //string idnumber= ay.get16IDNumber(Canget); 
                     TreeCanInfo Tcinfo = new TreeCanInfo();
-                    string thisid = ay.get16IDNumber(Canget);
+                    string thisid = ay.convert16to10(ay.get16IDNumber(Canget));
                     Tcinfo.ID = thisid;
+                    Tcinfo.Name = ay.getCanMessName(thisid);
                     Tcinfo.DLC= ay.getDLC(Canget);
                     Tcinfo.Data= ay.getData(Canget);
                    
@@ -90,7 +91,7 @@ namespace CanTool
                             listv.Text = Data[0]; //第一列
                             listv.SubItems.Add(Data[1]); //没有报错提示
                             CanMesslistView.Items.Add(listv);
-                            Tcinfo.block.Add(Data[0]+ Data[1]);
+                            Tcinfo.block.Add(Data[0]+" "+ Data[1]);
                         //textBox1.Text = Data[0];
                         #region
                         //增加ID Name Dir DLC Data
@@ -146,7 +147,7 @@ namespace CanTool
                     #endregion
                     if(hshTable.Contains(thisid))
                     {
-                        hshTable.Remove(thisid);
+                        hshTable.Remove(thisid); //删除旧数据
                     }
                     hshTable.Add(thisid, Tcinfo);//在hashtable中放入ID　DLC Data 器件name phy
                 }
@@ -532,7 +533,7 @@ namespace CanTool
                 t = i;
                 i++;
                 rottree.GetID = tcinfo.ID;
-                rottree.GetName = "defult";
+                rottree.GetName = tcinfo.Name;
                 rottree.DLC = "8";
                 rottree.GetData = tcinfo.Data;
                 pList.Add(rottree);
@@ -541,8 +542,10 @@ namespace CanTool
                     ListTree2 rottree1 = new ListTree2();
                     rottree1.ParentID = t;
                     rottree1.ID = i;
+                    string[] toolIDandData = block.Split(' ');
+                    rottree1.GetName = toolIDandData[0];
+                    rottree1.GetData = toolIDandData[1];
                     i++;
-                    rottree1.GetName = block;
                     pList.Add(rottree1);
                 }
             }
@@ -594,6 +597,11 @@ namespace CanTool
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void selectSavebutton_Click(object sender, EventArgs e)
         {
 
         }
@@ -729,6 +737,7 @@ namespace CanTool
     public class TreeCanInfo
     {
         public string ID;
+        public string Name;
         public string DLC;
         public string Data;
         public List<string> block = new List<string>();
