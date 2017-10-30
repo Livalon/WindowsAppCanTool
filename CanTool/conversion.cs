@@ -12,12 +12,12 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
-using System.Runtime.Serialization.Json;
+//using System.Runtime.Serialization.Json;
 //using System.Web;
 //using System.Web.UI;
 //using System.Web.UI.WebControls;
 
-namespace formatConversion
+namespace CanTool
 {
     //以下的ToXml、 CanMessageAndSignal定义除了整体的层次结构
     //XmlRoot表明这个类对应的是XML文件中的根节点

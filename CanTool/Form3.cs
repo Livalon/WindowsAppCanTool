@@ -20,7 +20,7 @@ namespace CanTool
         public Form3(Form1.SetVisiableHandler setvisible, Form1.SetVisiableHandler setvisible0)
         {
             InitializeComponent();
-            this.arcScaleComponent1.Value = 30F;
+            this.arcScaleComponent1.Value = 0F;
             this.digitalGauge1.Text = "0000.0";
             this.arcScaleComponent1.MinValue = 0F;
             this.arcScaleComponent1.MaxValue = 100F;

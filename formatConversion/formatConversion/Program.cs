@@ -14,10 +14,10 @@ namespace formatConversion
             string path = "canmsg-sample.dbc";
          ConversionFormat c = new ConversionFormat();
          c.dbcPreprocess(path);
-            c.conversionToJson;
-                c.conversionToXml;
-            c.reconversionToJson;
-                c.reconversionToXml;
+            //c.conversionToJson;
+            //    c.conversionToXml;
+            //c.reconversionToJson;
+            //    c.reconversionToXml;
 
 
 

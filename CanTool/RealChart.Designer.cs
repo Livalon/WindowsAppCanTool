@@ -33,8 +33,8 @@
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnStop = new System.Windows.Forms.Button();
-            this.btnInit = new System.Windows.Forms.Button();
-            this.rb1 = new System.Windows.Forms.RadioButton();
+            //this.btnInit = new System.Windows.Forms.Button();
+            //this.rb1 = new System.Windows.Forms.RadioButton();
             this.rb2 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
@@ -75,25 +75,25 @@
             // 
             // btnInit
             // 
-            this.btnInit.Location = new System.Drawing.Point(521, 10);
-            this.btnInit.Name = "btnInit";
-            this.btnInit.Size = new System.Drawing.Size(75, 23);
-            this.btnInit.TabIndex = 3;
-            this.btnInit.Text = "初始化";
-            this.btnInit.UseVisualStyleBackColor = true;
-            this.btnInit.Click += new System.EventHandler(this.btnInit_Click);
+            //this.btnInit.Location = new System.Drawing.Point(521, 10);
+            //this.btnInit.Name = "btnInit";
+            //this.btnInit.Size = new System.Drawing.Size(75, 23);
+            //this.btnInit.TabIndex = 3;
+            //this.btnInit.Text = "初始化";
+            //this.btnInit.UseVisualStyleBackColor = true;
+            //this.btnInit.Click += new System.EventHandler(this.btnInit_Click);
             // 
             // rb1
             // 
-            this.rb1.AutoSize = true;
-            this.rb1.Checked = true;
-            this.rb1.Location = new System.Drawing.Point(78, 13);
-            this.rb1.Name = "rb1";
-            this.rb1.Size = new System.Drawing.Size(59, 16);
-            this.rb1.TabIndex = 4;
-            this.rb1.TabStop = true;
-            this.rb1.Text = "折线图";
-            this.rb1.UseVisualStyleBackColor = true;
+            //this.rb1.AutoSize = true;
+            //this.rb1.Checked = true;
+            //this.rb1.Location = new System.Drawing.Point(78, 13);
+            //this.rb1.Name = "rb1";
+            //this.rb1.Size = new System.Drawing.Size(59, 16);
+            //this.rb1.TabIndex = 4;
+            //this.rb1.TabStop = true;
+            //this.rb1.Text = "折线图";
+            //this.rb1.UseVisualStyleBackColor = true;
             // 
             // rb2
             // 

@@ -66,7 +66,7 @@
             this.CanMesslistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.CanIDcolumn,
             this.CanMessValue});
-            this.CanMesslistView.Location = new System.Drawing.Point(255, 32);
+            this.CanMesslistView.Location = new System.Drawing.Point(236, 32);
             this.CanMesslistView.Name = "CanMesslistView";
             this.CanMesslistView.Size = new System.Drawing.Size(264, 484);
             this.CanMesslistView.TabIndex = 0;
@@ -85,7 +85,7 @@
             // 
             // seletCanIDbutton
             // 
-            this.seletCanIDbutton.Location = new System.Drawing.Point(144, 522);
+            this.seletCanIDbutton.Location = new System.Drawing.Point(125, 522);
             this.seletCanIDbutton.Name = "seletCanIDbutton";
             this.seletCanIDbutton.Size = new System.Drawing.Size(105, 28);
             this.seletCanIDbutton.TabIndex = 2;
@@ -98,13 +98,13 @@
             this.CanIDcheckedListBox1.FormattingEnabled = true;
             this.CanIDcheckedListBox1.Location = new System.Drawing.Point(3, 32);
             this.CanIDcheckedListBox1.Name = "CanIDcheckedListBox1";
-            this.CanIDcheckedListBox1.Size = new System.Drawing.Size(246, 484);
+            this.CanIDcheckedListBox1.Size = new System.Drawing.Size(227, 484);
             this.CanIDcheckedListBox1.TabIndex = 3;
             this.CanIDcheckedListBox1.SelectedIndexChanged += new System.EventHandler(this.CanIDcheckedListBox1_SelectedIndexChanged);
             // 
             // selectbuttonshow
             // 
-            this.selectbuttonshow.Location = new System.Drawing.Point(255, 522);
+            this.selectbuttonshow.Location = new System.Drawing.Point(400, 522);
             this.selectbuttonshow.Name = "selectbuttonshow";
             this.selectbuttonshow.Size = new System.Drawing.Size(100, 28);
             this.selectbuttonshow.TabIndex = 4;
@@ -114,21 +114,22 @@
             // 
             // selectbuttoninput
             // 
-            this.selectbuttoninput.Location = new System.Drawing.Point(1339, 524);
+            this.selectbuttoninput.Location = new System.Drawing.Point(1348, 522);
             this.selectbuttoninput.Name = "selectbuttoninput";
             this.selectbuttoninput.Size = new System.Drawing.Size(112, 28);
             this.selectbuttoninput.TabIndex = 5;
-            this.selectbuttoninput.Text = "输入Can信息";
+            this.selectbuttoninput.Text = "输入CAN信息";
             this.selectbuttoninput.UseVisualStyleBackColor = true;
             this.selectbuttoninput.Click += new System.EventHandler(this.selectbuttoninput_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(1125, 516);
+            this.textBox1.Location = new System.Drawing.Point(1100, 520);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(208, 36);
+            this.textBox1.Size = new System.Drawing.Size(208, 30);
             this.textBox1.TabIndex = 6;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // treeList1
             // 
@@ -136,10 +137,10 @@
             this.ID,
             this.Data,
             this.Range});
-            this.treeList1.Location = new System.Drawing.Point(1119, 32);
+            this.treeList1.Location = new System.Drawing.Point(1100, 32);
             this.treeList1.Name = "treeList1";
             this.treeList1.OptionsView.ShowCheckBoxes = true;
-            this.treeList1.Size = new System.Drawing.Size(413, 484);
+            this.treeList1.Size = new System.Drawing.Size(441, 484);
             this.treeList1.TabIndex = 7;
             this.treeList1.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.treeList1_FocusedNodeChanged);
             // 
@@ -151,7 +152,7 @@
             this.ID.Name = "ID";
             this.ID.Visible = true;
             this.ID.VisibleIndex = 0;
-            this.ID.Width = 222;
+            this.ID.Width = 192;
             // 
             // Data
             // 
@@ -160,7 +161,7 @@
             this.Data.Name = "Data";
             this.Data.Visible = true;
             this.Data.VisibleIndex = 1;
-            this.Data.Width = 49;
+            this.Data.Width = 65;
             // 
             // Range
             // 
@@ -169,11 +170,11 @@
             this.Range.Name = "Range";
             this.Range.Visible = true;
             this.Range.VisibleIndex = 2;
-            this.Range.Width = 124;
+            this.Range.Width = 138;
             // 
             // CanMessInputbutton
             // 
-            this.CanMessInputbutton.Location = new System.Drawing.Point(1457, 524);
+            this.CanMessInputbutton.Location = new System.Drawing.Point(1466, 522);
             this.CanMessInputbutton.Name = "CanMessInputbutton";
             this.CanMessInputbutton.Size = new System.Drawing.Size(75, 28);
             this.CanMessInputbutton.TabIndex = 8;
@@ -198,7 +199,7 @@
             this.GetName,
             this.DLC,
             this.GetData});
-            this.treeList2.Location = new System.Drawing.Point(525, 32);
+            this.treeList2.Location = new System.Drawing.Point(506, 32);
             this.treeList2.Name = "treeList2";
             this.treeList2.Size = new System.Drawing.Size(588, 484);
             this.treeList2.TabIndex = 10;
@@ -242,7 +243,7 @@
             // 
             // treeshow
             // 
-            this.treeshow.Location = new System.Drawing.Point(934, 522);
+            this.treeshow.Location = new System.Drawing.Point(915, 522);
             this.treeshow.Name = "treeshow";
             this.treeshow.Size = new System.Drawing.Size(98, 28);
             this.treeshow.TabIndex = 11;
@@ -257,7 +258,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1038, 522);
+            this.button1.Location = new System.Drawing.Point(1019, 522);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 12;
@@ -267,7 +268,7 @@
             // 
             // showcanchartbutton
             // 
-            this.showcanchartbutton.Location = new System.Drawing.Point(525, 522);
+            this.showcanchartbutton.Location = new System.Drawing.Point(506, 522);
             this.showcanchartbutton.Name = "showcanchartbutton";
             this.showcanchartbutton.Size = new System.Drawing.Size(115, 28);
             this.showcanchartbutton.TabIndex = 13;
@@ -287,7 +288,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(252, 9);
+            this.label2.Location = new System.Drawing.Point(233, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 15);
             this.label2.TabIndex = 15;
@@ -297,7 +298,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(531, 11);
+            this.label3.Location = new System.Drawing.Point(503, 11);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 15);
             this.label3.TabIndex = 16;
@@ -306,7 +307,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1129, 9);
+            this.label4.Location = new System.Drawing.Point(1097, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(97, 15);
             this.label4.TabIndex = 17;
@@ -314,7 +315,7 @@
             // 
             // selectSavebutton
             // 
-            this.selectSavebutton.Location = new System.Drawing.Point(656, 522);
+            this.selectSavebutton.Location = new System.Drawing.Point(627, 522);
             this.selectSavebutton.Name = "selectSavebutton";
             this.selectSavebutton.Size = new System.Drawing.Size(112, 28);
             this.selectSavebutton.TabIndex = 18;
@@ -326,7 +327,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1533, 553);
+            this.ClientSize = new System.Drawing.Size(1546, 557);
             this.Controls.Add(this.selectSavebutton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);

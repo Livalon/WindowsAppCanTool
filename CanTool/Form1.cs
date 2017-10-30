@@ -40,8 +40,6 @@ namespace CanTool
         string origindatabase = "data.txt";
         string useddatabase = "usedata.txt";
 
-        //暂时不让用户选择奇偶校验以及停止位
-
         public delegate void SetVisiableHandler();
 
         private void openButton_Click(object sender, EventArgs e)
@@ -339,6 +337,11 @@ namespace CanTool
         {
             f3 = new Form3(new SetVisiableHandler(SetVisiable1), new SetVisiableHandler(SetVisiable0));
             f3.Show();
+        }
+
+        private void Paritycomobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
